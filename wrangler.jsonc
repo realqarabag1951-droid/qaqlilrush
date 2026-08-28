@@ -3,15 +3,6 @@
   "main": "worker.js",
   "compatibility_date": "2026-08-28",
 
-  "durable_objects": {
-    "bindings": [
-      {
-        "name": "GAME_ROOM",
-        "class_name": "GameRoom"
-      }
-    ]
-  },
-
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
