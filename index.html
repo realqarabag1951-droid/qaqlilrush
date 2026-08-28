@@ -25,7 +25,12 @@ body{
 
 body{
     min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     color:#fff;
 
     background:
@@ -51,7 +56,9 @@ input{
 
 button{
     cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
+
+    -webkit-tap-highlight-color:
+        transparent;
 }
 
 button:disabled{
@@ -72,6 +79,7 @@ button:disabled{
     min-height:100vh;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -98,7 +106,9 @@ button:disabled{
 
 .logo{
     font-size:42px;
+
     font-weight:1000;
+
     letter-spacing:2px;
 }
 
@@ -109,12 +119,18 @@ button:disabled{
 
 .subtitle{
     color:#9da8bb;
-    margin:8px 0 25px;
+
+    margin:
+        8px
+        0
+        25px;
 }
 
 .authTabs{
     display:flex;
+
     gap:8px;
+
     margin-bottom:16px;
 }
 
@@ -215,13 +231,20 @@ header{
 }
 
 .headerLogo{
-    font-size:clamp(27px,6vw,42px);
+    font-size:
+        clamp(
+            27px,
+            6vw,
+            42px
+        );
 
     font-weight:1000;
 }
 
 .userInfo{
-    padding:10px 13px;
+    padding:
+        10px
+        13px;
 
     border-radius:15px;
 
@@ -265,7 +288,9 @@ header{
 
     justify-content:space-between;
 
-    padding:0 15px;
+    padding:
+        0
+        15px;
 
     background:#090e18;
 
@@ -302,7 +327,10 @@ canvas{
 
     position:absolute;
 
-    inset:52px 0 0;
+    inset:
+        52px
+        0
+        0;
 
     align-items:center;
     justify-content:center;
@@ -400,9 +428,13 @@ canvas{
 
     gap:10px;
 
-    padding:12px 7px;
+    padding:
+        12px
+        7px;
 
-    border-bottom:1px solid #20293a;
+    border-bottom:
+        1px solid
+        #20293a;
 }
 
 .rank{
@@ -443,7 +475,10 @@ canvas{
 ===================================================== */
 
 footer{
-    padding:25px 5px 12px;
+    padding:
+        25px
+        5px
+        12px;
 
     text-align:center;
 
@@ -809,14 +844,6 @@ footer a{
 
 
 /* =====================================================
-   API CONFIG
-===================================================== */
-
-const API_BASE =
-    "https://qaqlilrush.azfootball.workers.dev";
-
-
-/* =====================================================
    GLOBAL
 ===================================================== */
 
@@ -838,18 +865,33 @@ const $ =
    API
 ===================================================== */
 
+/*
+    Vacib:
+
+    API_BASE YOXDUR.
+
+    Sayt hansı Worker-dən açılıbsa,
+    API də həmin domainə gedəcək.
+
+    Məsələn:
+
+    /api/register
+    /api/login
+    /api/me
+    /api/score
+    /api/leaderboard
+*/
+
 async function api(
     endpoint,
     options = {}
 ){
 
     const headers = {
-
         "Content-Type":
             "application/json",
 
         ...(options.headers || {})
-
     };
 
 
@@ -868,7 +910,7 @@ async function api(
 
         response =
             await fetch(
-                API_BASE + endpoint,
+                endpoint,
                 {
                     ...options,
                     headers
@@ -889,19 +931,54 @@ async function api(
     }
 
 
-    const data =
-        await response
-            .json()
-            .catch(
-                () => ({})
-            );
+    const contentType =
+        response.headers
+            .get("content-type") || "";
+
+
+    let data = {};
+
+
+    if(
+        contentType
+            .includes("application/json")
+    ){
+
+        data =
+            await response
+                .json()
+                .catch(
+                    () => ({})
+                );
+
+    }else{
+
+        const text =
+            await response
+                .text()
+                .catch(
+                    () => ""
+                );
+
+        console.error(
+            "SERVER NON-JSON:",
+            text
+        );
+
+        data = {
+            error:
+                text ||
+                "Server JSON cavabı göndərmədi."
+        };
+
+    }
 
 
     if(!response.ok){
 
         throw new Error(
             data.error ||
-            "Server xətası."
+            `Server xətası (${response.status})`
         );
 
     }
@@ -915,14 +992,11 @@ async function api(
    ERROR
 ===================================================== */
 
-function showError(
-    message
-){
+function showError(message){
 
     $("authError")
         .textContent =
         message;
-
 }
 
 
@@ -931,7 +1005,6 @@ function clearError(){
     $("authError")
         .textContent =
         "";
-
 }
 
 
@@ -1052,11 +1125,6 @@ async function register(){
 
     try{
 
-        console.log(
-            "REGISTER REQUEST"
-        );
-
-
         const data =
             await api(
                 "/api/register",
@@ -1073,13 +1141,13 @@ async function register(){
 
 
         console.log(
-            "REGISTER RESPONSE:",
+            "REGISTER:",
             data
         );
 
 
         if(
-            !data.ok ||
+            !data ||
             !data.token
         ){
 
@@ -1149,20 +1217,26 @@ async function login(){
             .trim();
 
 
-    if(!username){
+    if(
+        !/^[A-Za-z0-9_]{3,18}$/
+            .test(username)
+    ){
 
         showError(
-            "İstifadəçi adını yaz."
+            "İstifadəçi adı 3-18 simvol olmalıdır."
         );
 
         return;
     }
 
 
-    if(!code){
+    if(
+        !/^[A-Za-z0-9]{4,10}$/
+            .test(code)
+    ){
 
         showError(
-            "Giriş kodunu yaz."
+            "Kod 4-10 hərf və rəqəmdən ibarət olmalıdır."
         );
 
         return;
@@ -1183,11 +1257,6 @@ async function login(){
 
     try{
 
-        console.log(
-            "LOGIN REQUEST"
-        );
-
-
         const data =
             await api(
                 "/api/login",
@@ -1204,13 +1273,13 @@ async function login(){
 
 
         console.log(
-            "LOGIN RESPONSE:",
+            "LOGIN:",
             data
         );
 
 
         if(
-            !data.ok ||
+            !data ||
             !data.token
         ){
 
@@ -1265,69 +1334,57 @@ async function login(){
 
 async function enterGame(){
 
-    try{
-
-        currentUser =
-            await api(
-                "/api/me"
-            );
-
-
-        if(!currentUser){
-
-            throw new Error(
-                "İstifadəçi məlumatı alınmadı."
-            );
-
-        }
-
-
-        $("authPage")
-            .classList
-            .add("hidden");
-
-
-        $("gamePage")
-            .classList
-            .remove("hidden");
-
-
-        $("username")
-            .textContent =
-            currentUser.username;
-
-
-        $("totalXP")
-            .textContent =
-            Number(
-                currentUser.xp || 0
-            ).toLocaleString();
-
-
-        $("best")
-            .textContent =
-            Number(
-                currentUser.best_distance || 0
-            ).toLocaleString();
-
-
-        await loadLeaderboard();
-
-
-        restartGame();
-
-
-    }catch(error){
-
-        console.error(
-            "ENTER GAME ERROR:",
-            error
+    currentUser =
+        await api(
+            "/api/me"
         );
 
 
-        throw error;
+    if(
+        !currentUser ||
+        !currentUser.username
+    ){
+
+        throw new Error(
+            "İstifadəçi məlumatı alınmadı."
+        );
 
     }
+
+
+    $("authPage")
+        .classList
+        .add("hidden");
+
+
+    $("gamePage")
+        .classList
+        .remove("hidden");
+
+
+    $("username")
+        .textContent =
+        currentUser.username;
+
+
+    $("totalXP")
+        .textContent =
+        Number(
+            currentUser.xp || 0
+        ).toLocaleString();
+
+
+    $("best")
+        .textContent =
+        Number(
+            currentUser.best_distance || 0
+        ).toLocaleString();
+
+
+    await loadLeaderboard();
+
+
+    restartGame();
 
 }
 
@@ -1360,7 +1417,7 @@ async function loadLeaderboard(){
 
         if(
             !data.players ||
-            data.players.length === 0
+            !data.players.length
         ){
 
             box.innerHTML =
@@ -1391,38 +1448,3 @@ async function loadLeaderboard(){
                 ){
 
                     row.classList.add(
-                        "myRank"
-                    );
-
-                }
-
-
-                const rank =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                rank.className =
-                    "rank";
-
-
-                rank.textContent =
-                    index + 1;
-
-
-                const name =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                name.className =
-                    "player";
-
-
-                name.textContent =
-                    player.username;
-
-
-  
