@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>QAQLIL RUSH</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial, sans-serif;
+    background:
+        radial-gradient(circle at 20% 10%,#273f9c 0%,transparent 35%),
+        radial-gradient(circle at 90% 80%,#8c1765 0%,transparent 35%),
+        #070a13;
+    color:white;
+    overflow-x:hidden;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================
+        LOGIN
+========================= */
+
+#authPage{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.authBox{
+    width:100%;
+    max-width:430px;
+    padding:30px;
+    background:#0c111d;
+    border:1px solid #33405e;
+    border-radius:25px;
+    box-shadow:0 25px 80px #000b;
+    text-align:center;
+}
+
+.logo{
+    font-size:42px;
+    font-weight:1000;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:#39ff70;
+}
+
+.subtitle{
+    color:#9ba7bc;
+    margin:8px 0 25px;
+}
+
+.authTabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.authTabs button{
+    flex:1;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin:6px 0;
+    border-radius:13px;
+    border:1px solid #303c58;
+    background:#111827;
+    color:white;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#32dcff;
+}
+
+button{
+    border:none;
+    border-radius:13px;
+    padding:14px 18px;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.primary{
+    background:linear-gradient(90deg,#39ff70,#2bd9ff);
+    color:#06100d;
+}
+
+.secondary{
+    background:#171f2e;
+    border:1px solid #34405b;
+    color:white;
+}
+
+#authError{
+    min-height:22px;
+    margin-top:10px;
+    color:#ff6094;
+}
+
+/* =========================
+        MAIN
+========================= */
+
+#gamePage{
+    width:min(1100px,100%);
+    margin:auto;
+    padding:12px;
+}
+
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.headerLogo{
+    font-size:clamp(25px,6vw,42px);
+    font-weight:1000;
+}
+
+.headerLogo span{
+    color:#39ff70;
+}
+
+.userInfo{
+    padding:10px 13px;
+    background:#0c1320;
+    border:1px solid #303b56;
+    border-radius:15px;
+    font-weight:800;
+}
+
+.card{
+    background:#0c111d;
+    border:1px solid #2d3954;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 18px 50px #0008;
+}
+
+/* =========================
+        GAME
+========================= */
+
+.gameCard{
+    position:relative;
+}
+
+.hud{
+    height:52px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 15px;
+    background:#090e18;
+    font-weight:900;
+}
+
+.hud b{
+    color:#39ff70;
+}
+
+canvas{
+    display:block;
+    width:100%;
+    height:auto;
+    touch-action:none;
+}
+
+#gameOver{
+    display:none;
+    position:absolute;
+    inset:52px 0 0;
+    background:#000a;
+    justify-content:center;
+    align-items:center;
+}
+
+.gameOverBox{
+    width:min(390px,90%);
+    background:#0c111d;
+    border:1px solid #485675;
+    border-radius:20px;
+    padding:28px;
+    text-align:center;
+}
+
+.gameOverBox h1{
+    color:#ff4c9a;
+    margin-bottom:8px;
+}
+
+.finalDistance{
+    font-size:44px;
+    font-weight:1000;
+    color:#2ddcff;
+    margin:7px;
+}
+
+.earned{
+    color:#39ff70;
+    font-size:22px;
+    font-weight:1000;
+    margin-bottom:18px;
+}
+
+/* =========================
+        CONTROLS
+========================= */
+
+.controls{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.controls button{
+    flex:1;
+}
+
+/* =========================
+       LEADERBOARD
+========================= */
+
+.leaderCard{
+    margin-top:12px;
+    padding:15px;
+}
+
+.leaderCard h2{
+    margin-bottom:10px;
+}
+
+.leader{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 7px;
+    border-bottom:1px solid #20293a;
+}
+
+.rank{
+    width:28px;
+    color:#8994a8;
+}
+
+.player{
+    flex:1;
+}
+
+.xp{
+    color:#39ff70;
+    font-weight:900;
+}
+
+.myRank{
+    background:#123c24;
+    border-radius:10px;
+}
+
+/* =========================
+        FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    color:#8e99ac;
+    padding:24px 5px 12px;
+    font-size:14px;
+}
+
+footer a{
+    color:#2ddcff;
+    font-weight:900;
+    text-decoration:none;
+}
+
+/* =========================
+        MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .authBox{
+        padding:23px;
+    }
+
+    .logo{
+        font-size:34px;
+    }
+
+    .userInfo{
+        font-size:12px;
+    }
+
+    .headerLogo{
+        font-size:27px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- ==========================================
+                LOGIN PAGE
+========================================== -->
+
+<section id="authPage">
+
+<div class="authBox">
+
+    <div class="logo">
+        QAQLIL <span>RUSH</span>
+    </div>
+
+    <div class="subtitle">
+        Maneələrdən qaç. Rekordu qır. 🔥
+    </div>
+
+    <div class="authTabs">
+
+        <button
+            id="registerTab"
+            class="primary"
+            onclick="showRegister()">
+            HESAB YARAT
+        </button>
+
+        <button
+            id="loginTab"
+            class="secondary"
+            onclick="showLogin()">
+            DAXİL OL
+        </button>
+
+    </div>
+
+
+    <!-- REGISTER -->
+
+    <div id="registerForm">
+
+        <input
+            id="registerUsername"
+            type="text"
+            maxlength="18"
+            placeholder="İstifadəçi adı">
+
+        <input
+            id="registerCode"
+            type="text"
+            maxlength="10"
+            placeholder="Giriş kodu (4-10 simvol)">
+
+        <button
+            class="primary"
+            style="width:100%;margin-top:8px"
+            onclick="register()">
+
+            🚀 HESAB YARAT
+
+        </button>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div
+        id="loginForm"
+        class="hidden">
+
+        <input
+            id="loginUsername"
+            type="text"
+            maxlength="18"
+            placeholder="İstifadəçi adı">
+
+        <input
+            id="loginCode"
+            type="text"
+            maxlength="10"
+            placeholder="Giriş kodu">
+
+        <button
+            class="primary"
+            style="width:100%;margin-top:8px"
+            onclick="login()">
+
+            🔥 DAXİL OL
+
+        </button>
+
+    </div>
+
+    <div id="authError"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- ==========================================
+                GAME PAGE
+========================================== -->
+
+<main
+    id="gamePage"
+    class="hidden">
+
+<header>
+
+    <div class="headerLogo">
+        QAQLIL <span>RUSH</span>
+    </div>
+
+    <div class="userInfo">
+
+        👤 <span id="username">QAQLIL</span>
+
+        ·
+
+        ⭐ <span id="totalXP">0</span> XP
+
+    </div>
+
+</header>
+
+
+
+<!-- GAME -->
+
+<div class="card gameCard">
+
+    <div class="hud">
+
+        <span>
+            ⭐ RUN XP:
+            <b id="runXP">0</b>
+        </span>
+
+        <span>
+            🏆
+            <b id="distance">0</b>
+            M
+            · BEST
+            <b id="best">0</b>
+        </span>
+
+    </div>
+
+
+    <canvas
+        id="gameCanvas"
+        width="900"
+        height="500">
+    </canvas>
+
+
+    <!-- GAME OVER -->
+
+    <div id="gameOver">
+
+        <div class="gameOverBox">
+
+            <h1>
+                OYUN BİTDİ!
+            </h1>
+
+            <div>
+                Məsafə
+            </div>
+
+            <div
+                id="finalDistance"
+                class="finalDistance">
+
+                0 M
+
+            </div>
+
+            <div
+                id="earnedXP"
+                class="earned">
+
+                +0 XP
+
+            </div>
+
+            <button
+                class="primary"
+                style="width:100%"
+                onclick="restartGame()">
+
+                ↻ RESTART
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- CONTROLS -->
+
+<div class="controls">
+
+    <button
+        id="jumpButton"
+        class="primary">
+
+        ⬆ TULLAN — SPACE
+
+    </button>
+
+    <button
+        class="secondary"
+        onclick="restartGame()">
+
+        ↻ YENİDƏN
+
+    </button>
+
+</div>
+
+
+
+<!-- LEADERBOARD -->
+
+<div class="card leaderCard">
+
+    <h2>
+        🌍 XP LİDERLƏRİ
+    </h2>
+
+    <div id="leaderboard">
+
+        <div class="leader">
+
+            <span class="rank">1</span>
+
+            <span class="player">
+                SpeedRunner
+            </span>
+
+            <span class="xp">
+                12,450 XP
+            </span>
+
+        </div>
+
+        <div class="leader">
+
+            <span class="rank">2</span>
+
+            <span class="player">
+                QaqliPro
+            </span>
+
+            <span class="xp">
+                10,820 XP
+            </span>
+
+        </div>
+
+        <div class="leader">
+
+            <span class="rank">3</span>
+
+            <span class="player">
+                PlayerOne
+            </span>
+
+            <span class="xp">
+                9,320 XP
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    İrad və tənqidlər üçün əlaqə:
+    <a
+        href="https://www.tiktok.com/@ssamirreds"
+        target="_blank">
+        TikTok — ssamirreds
+    </a>
+
+</footer>
+
+</main>
+
+
+
+<script>
+
+/* =====================================================
+                    ACCOUNT SYSTEM
+   ===================================================== */
+
+/*
+   İNDİLİK DEMO ACCOUNT SISTEMI.
+
+   REAL ACCOUNT SISTEMINI SONRA
+   worker.js + Cloudflare D1 ilə bağlayacağıq.
+*/
+
+let currentUser = null;
+
+
+/* =========================
+        AUTH UI
+========================= */
+
+function showRegister(){
+
+    document
+        .getElementById("registerForm")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("loginForm")
+        .classList.add("hidden");
+
+    document
+        .getElementById("registerTab")
+        .className = "primary";
+
+    document
+        .getElementById("loginTab")
+        .className = "secondary";
+
+    clearError();
+}
+
+
+function showLogin(){
+
+    document
+        .getElementById("registerForm")
+        .classList.add("hidden");
+
+    document
+        .getElementById("loginForm")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("registerTab")
+        .className = "secondary";
+
+    document
+        .getElementById("loginTab")
+        .className = "primary";
+
+    clearError();
+}
+
+
+function clearError(){
+
+    document
+        .getElementById("authError")
+        .textContent = "";
+
+}
+
+
+/* =========================
+        REGISTER
+========================= */
+
+function register(){
+
+    const username =
+        document
+        .getElementById("registerUsername")
+        .value
+        .trim();
+
+    const code =
+        document
+        .getElementById("registerCode")
+        .value
+        .trim();
+
+
+    if(!/^[A-Za-z0-9_]{3,18}$/.test(username)){
+
+        showError(
+            "İstifadəçi adı 3-18 hərf, rəqəm və _ ola bilər."
+        );
+
+        return;
+    }
+
+
+    if(!/^[A-Za-z0-9]{4,10}$/.test(code)){
+
+        showError(
+            "Giriş kodu 4-10 hərf/rəqəm olmalıdır."
+        );
+
+        return;
+    }
+
+
+    /*
+       DEMO.
+
+       Real versiyada burada:
+
+       POST /api/register
+
+       olacaq.
+    */
+
+    currentUser = {
+
+        username: username,
+
+        code: code,
+
+        xp: 0,
+
+        best: 0
+
+    };
+
+
+    saveLocalUser();
+
+    enterGame();
+
+}
+
+
+function login(){
+
+    const username =
+        document
+        .getElementById("loginUsername")
+        .value
+        .trim();
+
+    const code =
+        document
+        .getElementById("loginCode")
+        .value
+        .trim();
+
+
+    const saved =
+        JSON.parse(
+            localStorage.getItem(
+                "qaqlil_demo_user"
+            ) || "null"
+        );
+
+
+    if(
+        !saved ||
+        saved.username !== username ||
+        saved.code !== code
+    ){
+
+        showError(
+            "İstifadəçi adı və ya kod yanlışdır."
+        );
+
+        return;
+    }
+
+
+    currentUser = saved;
+
+    enterGame();
+
+}
+
+
+function showError(message){
+
+    document
+        .getElementById("authError")
+        .textContent = message;
+
+}
+
+
+function saveLocalUser(){
+
+    localStorage.setItem(
+        "qaqlil_demo_user",
+        JSON.stringify(currentUser)
+    );
+
+}
+
+
+function enterGame(){
+
+    document
+        .getElementById("authPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("gamePage")
+        .classList.remove("hidden");
+
+
+    updateUserUI();
+
+    restartGame();
+
+}
+
+
+/* =====================================================
+                    GAME
+   ===================================================== */
+
+const canvas =
+    document.getElementById(
+        "gameCanvas"
+    );
+
+const ctx =
+    canvas.getContext("2d");
+
+
+let gameRunning = false;
+
+let gameEnded = false;
+
+let lastTime = 0;
+
+let distance = 0;
+
+let runXP = 0;
+
+let speed = 6;
+
+let obstacleTimer = 70;
+
+let obstacles = [];
+
+
+/* =========================
+        PLAYER
+========================= */
+
+const player = {
+
+    x:120,
+
+    y:245,
+
+    width:90,
+
+    height:130,
+
+    velocityY:0,
+
+    onGround:true
+
+};
+
+
+const groundY = 375;
+
+
+/* =========================
+        JUMP
+========================= */
+
+function jump(){
+
+    if(gameEnded){
+
+        restartGame();
+
+        return;
+    }
+
+
+    if(player.onGround){
+
+        player.velocityY = -17;
+
+        player.onGround = false;
+
+        if(!gameRunning){
+
+            startGame();
+
+        }
+
+    }
+
+}
+
+
+/* SPACE */
+
+window.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.code === "Space" ||
+            event.code === "ArrowUp"
+        ){
+
+            event.preventDefault();
+
+            jump();
+
+        }
+
+    }
+);
+
+
+/* PHONE */
+
+document
+    .getElementById("jumpButton")
+    .addEventListener(
+        "pointerdown",
+        function(event){
+
+            event.preventDefault();
+
+            jump();
+
+        }
+    );
+
+
+canvas.addEventListener(
+    "pointerdown",
+    function(event){
+
+        event.preventDefault();
+
+        jump();
+
+    }
+);
+
+
+/* =========================
+        START
+========================= */
+
+function startGame(){
+
+    if(gameRunning)
+        return;
+
+    gameRunning = true;
+
+    lastTime =
+        performance.now();
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+
+/* =========================
+        RESTART
+========================= */
+
+function restartGame(){
+
+    gameRunning = false;
+
+    gameEnded = false;
+
+    distance = 0;
+
+    runXP = 0;
+
+    speed = 6;
+
+    obstacleTimer = 70;
+
+    obstacles = [];
+
+
+    player.x = 120;
+
+    player.y =
+        groundY -
+        player.height;
+
+    player.velocityY = 0;
+
+    player.onGround = true;
+
+
+    document
+        .getElementById("gameOver")
+        .style.display = "none";
+
+
+    updateGameUI();
+
+    draw();
+
+
+    startGame();
+
+}
+
+
+/* =========================
+        OBSTACLE
+========================= */
+
+function createObstacle(){
+
+    const tall =
+        Math.random() < 0.45;
+
+    const width =
+        tall ? 38 : 45;
+
+    const height =
+        tall
+        ? 70 + Math.random()*65
+        : 30 + Math.random()*25;
+
+
+    obstacles.push({
+
+        x:900,
+
+        y:groundY-height,
+
+        width:width,
+
+        height:height
+
+    });
+
+
+    obstacleTimer =
+        70 +
+        Math.random()*90;
+
+}
+
+
+/* =========================
+        COLLISION
+========================= */
+
+function collision(a,b){
+
+    const ax =
+        a.x + 20;
+
+    const ay =
+        a.y + 15;
+
+    const aw =
+        a.width - 35;
+
+    const ah =
+        a.height - 20;
+
+
+    return (
+
+        ax < b.x+b.width &&
+
+        ax+aw > b.x &&
+
+        ay < b.y+b.height &&
+
+        ay+ah > b.y
+
+    );
+
+}
+
+
+/* =========================
+        GAME LOOP
+========================= */
+
+function gameLoop(time){
+
+    if(!gameRunning)
+        return;
+
+
+    const delta =
+        Math.min(
+            2,
+            (time-lastTime)/16.666
+        );
+
+    lastTime = time;
+
+
+    /* GRAVITY */
+
+    player.velocityY +=
+        0.82 * delta;
+
+    player.y +=
+        player.velocityY * delta;
+
+
+    /* GROUND */
+
+    if(
+        player.y >=
+        groundY-player.height
+    ){
+
+        player.y =
+            groundY-player.height;
+
+        player.velocityY = 0;
+
+        player.onGround = true;
+
+    }
+
+
+    /* SPEED */
+
+    speed +=
+        0.0025 * delta;
+
+
+    /* DISTANCE */
+
+    distance +=
+        speed * 0.12 * delta;
+
+
+    /* XP */
+
+    runXP =
+        Math.floor(
+            distance / 5
+        );
+
+
+    /* OBSTACLES */
+
+    obstacleTimer -= delta;
+
+
+    if(obstacleTimer <= 0){
+
+        createObstacle();
+
+    }
+
+
+    for(
+        const obstacle
+        of obstacles
+    ){
+
+        obstacle.x -=
+            speed * delta;
+
+    }
+
+
+    obstacles =
+        obstacles.filter(
+            obstacle =>
+                obstacle.x > -100
+        );
+
+
+    /* COLLISION */
+
+    for(
+        const obstacle
+        of obstacles
+    ){
+
+        if(
+            collision(
+                player,
+                obstacle
+            )
+        ){
+
+            gameOver();
+
+            return;
+
+        }
+
+    }
+
+
+    updateGameUI();
+
+    draw();
+
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+
+/* =========================
+        GAME OVER
+========================= */
+
+function gameOver(){
+
+    gameRunning = false;
+
+    gameEnded = true;
+
+
+    const finalDistance =
+        Math.floor(distance);
+
+    const earned =
+        Math.max(
+            10,
+            Math.floor(
+                finalDistance / 5
+            )
+        );
+
+
+    document
+        .getElementById(
+            "finalDistance"
+        )
+        .textContent =
+        finalDistance + " M";
+
+
+    document
+        .getElementById(
+            "earnedXP"
+        )
+        .textContent =
+        "+" + earned + " XP";
+
+
+    /*
+       DEMO XP.
+
+       SONRA BURANI:
+
+       await saveScore(finalDistance)
+
+       edəcəyik.
+    */
+
+    currentUser.xp += earned;
+
+    if(
+        finalDistance >
+        currentUser.best
+    ){
+
+        currentUser.best =
+            finalDistance;
+
+    }
+
+
+    saveLocalUser();
+
+    updateUserUI();
+
+
+    document
+        .getElementById("gameOver")
+        .style.display = "flex";
+
+
+    updateLeaderboard();
+
+}
+
+
+/* =========================
+        UI
+========================= */
+
+function updateGameUI(){
+
+    document
+        .getElementById("distance")
+        .textContent =
+        Math.floor(distance);
+
+
+    document
+        .getElementById("runXP")
+        .textContent =
+        runXP;
+
+
+    document
+        .getElementById("best")
+        .textContent =
+        currentUser
+        ? currentUser.best
+        : 0;
+
+}
+
+
+function updateUserUI(){
+
+    if(!currentUser)
+        return;
+
+
+    document
+        .getElementById("username")
+        .textContent =
+        currentUser.username;
+
+
+    document
+        .getElementById("totalXP")
+        .textContent =
+        currentUser.xp.toLocaleString();
+
+
+    document
+        .getElementById("best")
+        .textContent =
+        currentUser.best;
+
+}
+
+
+/* =====================================================
+                    DRAW
+   ===================================================== */
+
+function draw(){
+
+    ctx.clearRect(
+        0,
+        0,
+        900,
+        500
+    );
+
+
+    /* SKY */
+
+    const sky =
+        ctx.createLinearGradient(
+            0,
+            0,
+            0,
+            groundY
+        );
+
+
+    sky.addColorStop(
+        0,
+        "#111b64"
+    );
+
+    sky.addColorStop(
+        0.55,
+        "#7048b5"
+    );
+
+    sky.addColorStop(
+        1,
+        "#ff9569"
+    );
+
+
+    ctx.fillStyle = sky;
+
+    ctx.fillRect(
+        0,
+        0,
+        900,
+        groundY
+    );
+
+
+    /* STARS */
+
+    ctx.fillStyle = "#fff";
+
+    for(
+        let i=0;
+        i<60;
+        i++
+    ){
+
+        const x =
+            (i*157)%900;
+
+        const y =
+            (i*71)%300;
+
+
+        ctx.globalAl
