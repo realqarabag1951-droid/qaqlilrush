@@ -1,6 +1,6 @@
 export class GameRoom {
     constructor(state, env) {
-        this.state = state;
+     this.state = state;
         this.env = env;
 
         this.players = new Map();
