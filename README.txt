@@ -1,4 +1,4 @@
-QAQLIL RUSH v3
+QAQLIL RUSH
 - index.html ve profile-crop.png eyni qovluqda qalmalidir.
 - Komputerde Space / ArrowUp ile tullan.
 - Telefonda ekrana ve TULLAN duymesine toxun.
