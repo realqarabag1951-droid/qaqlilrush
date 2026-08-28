@@ -3,16 +3,16 @@
   "main": "worker.js",
   "compatibility_date": "2026-08-28",
 
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "qaqlil-rush",
+      "database_name": "qaqlil-rush-db",
       "database_id": "865a8697-ef03-4c08-9fbf-56a636444903"
     }
-  ],
-
-  "assets": {
-    "directory": ".",
-    "binding": "ASSETS"
-  }
+  ]
 }
