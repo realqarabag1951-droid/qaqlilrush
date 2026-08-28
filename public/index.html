@@ -5,136 +5,278 @@
 
 <meta
     name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 >
 
 <title>QAQLIL RUSH</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html,
-body {
-    min-height: 100%;
+body{
+    width:100%;
+    min-height:100%;
 }
 
-body {
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #fff;
+body{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color:white;
 
     background:
         radial-gradient(
             circle at 15% 10%,
             #253c9c 0,
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 90% 80%,
-            #92145f 0,
             transparent 35%
         ),
+
+        radial-gradient(
+            circle at 90% 85%,
+            #92145f 0,
+            transparent 38%
+        ),
+
         #070a13;
+
+    overflow-x:hidden;
 }
 
-button,
-input {
-    font: inherit;
+button{
+    font:inherit;
+    cursor:pointer;
+    border:0;
 }
 
-button {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-}
-
-button:disabled {
-    opacity: .6;
-    cursor: not-allowed;
-}
-
-.hidden {
-    display: none !important;
+#app{
+    width:min(1050px,100%);
+    padding:14px;
 }
 
 
-/* =========================
-   NAME PAGE
-========================= */
+/* ================================
+   HEADER
+================================ */
 
-#namePage {
-    min-height: 100vh;
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    gap:15px;
 
-    padding: 20px;
+    margin-bottom:14px;
 }
 
-.nameBox {
-    width: 100%;
-    max-width: 430px;
+.logo{
+    font-size:
+        clamp(
+            28px,
+            7vw,
+            45px
+        );
 
-    padding: 30px;
+    font-weight:1000;
+    letter-spacing:2px;
+}
 
-    text-align: center;
+.logo span{
+    color:#39ff70;
+}
 
-    background: #0c111d;
+.bestBox{
+    padding:10px 15px;
 
-    border: 1px solid #35415e;
+    background:#0c111d;
 
-    border-radius: 25px;
+    border:1px solid #34405b;
+
+    border-radius:14px;
+
+    font-weight:900;
+
+    font-size:14px;
+}
+
+.bestBox b{
+    color:#39ff70;
+}
+
+
+/* ================================
+   GAME CARD
+================================ */
+
+.gameCard{
+    position:relative;
+
+    overflow:hidden;
+
+    background:#0c111d;
+
+    border:
+        1px solid
+        #34405b;
+
+    border-radius:22px;
 
     box-shadow:
-        0 25px 80px #000b;
+        0 20px 70px #000b;
 }
 
-.logo {
-    font-size: 42px;
-    font-weight: 1000;
-    letter-spacing: 2px;
+.hud{
+    height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:
+        0
+        16px;
+
+    background:#090e18;
+
+    font-weight:900;
+
+    font-size:14px;
+
+    position:relative;
+
+    z-index:3;
 }
 
-.logo span,
-.headerLogo span {
-    color: #39ff70;
+.hud b{
+    color:#39ff70;
 }
 
-.subtitle {
-    color: #9da8bb;
-    margin: 10px 0 25px;
+#gameCanvas{
+    display:block;
+
+    width:100%;
+    height:auto;
+
+    background:
+        linear-gradient(
+            #111a38,
+            #070a13
+        );
+
+    touch-action:none;
+
+    user-select:none;
 }
 
-.nameInput {
-    width: 100%;
 
-    padding: 15px;
+/* ================================
+   GAME OVER
+================================ */
 
-    color: #fff;
+#gameOver{
+    position:absolute;
 
-    background: #111827;
+    top:55px;
+    left:0;
+    right:0;
+    bottom:0;
 
-    border: 1px solid #303c58;
+    display:none;
 
-    border-radius: 13px;
+    align-items:center;
+    justify-content:center;
 
-    outline: none;
+    background:#000b;
 
-    text-align: center;
+    z-index:20;
 }
 
-.nameInput:focus {
-    border-color: #2ddcff;
+.overBox{
+    width:min(390px,90%);
+
+    padding:30px;
+
+    text-align:center;
+
+    background:#0c111d;
+
+    border:
+        1px solid
+        #485675;
+
+    border-radius:22px;
 
     box-shadow:
-        0 0 0 2px #2ddcff22;
+        0 20px 70px #000d;
 }
 
-.primary {
+.overBox h1{
+    color:#ff4c9a;
+
+    font-size:32px;
+
+    margin-bottom:12px;
+}
+
+.finalDistance{
+    margin:8px 0 5px;
+
+    font-size:48px;
+
+    font-weight:1000;
+
+    color:#2ddcff;
+}
+
+.newRecord{
+    color:#39ff70;
+
+    font-weight:1000;
+
+    margin:
+        8px
+        0
+        18px;
+
+    min-height:20px;
+}
+
+
+/* ================================
+   BUTTONS
+================================ */
+
+.controls{
+    display:flex;
+
+    gap:10px;
+
+    margin-top:12px;
+}
+
+.control{
+    flex:1;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    font-weight:1000;
+}
+
+.jump{
     background:
         linear-gradient(
             90deg,
@@ -142,482 +284,195 @@ button:disabled {
             #2ddcff
         );
 
-    color: #06100d;
-
-    border: 0;
+    color:#06100d;
 }
 
-.btn {
-    width: 100%;
+.restart{
+    background:#171f2e;
 
-    padding: 14px;
+    color:white;
 
-    margin-top: 10px;
-
-    border-radius: 13px;
-
-    font-weight: 900;
-}
-
-#errorMessage {
-    min-height: 22px;
-
-    margin-top: 10px;
-
-    color: #ff5e94;
-
-    font-weight: 700;
+    border:
+        1px solid
+        #34405b;
 }
 
 
-/* =========================
-   GAME PAGE
-========================= */
+/* ================================
+   INFO
+================================ */
 
-#gamePage {
-    width: min(1100px, 100%);
+.info{
+    margin-top:12px;
 
-    margin: auto;
+    display:grid;
 
-    padding: 12px;
+    grid-template-columns:
+        repeat(
+            3,
+            1fr
+        );
+
+    gap:10px;
 }
 
-header {
-    display: flex;
+.infoBox{
+    padding:15px;
 
-    justify-content: space-between;
-    align-items: center;
+    text-align:center;
 
-    gap: 10px;
+    background:#0c111d;
 
-    margin-bottom: 12px;
+    border:
+        1px solid
+        #2d3954;
+
+    border-radius:16px;
 }
 
-.headerLogo {
-    font-size: clamp(27px, 6vw, 42px);
+.infoBox strong{
+    display:block;
 
-    font-weight: 1000;
+    font-size:20px;
+
+    color:#2ddcff;
+
+    margin-bottom:4px;
 }
 
-.userInfo {
-    padding: 10px 13px;
+.infoBox span{
+    color:#8995aa;
 
-    border-radius: 15px;
-
-    background: #0c1320;
-
-    border: 1px solid #303b56;
-
-    font-weight: 800;
-
-    font-size: 14px;
-}
-
-.card {
-    background: #0c111d;
-
-    border: 1px solid #2d3954;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 18px 50px #0008;
+    font-size:12px;
 }
 
 
-/* =========================
-   GAME
-========================= */
-
-.gameCard {
-    position: relative;
-}
-
-.hud {
-    height: 52px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 0 15px;
-
-    background: #090e18;
-
-    font-weight: 900;
-
-    font-size: 14px;
-}
-
-.hud b {
-    color: #39ff70;
-}
-
-canvas {
-    display: block;
-
-    width: 100%;
-
-    height: auto;
-
-    touch-action: none;
-
-    user-select: none;
-
-    -webkit-user-select: none;
-
-    background: #101827;
-}
-
-
-/* =========================
-   GAME OVER
-========================= */
-
-#gameOver {
-    display: none;
-
-    position: absolute;
-
-    inset: 52px 0 0;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #000b;
-
-    z-index: 10;
-}
-
-.gameOverBox {
-    width: min(390px, 90%);
-
-    padding: 28px;
-
-    text-align: center;
-
-    background: #0c111d;
-
-    border: 1px solid #485675;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 20px 70px #000c;
-}
-
-.gameOverBox h1 {
-    color: #ff4c9a;
-
-    margin-bottom: 5px;
-}
-
-.finalDistance {
-    margin: 7px;
-
-    font-size: 44px;
-
-    font-weight: 1000;
-
-    color: #2ddcff;
-}
-
-.earned {
-    margin-bottom: 18px;
-
-    color: #39ff70;
-
-    font-size: 22px;
-
-    font-weight: 1000;
-}
-
-
-/* =========================
-   CONTROLS
-========================= */
-
-.controls {
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 10px;
-}
-
-.controls button {
-    flex: 1;
-
-    padding: 14px;
-
-    border-radius: 13px;
-
-    font-weight: 900;
-}
-
-.secondary {
-    background: #171f2e;
-
-    color: #fff;
-
-    border: 1px solid #34405b;
-}
-
-
-/* =========================
-   LEADERBOARD
-========================= */
-
-.leaderCard {
-    margin-top: 12px;
-
-    padding: 15px;
-}
-
-.leaderCard h2 {
-    margin-bottom: 10px;
-}
-
-.leader {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 12px 7px;
-
-    border-bottom: 1px solid #20293a;
-}
-
-.rank {
-    width: 30px;
-
-    color: #8f9aae;
-
-    font-weight: 900;
-}
-
-.player {
-    flex: 1;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-}
-
-.score {
-    color: #39ff70;
-
-    font-weight: 900;
-
-    white-space: nowrap;
-}
-
-.me {
-    background: #123c24;
-
-    border-radius: 10px;
-}
-
-
-/* =========================
-   ONLINE
-========================= */
-
-.onlineTitle {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 10px;
-}
-
-.onlineCount {
-    color: #39ff70;
-
-    font-size: 14px;
-
-    font-weight: 900;
-}
-
-.onlineUser {
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 10px 7px;
-
-    border-bottom: 1px solid #20293a;
-}
-
-.onlineDot {
-    width: 9px;
-    height: 9px;
-
-    border-radius: 50%;
-
-    background: #39ff70;
-
-    box-shadow:
-        0 0 10px #39ff70;
-}
-
-.onlineName {
-    font-weight: 800;
-}
-
-
-/* =========================
+/* ================================
    FOOTER
-========================= */
+================================ */
 
-footer {
-    padding: 25px 5px 12px;
+footer{
+    text-align:center;
 
-    text-align: center;
+    padding:
+        25px
+        5px
+        15px;
 
-    color: #8e99ac;
+    color:#8792a5;
 
-    font-size: 14px;
+    font-size:14px;
 }
 
-footer a {
-    color: #2ddcff;
+footer a{
+    color:#2ddcff;
 
-    font-weight: 900;
+    text-decoration:none;
 
-    text-decoration: none;
+    font-weight:1000;
+}
+
+footer a:hover{
+    text-decoration:underline;
 }
 
 
-/* =========================
+/* ================================
    MOBILE
-========================= */
+================================ */
 
-@media(max-width:600px) {
+@media(max-width:600px){
 
-    .nameBox {
-        padding: 23px;
+    #app{
+        padding:8px;
     }
 
-    .logo {
-        font-size: 34px;
+    header{
+        margin-bottom:9px;
     }
 
-    .headerLogo {
-        font-size: 27px;
+    .logo{
+        font-size:27px;
     }
 
-    .userInfo {
-        font-size: 12px;
+    .bestBox{
+        padding:
+            8px
+            11px;
+
+        font-size:12px;
     }
 
-    .hud {
-        font-size: 11px;
+    .hud{
+        height:47px;
+
+        font-size:11px;
+
+        padding:
+            0
+            11px;
     }
 
-    .controls {
-        flex-direction: column;
+    #gameOver{
+        top:47px;
     }
+
+    .controls{
+        flex-direction:column;
+    }
+
+    .control{
+        padding:14px;
+    }
+
+    .infoBox{
+        padding:12px 5px;
+    }
+
+    .infoBox strong{
+        font-size:17px;
+    }
+
+    .infoBox span{
+        font-size:10px;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
+<div id="app">
 
-<!-- =====================================================
-     NAME PAGE
-===================================================== -->
-
-<section id="namePage">
-
-    <div class="nameBox">
-
-        <div class="logo">
-            QAQLIL <span>RUSH</span>
-        </div>
-
-        <div class="subtitle">
-            Maneələrdən qaç. Rekordu qır. 🔥
-        </div>
-
-        <input
-            id="nameInput"
-            class="nameInput"
-            maxlength="18"
-            autocomplete="off"
-            placeholder="Adını yaz..."
-        >
-
-        <button
-            id="startButton"
-            class="btn primary"
-            type="button"
-        >
-            🚀 OYUNA BAŞLA
-        </button>
-
-        <div id="errorMessage"></div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     GAME PAGE
-===================================================== -->
-
-<main
-    id="gamePage"
-    class="hidden"
->
 
 <header>
 
-    <div class="headerLogo">
+    <div class="logo">
         QAQLIL <span>RUSH</span>
     </div>
 
-    <div class="userInfo">
-        👤
-        <span id="username">---</span>
-        · ⭐
-        <span id="totalScore">0</span>
+    <div class="bestBox">
+        🏆 BEST:
+        <b id="best">0</b> M
     </div>
 
 </header>
 
 
-<!-- GAME -->
-
-<div class="card gameCard">
+<div class="gameCard">
 
     <div class="hud">
 
         <span>
-            ⭐ SCORE:
-            <b id="runScore">0</b>
+            📏 MƏSAFƏ:
+            <b id="distance">0</b> M
         </span>
 
         <span>
-            🏆
-            <b id="distance">0</b>
-            M
-            · BEST
-            <b id="best">0</b>
+            ⚡ SÜRƏT:
+            <b id="speed">1.0</b>x
         </span>
 
     </div>
@@ -630,18 +485,16 @@ footer a {
     ></canvas>
 
 
-    <!-- GAME OVER -->
-
     <div id="gameOver">
 
-        <div class="gameOverBox">
+        <div class="overBox">
 
             <h1>
-                OYUN BİTDİ!
+                💥 OYUN BİTDİ
             </h1>
 
             <div>
-                Məsafə
+                Məsafən
             </div>
 
             <div
@@ -652,18 +505,15 @@ footer a {
             </div>
 
             <div
-                id="earnedXP"
-                class="earned"
-            >
-                +0 SCORE
-            </div>
+                id="newRecord"
+                class="newRecord"
+            ></div>
 
             <button
-                id="restartGameOver"
-                class="btn primary"
-                type="button"
+                id="overRestart"
+                class="control jump"
             >
-                ↻ YENİDƏN OYNA
+                🔄 YENİDƏN OYNA
             </button>
 
         </div>
@@ -673,75 +523,62 @@ footer a {
 </div>
 
 
-<!-- CONTROLS -->
-
 <div class="controls">
 
     <button
         id="jumpButton"
-        class="primary"
-        type="button"
+        class="control jump"
     >
-        ⬆ TULLAN — SPACE
+        ⬆️ TULLAN — SPACE
     </button>
 
     <button
         id="restartButton"
-        class="secondary"
-        type="button"
+        class="control restart"
     >
-        ↻ YENİDƏN
+        🔄 YENİDƏN BAŞLA
     </button>
 
 </div>
 
 
-<!-- ONLINE USERS -->
+<div class="info">
 
-<div class="card leaderCard">
+    <div class="infoBox">
 
-    <div class="onlineTitle">
+        <strong id="obstaclesPassed">
+            0
+        </strong>
 
-        <h2>
-            🟢 ONLAYN OYUNÇULAR
-        </h2>
-
-        <span
-            id="onlineCount"
-            class="onlineCount"
-        >
-            0 nəfər
+        <span>
+            MANEƏ
         </span>
 
     </div>
 
-    <div id="onlineUsers">
 
-        <div class="onlineUser">
-            <span class="onlineDot"></span>
-            <span class="onlineName">
-                Yüklənir...
-            </span>
-        </div>
+    <div class="infoBox">
+
+        <strong id="bestInfo">
+            0
+        </strong>
+
+        <span>
+            REKORD
+        </span>
 
     </div>
 
-</div>
 
+    <div class="infoBox">
 
-<!-- LEADERBOARD -->
+        <strong>
+            ∞
+        </strong>
 
-<div class="card leaderCard">
-
-    <h2>
-        🏆 SIRALAMA
-    </h2>
-
-    <div id="leaderboard">
-
-        <div class="leader">
-            Yüklənir...
-        </div>
+        <span>
+            MƏRHƏLƏ
+        </span>
 
     </div>
 
@@ -750,19 +587,24 @@ footer a {
 
 <footer>
 
-    İrad və tənqidlər üçün əlaqə:
+    QAQLIL RUSH · Made by Samir
+
+    <br><br>
+
+    İrad və tənqidlər üçün:
 
     <a
         href="https://www.tiktok.com/@ssamirreds"
         target="_blank"
         rel="noopener noreferrer"
     >
-        TikTok — ssamirreds
+        TikTok @ssamirreds
     </a>
 
 </footer>
 
-</main>
+
+</div>
 
 
 <script>
@@ -770,572 +612,995 @@ footer a {
 "use strict";
 
 
-/* =====================================================
-   GLOBAL
-===================================================== */
-
-const $ = id =>
-    document.getElementById(id);
-
-let playerName = "";
-
-let gameRunning = false;
-
-let gameOver = false;
-
-let animationId = null;
-
-let lastTime = 0;
-
-let distance = 0;
-
-let score = 0;
-
-let bestDistance = 0;
-
-let player = null;
-
-let obstacles = [];
-
-let particles = [];
-
-let groundY = 420;
-
-let speed = 360;
-
-let obstacleTimer = 0;
-
-let onlineTimer = null;
-
-let leaderboardTimer = null;
-
-
-/* =====================================================
+/* =========================================
    CANVAS
-===================================================== */
+========================================= */
 
 const canvas =
-    $("gameCanvas");
+    document.getElementById(
+        "gameCanvas"
+    );
 
 const ctx =
     canvas.getContext("2d");
 
 
-/* =====================================================
-   LOCAL DATA
-===================================================== */
+/* =========================================
+   ELEMENTS
+========================================= */
 
-function loadLocalData() {
+const distanceEl =
+    document.getElementById(
+        "distance"
+    );
 
-    bestDistance =
-        Number(
-            localStorage.getItem(
-                "qaqlil_best_" + playerName
-            ) || 0
-        );
+const speedEl =
+    document.getElementById(
+        "speed"
+    );
 
-    $("best").textContent =
-        bestDistance;
-}
+const bestEl =
+    document.getElementById(
+        "best"
+    );
 
+const bestInfoEl =
+    document.getElementById(
+        "bestInfo"
+    );
 
-function saveLocalData() {
+const obstaclesPassedEl =
+    document.getElementById(
+        "obstaclesPassed"
+    );
 
-    if (distance > bestDistance) {
+const gameOverEl =
+    document.getElementById(
+        "gameOver"
+    );
 
-        bestDistance =
-            Math.floor(distance);
+const finalDistanceEl =
+    document.getElementById(
+        "finalDistance"
+    );
 
-        localStorage.setItem(
-            "qaqlil_best_" + playerName,
-            bestDistance
-        );
-    }
-}
-
-
-/* =====================================================
-   SERVER API
-===================================================== */
-
-async function serverRequest(
-    path,
-    options = {}
-) {
-
-    try {
-
-        const response =
-            await fetch(
-                path,
-                {
-                    ...options,
-
-                    headers: {
-                        "Content-Type":
-                            "application/json",
-
-                        ...(options.headers || {})
-                    }
-                }
-            );
-
-        const type =
-            response.headers.get(
-                "content-type"
-            ) || "";
-
-        if (
-            !type.includes(
-                "application/json"
-            )
-        ) {
-
-            return null;
-        }
-
-        return await response.json();
-
-    } catch (error) {
-
-        console.warn(
-            "Server connection:",
-            error
-        );
-
-        return null;
-    }
-}
-
-
-/* =====================================================
-   JOIN
-===================================================== */
-
-async function joinGame() {
-
-    const data =
-        await serverRequest(
-            "/api/join",
-            {
-                method: "POST",
-
-                body:
-                    JSON.stringify({
-                        name: playerName
-                    })
-            }
-        );
-
-    if (data) {
-
-        if (
-            Number.isFinite(
-                Number(data.best)
-            )
-        ) {
-
-            bestDistance =
-                Number(data.best);
-
-            localStorage.setItem(
-                "qaqlil_best_" + playerName,
-                bestDistance
-            );
-        }
-    }
-
-    loadOnlineUsers();
-
-    loadLeaderboard();
-}
-
-
-/* =====================================================
-   SEND SCORE
-===================================================== */
-
-async function sendScore() {
-
-    const finalScore =
-        Math.floor(distance);
-
-    const data =
-        await serverRequest(
-            "/api/score",
-            {
-                method: "POST",
-
-                body:
-                    JSON.stringify({
-                        name: playerName,
-                        score: finalScore
-                    })
-            }
-        );
-
-    if (data) {
-
-        if (
-            Number.isFinite(
-                Number(data.best)
-            )
-        ) {
-
-            bestDistance =
-                Math.max(
-                    bestDistance,
-                    Number(data.best)
-                );
-
-            localStorage.setItem(
-                "qaqlil_best_" + playerName,
-                bestDistance
-            );
-
-            $("best").textContent =
-                bestDistance;
-        }
-    }
-
-    loadLeaderboard();
-}
-
-
-/* =====================================================
-   ONLINE USERS
-===================================================== */
-
-async function loadOnlineUsers() {
-
-    const data =
-        await serverRequest(
-            "/api/online"
-        );
-
-    const box =
-        $("onlineUsers");
-
-    if (
-        !data ||
-        !Array.isArray(data.users)
-    ) {
-
-        box.innerHTML = `
-            <div class="onlineUser">
-                <span class="onlineDot"></span>
-                <span class="onlineName">
-                    ${escapeHTML(playerName)}
-                </span>
-            </div>
-        `;
-
-        $("onlineCount").textContent =
-            "1 nəfər";
-
-        return;
-    }
-
-
-    box.innerHTML = "";
-
-    data.users.forEach(
-        name => {
-
-            const row =
-                document.createElement(
-                    "div"
-                );
-
-            row.className =
-                "onlineUser";
-
-            row.innerHTML = `
-                <span class="onlineDot"></span>
-                <span class="onlineName"></span>
-            `;
-
-            row.querySelector(
-                ".onlineName"
-            ).textContent = name;
-
-            box.appendChild(row);
-        }
+const newRecordEl =
+    document.getElementById(
+        "newRecord"
     );
 
 
-    $("onlineCount").textContent =
-        data.users.length +
-        " nəfər";
-}
+/* =========================================
+   GAME STATE
+========================================= */
 
+const W = 900;
+const H = 500;
 
-/* =====================================================
-   LEADERBOARD
-===================================================== */
+const groundY = 415;
 
-async function loadLeaderboard() {
+let player;
 
-    const box =
-        $("leaderboard");
+let obstacles = [];
 
-    const data =
-        await serverRequest(
-            "/api/leaderboard"
-        );
+let particles = [];
 
-    if (
-        !data ||
-        !Array.isArray(data.players)
-    ) {
+let distance = 0;
 
-        box.innerHTML = `
-            <div class="leader">
-                <span class="rank">1</span>
-                <span class="player"></span>
-                <span class="score"></span>
-            </div>
-        `;
-
-        box.querySelector(
-            ".player"
-        ).textContent =
-            playerName;
-
-        box.querySelector(
-            ".score"
-        ).textContent =
-            bestDistance + " M";
-
-        return;
-    }
-
-
-    box.innerHTML = "";
-
-
-    if (!data.players.length) {
-
-        box.innerHTML =
-            `<div class="leader">
-                Hələ heç kim yoxdur.
-            </div>`;
-
-        return;
-    }
-
-
-    data.players.forEach(
-        (item, index) => {
-
-            const row =
-                document.createElement(
-                    "div"
-                );
-
-            row.className =
-                "leader";
-
-
-            if (
-                item.name === playerName
-            ) {
-
-                row.classList.add(
-                    "me"
-                );
-            }
-
-
-            const rank =
-                document.createElement(
-                    "span"
-                );
-
-            rank.className =
-                "rank";
-
-            rank.textContent =
-                index + 1;
-
-
-            const name =
-                document.createElement(
-                    "span"
-                );
-
-            name.className =
-                "player";
-
-            name.textContent =
-                item.name;
-
-
-            const value =
-                document.createElement(
-                    "span"
-                );
-
-            value.className =
-                "score";
-
-            value.textContent =
-                Number(
-                    item.score || 0
-                ) + " M";
-
-
-            row.appendChild(rank);
-
-            row.appendChild(name);
-
-            row.appendChild(value);
-
-            box.appendChild(row);
-        }
+let best =
+    Number(
+        localStorage.getItem(
+            "qaqlil_best"
+        ) || 0
     );
-}
+
+let obstacleCount = 0;
+
+let gameRunning = false;
+
+let gameOver = false;
+
+let lastTime = 0;
+
+let spawnTimer = 0;
+
+let spawnDelay = 1300;
+
+let worldSpeed = 6;
+
+let animationId = 0;
 
 
-/* =====================================================
-   HTML ESCAPE
-===================================================== */
-
-function escapeHTML(text) {
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-    div.textContent =
-        text;
-
-    return div.innerHTML;
-}
-
-
-/* =====================================================
-   NAME VALIDATION
-===================================================== */
-
-function validName(name) {
-
-    return /^[A-Za-z0-9_]{3,18}$/
-        .test(name);
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-async function startGame() {
-
-    const input =
-        $("nameInput");
-
-    const name =
-        input.value.trim();
-
-    $("errorMessage")
-        .textContent = "";
-
-
-    if (!validName(name)) {
-
-        $("errorMessage")
-            .textContent =
-            "Ad 3-18 simvol olmalıdır. Yalnız hərf, rəqəm və _ istifadə et.";
-
-        return;
-    }
-
-
-    playerName =
-        name;
-
-
-    $("namePage")
-        .classList
-        .add("hidden");
-
-
-    $("gamePage")
-        .classList
-        .remove("hidden");
-
-
-    $("username")
-        .textContent =
-        playerName;
-
-
-    loadLocalData();
-
-    await joinGame();
-
-    restartGame();
-
-
-    if (onlineTimer)
-        clearInterval(onlineTimer);
-
-    onlineTimer =
-        setInterval(
-            loadOnlineUsers,
-            5000
-        );
-
-
-    if (leaderboardTimer)
-        clearInterval(leaderboardTimer);
-
-    leaderboardTimer =
-        setInterval(
-            loadLeaderboard,
-            5000
-        );
-}
-
-
-/* =====================================================
+/* =========================================
    PLAYER
-===================================================== */
+========================================= */
 
-function createPlayer() {
+function createPlayer(){
 
-    player = {
+    return {
 
-        x: 120,
+        x:120,
 
-        y: groundY - 55,
+        y:groundY - 65,
 
-        width: 42,
+        width:42,
 
-        height: 55,
+        height:65,
 
-        velocityY: 0,
+        velocityY:0,
 
-        jumpPower: -720,
+        gravity:0.8,
 
-        gravity: 1900,
+        jumpPower:-15,
 
-        onGround: true
+        grounded:true
+
     };
+
 }
 
 
-/* =====================================================
-   OBSTACLE
-===================================================== */
+/* =========================================
+   RESET
+========================================= */
 
-function createObstacle() {
+function restartGame(){
+
+    cancelAnimationFrame(
+        animationId
+    );
+
+    player =
+        createPlayer();
+
+    obstacles = [];
+
+    particles = [];
+
+    distance = 0;
+
+    obstacleCount = 0;
+
+    spawnTimer = 0;
+
+    spawnDelay = 1300;
+
+    worldSpeed = 6;
+
+    gameRunning = true;
+
+    gameOver = false;
+
+    gameOverEl.style.display =
+        "none";
+
+    updateHUD();
+
+    lastTime =
+        performance.now();
+
+    animationId =
+        requestAnimationFrame(
+            gameLoop
+        );
+
+}
+
+
+/* =========================================
+   JUMP
+========================================= */
+
+function jump(){
+
+    if(gameOver){
+
+        restartGame();
+
+        return;
+
+    }
+
+    if(
+        player &&
+        player.grounded
+    ){
+
+        player.velocityY =
+            player.jumpPower;
+
+        player.grounded =
+            false;
+
+        createJumpParticles();
+
+        beep(
+            500,
+            0.06
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+document
+    .getElementById(
+        "jumpButton"
+    )
+    .addEventListener(
+        "pointerdown",
+        event => {
+
+            event.preventDefault();
+
+            jump();
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "restartButton"
+    )
+    .addEventListener(
+        "click",
+        restartGame
+    );
+
+
+document
+    .getElementById(
+        "overRestart"
+    )
+    .addEventListener(
+        "click",
+        restartGame
+    );
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.code === "Space" ||
+            event.code === "ArrowUp"
+        ){
+
+            event.preventDefault();
+
+            jump();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   CANVAS TOUCH
+========================================= */
+
+canvas.addEventListener(
+    "pointerdown",
+    event => {
+
+        event.preventDefault();
+
+        jump();
+
+    }
+);
+
+
+/* =========================================
+   SPAWN OBSTACLE
+========================================= */
+
+function spawnObstacle(){
 
     const height =
         35 +
-        Math.random() * 65;
+        Math.random() * 55;
 
     const width =
         25 +
-    
+        Math.random() * 28;
+
+    obstacles.push({
+
+        x:W + 30,
+
+        y:groundY - height,
+
+        width,
+
+        height,
+
+        passed:false,
+
+        type:
+            Math.random() >
+            0.5
+            ? "rock"
+            : "spike"
+
+    });
+
+}
+
+
+/* =========================================
+   UPDATE
+========================================= */
+
+function update(delta){
+
+    if(!gameRunning)
+        return;
+
+
+    /* PLAYER */
+
+    player.velocityY +=
+        player.gravity;
+
+    player.y +=
+        player.velocityY;
+
+
+    if(
+        player.y +
+        player.height >=
+        groundY
+    ){
+
+        player.y =
+            groundY -
+            player.height;
+
+        player.velocityY =
+            0;
+
+        player.grounded =
+            true;
+
+    }
+
+
+    /* SPEED */
+
+    worldSpeed =
+        6 +
+        Math.min(
+            distance / 500,
+            8
+        );
+
+
+    spawnDelay =
+        Math.max(
+            500,
+            1300 -
+            distance * 0.7
+        );
+
+
+    /* DISTANCE */
+
+    distance +=
+        worldSpeed *
+        delta *
+        0.045;
+
+
+    /* SPAWN */
+
+    spawnTimer +=
+        delta;
+
+    if(
+        spawnTimer >=
+        spawnDelay
+    ){
+
+        spawnObstacle();
+
+        spawnTimer = 0;
+
+    }
+
+
+    /* OBSTACLES */
+
+    for(
+        let i =
+            obstacles.length - 1;
+
+        i >= 0;
+
+        i--
+    ){
+
+        const obstacle =
+            obstacles[i];
+
+        obstacle.x -=
+            worldSpeed *
+            delta *
+            0.06;
+
+
+        if(
+            !obstacle.passed &&
+            obstacle.x +
+            obstacle.width <
+            player.x
+        ){
+
+            obstacle.passed =
+                true;
+
+            obstacleCount++;
+
+            createScoreParticles(
+                obstacle.x,
+                obstacle.y
+            );
+
+        }
+
+
+        if(
+            obstacle.x +
+            obstacle.width <
+            -50
+        ){
+
+            obstacles.splice(
+                i,
+                1
+            );
+
+            continue;
+
+        }
+
+
+        if(
+            collision(
+                player,
+                obstacle
+            )
+        ){
+
+            endGame();
+
+            return;
+
+        }
+
+    }
+
+
+    /* PARTICLES */
+
+    updateParticles();
+
+
+    updateHUD();
+
+}
+
+
+/* =========================================
+   COLLISION
+========================================= */
+
+function collision(
+    a,
+    b
+){
+
+    const padding = 8;
+
+    return (
+
+        a.x + padding <
+        b.x + b.width &&
+
+        a.x +
+        a.width -
+        padding >
+        b.x &&
+
+        a.y + padding <
+        b.y + b.height &&
+
+        a.y +
+        a.height -
+        padding >
+        b.y
+
+    );
+
+}
+
+
+/* =========================================
+   END GAME
+========================================= */
+
+function endGame(){
+
+    gameRunning =
+        false;
+
+    gameOver =
+        true;
+
+    const final =
+        Math.floor(
+            distance
+        );
+
+    const newRecord =
+        final > best;
+
+
+    if(newRecord){
+
+        best =
+            final;
+
+        localStorage.setItem(
+            "qaqlil_best",
+            best
+        );
+
+        newRecordEl.textContent =
+            "🏆 YENİ REKORD!";
+
+    }else{
+
+        newRecordEl.textContent =
+            `Rekordun: ${best} M`;
+
+    }
+
+
+    finalDistanceEl.textContent =
+        final + " M";
+
+
+    updateHUD();
+
+
+    gameOverEl.style.display =
+        "flex";
+
+
+    createExplosion(
+        player.x +
+        player.width / 2,
+
+        player.y +
+        player.height / 2
+    );
+
+
+    beep(
+        150,
+        0.2
+    );
+
+}
+
+
+/* =========================================
+   HUD
+========================================= */
+
+function updateHUD(){
+
+    distanceEl.textContent =
+        Math.floor(
+            distance
+        );
+
+
+    speedEl.textContent =
+        (
+            worldSpeed /
+            6
+        ).toFixed(1);
+
+
+    bestEl.textContent =
+        best;
+
+
+    bestInfoEl.textContent =
+        best;
+
+
+    obstaclesPassedEl.textContent =
+        obstacleCount;
+
+}
+
+
+/* =========================================
+   DRAW
+========================================= */
+
+function draw(){
+
+    ctx.clearRect(
+        0,
+        0,
+        W,
+        H
+    );
+
+
+    drawBackground();
+
+    drawGround();
+
+    drawObstacles();
+
+    drawPlayer();
+
+    drawParticles();
+
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+function drawBackground(){
+
+    /* moon */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        760,
+        95,
+        48,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        "#e7f1ff";
+
+    ctx.globalAlpha =
+        0.9;
+
+    ctx.fill();
+
+    ctx.globalAlpha =
+        1;
+
+
+    /* stars */
+
+    const stars = [
+        [80,80,2],
+        [180,130,1],
+        [300,65,2],
+        [420,110,1],
+        [530,55,2],
+        [650,155,1],
+        [850,65,2],
+        [720,210,1]
+    ];
+
+
+    for(
+        const star of stars
+    ){
+
+        ctx.beginPath();
+
+        ctx.arc(
+            star[0],
+            star[1],
+            star[2],
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            "#ffffff";
+
+        ctx.globalAlpha =
+            0.75;
+
+        ctx.fill();
+
+    }
+
+    ctx.globalAlpha =
+        1;
+
+
+    /* distant city */
+
+    ctx.fillStyle =
+        "#101a32";
+
+    for(
+        let x=0;
+        x<W;
+        x+=55
+    ){
+
+        const h =
+            40 +
+            ((x * 17) % 80);
+
+        ctx.fillRect(
+            x,
+            groundY - h,
+            40,
+            h
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   GROUND
+========================================= */
+
+function drawGround(){
+
+    ctx.fillStyle =
+        "#0b101c";
+
+    ctx.fillRect(
+        0,
+        groundY,
+        W,
+        H-groundY
+    );
+
+
+    ctx.fillStyle =
+        "#24304a";
+
+    ctx.fillRect(
+        0,
+        groundY,
+        W,
+        5
+    );
+
+
+    ctx.fillStyle =
+        "#39ff70";
+
+    ctx.globalAlpha =
+        0.35;
+
+    ctx.fillRect(
+        0,
+        groundY,
+        W,
+        2
+    );
+
+    ctx.globalAlpha =
+        1;
+
+
+    /* ground lines */
+
+    ctx.strokeStyle =
+        "#192239";
+
+    ctx.lineWidth =
+        2;
+
+    for(
+        let x=0;
+        x<W;
+        x+=45
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x,
+            groundY + 30
+        );
+
+        ctx.lineTo(
+            x + 20,
+            groundY + 30
+        );
+
+        ctx.stroke();
+
+    }
+
+}
+
+
+/* =========================================
+   PLAYER
+========================================= */
+
+function drawPlayer(){
+
+    const x =
+        player.x;
+
+    const y =
+        player.y;
+
+
+    /* shadow */
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        x + player.width/2,
+        groundY + 3,
+        28,
+        7,
+        0,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        "#000000";
+
+    ctx.globalAlpha =
+        0.35;
+
+    ctx.fill();
+
+    ctx.globalAlpha =
+        1;
+
+
+    /* body */
+
+    ctx.fillStyle =
+        "#2ddcff";
+
+    ctx.fillRect(
+        x + 8,
+        y + 25,
+        26,
+        34
+    );
+
+
+    /* head */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x + 21,
+        y + 15,
+        15,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        "#ffd2b3";
+
+    ctx.fill();
+
+
+    /* hair */
+
+    ctx.fillStyle =
+        "#151515";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x + 21,
+        y + 11,
+        15,
+        Math.PI,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /* legs */
+
+    ctx.fillStyle =
+        "#e8edf7";
+
+    ctx.fillRect(
+        x + 10,
+        y + 55,
+        8,
+        10
+    );
+
+    ctx.fillRect(
+        x + 24,
+        y + 55,
+        8,
+        10
+    );
+
+
+    /* eye */
+
+    ctx.fillStyle =
+        "#111";
+
+    ctx.fillRect(
+        x + 26,
+        y + 12,
+        3,
+        3
+    );
+
+}
+
+
+/* =========================================
+   OBSTACLES
+========================================= */
+
+function drawObstacles(){
+
+    for(
+        const obstacle of obstacles
+    ){
+
+        if(
+            obstacle.type ===
+            "spike"
+        ){
+
+            drawSpike(
+                obstacle
+            );
+
+        }else{
+
+            drawRock(
+                obstacle
+            );
+
+        }
+
+    }
+
+}
+
+
+function drawSpike(o){
+
+    ctx.fillStyle =
+        "#ff4c9a";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+       
