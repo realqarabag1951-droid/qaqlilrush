@@ -11,272 +11,99 @@
 <title>QAQLIL RUSH</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
-body{
-    width:100%;
-    min-height:100%;
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
-body{
-    min-height:100vh;
-
-    display:flex;
-    justify-content:center;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color:white;
-
+body {
+    min-height: 100vh;
     background:
-        radial-gradient(
-            circle at 15% 10%,
-            #253c9c 0,
-            transparent 35%
-        ),
+        radial-gradient(circle at 15% 10%, #2948b8 0%, transparent 30%),
+        radial-gradient(circle at 85% 80%, #a31c72 0%, transparent 32%),
+        linear-gradient(135deg, #060912, #0b1020 55%, #080914);
 
-        radial-gradient(
-            circle at 90% 85%,
-            #92145f 0,
-            transparent 38%
-        ),
-
-        #070a13;
-
-    overflow-x:hidden;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
-button{
-    font:inherit;
-    cursor:pointer;
-    border:0;
+button {
+    font: inherit;
+    border: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
-#app{
-    width:min(1050px,100%);
-    padding:14px;
+.hidden {
+    display: none !important;
 }
 
 
-/* ================================
-   HEADER
-================================ */
+/* =========================
+   START SCREEN
+========================= */
 
-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+#startScreen {
+    min-height: 100vh;
 
-    gap:15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    margin-bottom:14px;
+    padding: 20px;
 }
 
-.logo{
-    font-size:
-        clamp(
-            28px,
-            7vw,
-            45px
-        );
+.startBox {
+    width: min(450px, 100%);
 
-    font-weight:1000;
-    letter-spacing:2px;
-}
+    padding: 35px 25px;
 
-.logo span{
-    color:#39ff70;
-}
+    text-align: center;
 
-.bestBox{
-    padding:10px 15px;
+    background: rgba(10, 15, 28, 0.95);
 
-    background:#0c111d;
+    border: 1px solid #34415f;
 
-    border:1px solid #34405b;
-
-    border-radius:14px;
-
-    font-weight:900;
-
-    font-size:14px;
-}
-
-.bestBox b{
-    color:#39ff70;
-}
-
-
-/* ================================
-   GAME CARD
-================================ */
-
-.gameCard{
-    position:relative;
-
-    overflow:hidden;
-
-    background:#0c111d;
-
-    border:
-        1px solid
-        #34405b;
-
-    border-radius:22px;
+    border-radius: 28px;
 
     box-shadow:
-        0 20px 70px #000b;
+        0 25px 80px rgba(0,0,0,.55);
 }
 
-.hud{
-    height:55px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:
-        0
-        16px;
-
-    background:#090e18;
-
-    font-weight:900;
-
-    font-size:14px;
-
-    position:relative;
-
-    z-index:3;
+.logo {
+    font-size: clamp(38px, 11vw, 60px);
+    font-weight: 1000;
+    letter-spacing: 3px;
 }
 
-.hud b{
-    color:#39ff70;
+.logo span {
+    color: #39ff70;
 }
 
-#gameCanvas{
-    display:block;
-
-    width:100%;
-    height:auto;
-
-    background:
-        linear-gradient(
-            #111a38,
-            #070a13
-        );
-
-    touch-action:none;
-
-    user-select:none;
+.description {
+    margin-top: 10px;
+    color: #aab4c8;
+    font-size: 15px;
+    line-height: 1.5;
 }
 
+.startButton {
+    width: 100%;
 
-/* ================================
-   GAME OVER
-================================ */
+    margin-top: 28px;
 
-#gameOver{
-    position:absolute;
+    padding: 17px;
 
-    top:55px;
-    left:0;
-    right:0;
-    bottom:0;
+    border-radius: 15px;
 
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#000b;
-
-    z-index:20;
-}
-
-.overBox{
-    width:min(390px,90%);
-
-    padding:30px;
-
-    text-align:center;
-
-    background:#0c111d;
-
-    border:
-        1px solid
-        #485675;
-
-    border-radius:22px;
-
-    box-shadow:
-        0 20px 70px #000d;
-}
-
-.overBox h1{
-    color:#ff4c9a;
-
-    font-size:32px;
-
-    margin-bottom:12px;
-}
-
-.finalDistance{
-    margin:8px 0 5px;
-
-    font-size:48px;
-
-    font-weight:1000;
-
-    color:#2ddcff;
-}
-
-.newRecord{
-    color:#39ff70;
-
-    font-weight:1000;
-
-    margin:
-        8px
-        0
-        18px;
-
-    min-height:20px;
-}
-
-
-/* ================================
-   BUTTONS
-================================ */
-
-.controls{
-    display:flex;
-
-    gap:10px;
-
-    margin-top:12px;
-}
-
-.control{
-    flex:1;
-
-    padding:15px;
-
-    border-radius:14px;
-
-    font-weight:1000;
-}
-
-.jump{
     background:
         linear-gradient(
             90deg,
@@ -284,178 +111,385 @@ header{
             #2ddcff
         );
 
-    color:#06100d;
+    color: #06100d;
+
+    font-size: 18px;
+    font-weight: 1000;
+
+    box-shadow:
+        0 10px 35px rgba(45,220,255,.2);
 }
 
-.restart{
-    background:#171f2e;
+.startButton:active {
+    transform: scale(.98);
+}
 
-    color:white;
+.instructions {
+    margin-top: 18px;
 
-    border:
-        1px solid
-        #34405b;
+    color: #77839a;
+
+    font-size: 13px;
 }
 
 
-/* ================================
-   INFO
-================================ */
+/* =========================
+   GAME PAGE
+========================= */
 
-.info{
-    margin-top:12px;
+#gamePage {
+    width: min(1100px, 100%);
 
-    display:grid;
+    margin: auto;
 
-    grid-template-columns:
-        repeat(
-            3,
-            1fr
+    padding: 14px;
+}
+
+header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+}
+
+.headerLogo {
+    font-size: clamp(27px, 6vw, 43px);
+    font-weight: 1000;
+    letter-spacing: 1px;
+}
+
+.headerLogo span {
+    color: #39ff70;
+}
+
+.scoreBox {
+    padding: 10px 15px;
+
+    background: rgba(10,15,28,.9);
+
+    border: 1px solid #303c58;
+
+    border-radius: 14px;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+}
+
+.scoreBox b {
+    color: #39ff70;
+}
+
+
+/* =========================
+   GAME CARD
+========================= */
+
+.gameCard {
+    position: relative;
+
+    overflow: hidden;
+
+    background: #111;
+
+    border: 1px solid #35415e;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.55);
+}
+
+.hud {
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    background: #080d17;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    position: relative;
+
+    z-index: 3;
+}
+
+.hud b {
+    color: #39ff70;
+}
+
+canvas {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    background: #17213b;
+
+    touch-action: none;
+
+    user-select: none;
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+#gameOver {
+    position: absolute;
+
+    inset: 52px 0 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0,0,0,.68);
+
+    z-index: 10;
+}
+
+.gameOverBox {
+    width: min(390px, 90%);
+
+    padding: 28px;
+
+    text-align: center;
+
+    background: #0c111d;
+
+    border: 1px solid #485675;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.8);
+}
+
+.gameOverBox h1 {
+    color: #ff4c9a;
+
+    margin-bottom: 12px;
+
+    font-size: 30px;
+}
+
+.distanceTitle {
+    color: #9da8bb;
+}
+
+.finalDistance {
+    margin: 8px 0 20px;
+
+    color: #2ddcff;
+
+    font-size: 48px;
+
+    font-weight: 1000;
+}
+
+.restartButton {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #39ff70,
+            #2ddcff
         );
 
-    gap:10px;
-}
+    color: #06100d;
 
-.infoBox{
-    padding:15px;
+    font-weight: 1000;
 
-    text-align:center;
-
-    background:#0c111d;
-
-    border:
-        1px solid
-        #2d3954;
-
-    border-radius:16px;
-}
-
-.infoBox strong{
-    display:block;
-
-    font-size:20px;
-
-    color:#2ddcff;
-
-    margin-bottom:4px;
-}
-
-.infoBox span{
-    color:#8995aa;
-
-    font-size:12px;
+    font-size: 16px;
 }
 
 
-/* ================================
+/* =========================
+   CONTROLS
+========================= */
+
+.controls {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.controlButton {
+    flex: 1;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    font-weight: 1000;
+}
+
+.jumpButton {
+    background:
+        linear-gradient(
+            90deg,
+            #39ff70,
+            #2ddcff
+        );
+
+    color: #06100d;
+}
+
+.restartControl {
+    background: #151e30;
+
+    color: white;
+
+    border: 1px solid #35415e;
+}
+
+.controlButton:active {
+    transform: scale(.98);
+}
+
+
+/* =========================
    FOOTER
-================================ */
+========================= */
 
-footer{
-    text-align:center;
+footer {
+    padding: 25px 5px 15px;
 
-    padding:
-        25px
-        5px
-        15px;
+    text-align: center;
 
-    color:#8792a5;
+    color: #7f8ba0;
 
-    font-size:14px;
+    font-size: 14px;
 }
 
-footer a{
-    color:#2ddcff;
+footer a {
+    color: #2ddcff;
 
-    text-decoration:none;
+    font-weight: 900;
 
-    font-weight:1000;
-}
-
-footer a:hover{
-    text-decoration:underline;
+    text-decoration: none;
 }
 
 
-/* ================================
+/* =========================
    MOBILE
-================================ */
+========================= */
 
-@media(max-width:600px){
+@media (max-width: 600px) {
 
-    #app{
-        padding:8px;
+    #gamePage {
+        padding: 8px;
     }
 
-    header{
-        margin-bottom:9px;
+    header {
+        margin-bottom: 8px;
     }
 
-    .logo{
-        font-size:27px;
+    .headerLogo {
+        font-size: 26px;
     }
 
-    .bestBox{
-        padding:
-            8px
-            11px;
-
-        font-size:12px;
+    .scoreBox {
+        padding: 8px 10px;
+        font-size: 12px;
     }
 
-    .hud{
-        height:47px;
-
-        font-size:11px;
-
-        padding:
-            0
-            11px;
+    .hud {
+        height: 46px;
+        font-size: 11px;
     }
 
-    #gameOver{
-        top:47px;
+    #gameOver {
+        inset: 46px 0 0;
     }
 
-    .controls{
-        flex-direction:column;
+    .controls {
+        flex-direction: column;
     }
 
-    .control{
-        padding:14px;
+    .controlButton {
+        padding: 14px;
     }
-
-    .infoBox{
-        padding:12px 5px;
-    }
-
-    .infoBox strong{
-        font-size:17px;
-    }
-
-    .infoBox span{
-        font-size:10px;
-    }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<div id="app">
 
+<!-- =====================================================
+     START SCREEN
+===================================================== -->
+
+<section id="startScreen">
+
+    <div class="startBox">
+
+        <div class="logo">
+            QAQLIL <span>RUSH</span>
+        </div>
+
+        <div class="description">
+            Maneələrdən qaç, mümkün qədər uzağa get
+            və öz rekordunu qır! 🔥
+        </div>
+
+        <button
+            id="startButton"
+            class="startButton"
+            type="button"
+        >
+            🚀 OYUNA BAŞLA
+        </button>
+
+        <div class="instructions">
+            Kompüter: SPACE və ya ↑<br>
+            Telefon: TULLAN düyməsi
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GAME
+===================================================== -->
+
+<main
+    id="gamePage"
+    class="hidden"
+>
 
 <header>
 
-    <div class="logo">
+    <div class="headerLogo">
         QAQLIL <span>RUSH</span>
     </div>
 
-    <div class="bestBox">
-        🏆 BEST:
-        <b id="best">0</b> M
+    <div class="scoreBox">
+        🏆 <b id="bestScore">0</b> M
     </div>
 
 </header>
@@ -466,13 +500,11 @@ footer a:hover{
     <div class="hud">
 
         <span>
-            📏 MƏSAFƏ:
-            <b id="distance">0</b> M
+            📏 <b id="distance">0</b> M
         </span>
 
         <span>
-            ⚡ SÜRƏT:
-            <b id="speed">1.0</b>x
+            ⭐ <b id="score">0</b>
         </span>
 
     </div>
@@ -487,14 +519,14 @@ footer a:hover{
 
     <div id="gameOver">
 
-        <div class="overBox">
+        <div class="gameOverBox">
 
             <h1>
-                💥 OYUN BİTDİ
+                OYUN BİTDİ!
             </h1>
 
-            <div>
-                Məsafən
+            <div class="distanceTitle">
+                Getdiyin məsafə
             </div>
 
             <div
@@ -504,14 +536,10 @@ footer a:hover{
                 0 M
             </div>
 
-            <div
-                id="newRecord"
-                class="newRecord"
-            ></div>
-
             <button
-                id="overRestart"
-                class="control jump"
+                id="restartGameOver"
+                class="restartButton"
+                type="button"
             >
                 🔄 YENİDƏN OYNA
             </button>
@@ -527,67 +555,26 @@ footer a:hover{
 
     <button
         id="jumpButton"
-        class="control jump"
+        class="controlButton jumpButton"
+        type="button"
     >
-        ⬆️ TULLAN — SPACE
+        ⬆️ TULLAN
     </button>
 
     <button
         id="restartButton"
-        class="control restart"
+        class="controlButton restartControl"
+        type="button"
     >
-        🔄 YENİDƏN BAŞLA
+        🔄 YENİDƏN
     </button>
-
-</div>
-
-
-<div class="info">
-
-    <div class="infoBox">
-
-        <strong id="obstaclesPassed">
-            0
-        </strong>
-
-        <span>
-            MANEƏ
-        </span>
-
-    </div>
-
-
-    <div class="infoBox">
-
-        <strong id="bestInfo">
-            0
-        </strong>
-
-        <span>
-            REKORD
-        </span>
-
-    </div>
-
-
-    <div class="infoBox">
-
-        <strong>
-            ∞
-        </strong>
-
-        <span>
-            MƏRHƏLƏ
-        </span>
-
-    </div>
 
 </div>
 
 
 <footer>
 
-    QAQLIL RUSH · Made by Samir
+    QAQLIL RUSH · 2026
 
     <br><br>
 
@@ -598,94 +585,102 @@ footer a:hover{
         target="_blank"
         rel="noopener noreferrer"
     >
-        TikTok @ssamirreds
+        TikTok — @ssamirreds
     </a>
 
 </footer>
 
-
-</div>
+</main>
 
 
 <script>
-
 "use strict";
 
 
-/* =========================================
-   CANVAS
-========================================= */
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const startScreen =
+    document.getElementById("startScreen");
+
+const gamePage =
+    document.getElementById("gamePage");
+
+const startButton =
+    document.getElementById("startButton");
+
+const jumpButton =
+    document.getElementById("jumpButton");
+
+const restartButton =
+    document.getElementById("restartButton");
+
+const restartGameOver =
+    document.getElementById("restartGameOver");
+
+const gameOver =
+    document.getElementById("gameOver");
 
 const canvas =
-    document.getElementById(
-        "gameCanvas"
-    );
+    document.getElementById("gameCanvas");
 
 const ctx =
     canvas.getContext("2d");
 
+const distanceText =
+    document.getElementById("distance");
 
-/* =========================================
-   ELEMENTS
-========================================= */
+const scoreText =
+    document.getElementById("score");
 
-const distanceEl =
-    document.getElementById(
-        "distance"
-    );
+const bestScoreText =
+    document.getElementById("bestScore");
 
-const speedEl =
-    document.getElementById(
-        "speed"
-    );
-
-const bestEl =
-    document.getElementById(
-        "best"
-    );
-
-const bestInfoEl =
-    document.getElementById(
-        "bestInfo"
-    );
-
-const obstaclesPassedEl =
-    document.getElementById(
-        "obstaclesPassed"
-    );
-
-const gameOverEl =
-    document.getElementById(
-        "gameOver"
-    );
-
-const finalDistanceEl =
-    document.getElementById(
-        "finalDistance"
-    );
-
-const newRecordEl =
-    document.getElementById(
-        "newRecord"
-    );
+const finalDistanceText =
+    document.getElementById("finalDistance");
 
 
-/* =========================================
+/* =====================================================
+   GAME SETTINGS
+===================================================== */
+
+const WIDTH = canvas.width;
+const HEIGHT = canvas.height;
+
+const GROUND_Y = 410;
+
+const GRAVITY = 0.72;
+
+const JUMP_POWER = -13.5;
+
+
+/* =====================================================
    GAME STATE
-========================================= */
+===================================================== */
 
-const W = 900;
-const H = 500;
+let running = false;
 
-const groundY = 415;
+let gameOverState = false;
 
-let player;
+let animationId = null;
 
-let obstacles = [];
-
-let particles = [];
+let lastTime = 0;
 
 let distance = 0;
+
+let score = 0;
+
+let speed = 6;
+
+let obstacleTimer = 0;
+
+let nextObstacle = 90;
+
+
+/* =====================================================
+   BEST SCORE
+===================================================== */
 
 let best =
     Number(
@@ -694,90 +689,120 @@ let best =
         ) || 0
     );
 
-let obstacleCount = 0;
-
-let gameRunning = false;
-
-let gameOver = false;
-
-let lastTime = 0;
-
-let spawnTimer = 0;
-
-let spawnDelay = 1300;
-
-let worldSpeed = 6;
-
-let animationId = 0;
+bestScoreText.textContent =
+    best;
 
 
-/* =========================================
+/* =====================================================
    PLAYER
-========================================= */
+===================================================== */
 
-function createPlayer(){
+const player = {
 
-    return {
+    x: 120,
 
-        x:120,
+    y: GROUND_Y - 72,
 
-        y:groundY - 65,
+    width: 48,
 
-        width:42,
+    height: 72,
 
-        height:65,
+    velocityY: 0,
 
-        velocityY:0,
+    grounded: true
 
-        gravity:0.8,
+};
 
-        jumpPower:-15,
 
-        grounded:true
+/* =====================================================
+   OBSTACLES
+===================================================== */
 
-    };
+let obstacles = [];
+
+
+/* =====================================================
+   CLOUDS
+===================================================== */
+
+const clouds = [
+
+    {
+        x: 100,
+        y: 75,
+        size: 1
+    },
+
+    {
+        x: 430,
+        y: 110,
+        size: .75
+    },
+
+    {
+        x: 730,
+        y: 65,
+        size: 1.15
+    }
+];
+
+
+/* =====================================================
+   START GAME
+===================================================== */
+
+function startGame() {
+
+    startScreen.classList.add("hidden");
+
+    gamePage.classList.remove("hidden");
+
+    resetGame();
 
 }
 
 
-/* =========================================
+/* =====================================================
    RESET
-========================================= */
+===================================================== */
 
-function restartGame(){
+function resetGame() {
 
-    cancelAnimationFrame(
-        animationId
-    );
+    cancelAnimationFrame(animationId);
 
-    player =
-        createPlayer();
+    running = true;
 
-    obstacles = [];
-
-    particles = [];
+    gameOverState = false;
 
     distance = 0;
 
-    obstacleCount = 0;
+    score = 0;
 
-    spawnTimer = 0;
+    speed = 6;
 
-    spawnDelay = 1300;
+    obstacleTimer = 0;
 
-    worldSpeed = 6;
+    nextObstacle = 80;
 
-    gameRunning = true;
+    obstacles = [];
 
-    gameOver = false;
+    player.x = 120;
 
-    gameOverEl.style.display =
-        "none";
+    player.y =
+        GROUND_Y -
+        player.height;
 
-    updateHUD();
+    player.velocityY = 0;
 
-    lastTime =
-        performance.now();
+    player.grounded = true;
+
+    distanceText.textContent = "0";
+
+    scoreText.textContent = "0";
+
+    gameOver.style.display = "none";
+
+    lastTime = performance.now();
 
     animationId =
         requestAnimationFrame(
@@ -787,326 +812,64 @@ function restartGame(){
 }
 
 
-/* =========================================
+/* =====================================================
    JUMP
-========================================= */
+===================================================== */
 
-function jump(){
+function jump() {
 
-    if(gameOver){
-
-        restartGame();
-
+    if (!running || gameOverState) {
         return;
-
     }
 
-    if(
-        player &&
-        player.grounded
-    ){
+    if (player.grounded) {
 
         player.velocityY =
-            player.jumpPower;
+            JUMP_POWER;
 
         player.grounded =
             false;
-
-        createJumpParticles();
-
-        beep(
-            500,
-            0.06
-        );
-
     }
 
 }
 
 
-/* =========================================
-   INPUT
-========================================= */
+/* =====================================================
+   CREATE OBSTACLE
+===================================================== */
 
-document
-    .getElementById(
-        "jumpButton"
-    )
-    .addEventListener(
-        "pointerdown",
-        event => {
-
-            event.preventDefault();
-
-            jump();
-
-        }
-    );
-
-
-document
-    .getElementById(
-        "restartButton"
-    )
-    .addEventListener(
-        "click",
-        restartGame
-    );
-
-
-document
-    .getElementById(
-        "overRestart"
-    )
-    .addEventListener(
-        "click",
-        restartGame
-    );
-
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if(
-            event.code === "Space" ||
-            event.code === "ArrowUp"
-        ){
-
-            event.preventDefault();
-
-            jump();
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   CANVAS TOUCH
-========================================= */
-
-canvas.addEventListener(
-    "pointerdown",
-    event => {
-
-        event.preventDefault();
-
-        jump();
-
-    }
-);
-
-
-/* =========================================
-   SPAWN OBSTACLE
-========================================= */
-
-function spawnObstacle(){
+function createObstacle() {
 
     const height =
-        35 +
-        Math.random() * 55;
+        40 +
+        Math.random() * 65;
 
     const width =
-        25 +
-        Math.random() * 28;
+        30 +
+        Math.random() * 25;
 
     obstacles.push({
 
-        x:W + 30,
+        x: WIDTH + 20,
 
-        y:groundY - height,
+        y:
+            GROUND_Y -
+            height,
 
-        width,
+        width: width,
 
-        height,
-
-        passed:false,
-
-        type:
-            Math.random() >
-            0.5
-            ? "rock"
-            : "spike"
+        height: height
 
     });
 
 }
 
 
-/* =========================================
-   UPDATE
-========================================= */
-
-function update(delta){
-
-    if(!gameRunning)
-        return;
-
-
-    /* PLAYER */
-
-    player.velocityY +=
-        player.gravity;
-
-    player.y +=
-        player.velocityY;
-
-
-    if(
-        player.y +
-        player.height >=
-        groundY
-    ){
-
-        player.y =
-            groundY -
-            player.height;
-
-        player.velocityY =
-            0;
-
-        player.grounded =
-            true;
-
-    }
-
-
-    /* SPEED */
-
-    worldSpeed =
-        6 +
-        Math.min(
-            distance / 500,
-            8
-        );
-
-
-    spawnDelay =
-        Math.max(
-            500,
-            1300 -
-            distance * 0.7
-        );
-
-
-    /* DISTANCE */
-
-    distance +=
-        worldSpeed *
-        delta *
-        0.045;
-
-
-    /* SPAWN */
-
-    spawnTimer +=
-        delta;
-
-    if(
-        spawnTimer >=
-        spawnDelay
-    ){
-
-        spawnObstacle();
-
-        spawnTimer = 0;
-
-    }
-
-
-    /* OBSTACLES */
-
-    for(
-        let i =
-            obstacles.length - 1;
-
-        i >= 0;
-
-        i--
-    ){
-
-        const obstacle =
-            obstacles[i];
-
-        obstacle.x -=
-            worldSpeed *
-            delta *
-            0.06;
-
-
-        if(
-            !obstacle.passed &&
-            obstacle.x +
-            obstacle.width <
-            player.x
-        ){
-
-            obstacle.passed =
-                true;
-
-            obstacleCount++;
-
-            createScoreParticles(
-                obstacle.x,
-                obstacle.y
-            );
-
-        }
-
-
-        if(
-            obstacle.x +
-            obstacle.width <
-            -50
-        ){
-
-            obstacles.splice(
-                i,
-                1
-            );
-
-            continue;
-
-        }
-
-
-        if(
-            collision(
-                player,
-                obstacle
-            )
-        ){
-
-            endGame();
-
-            return;
-
-        }
-
-    }
-
-
-    /* PARTICLES */
-
-    updateParticles();
-
-
-    updateHUD();
-
-}
-
-
-/* =========================================
+/* =====================================================
    COLLISION
-========================================= */
+===================================================== */
 
-function collision(
-    a,
-    b
-){
+function collision(a, b) {
 
     const padding = 8;
 
@@ -1133,459 +896,133 @@ function collision(
 }
 
 
-/* =========================================
-   END GAME
-========================================= */
+/* =====================================================
+   UPDATE
+===================================================== */
 
-function endGame(){
+function update(delta) {
 
-    gameRunning =
-        false;
-
-    gameOver =
-        true;
-
-    const final =
-        Math.floor(
-            distance
-        );
-
-    const newRecord =
-        final > best;
-
-
-    if(newRecord){
-
-        best =
-            final;
-
-        localStorage.setItem(
-            "qaqlil_best",
-            best
-        );
-
-        newRecordEl.textContent =
-            "🏆 YENİ REKORD!";
-
-    }else{
-
-        newRecordEl.textContent =
-            `Rekordun: ${best} M`;
-
+    if (!running || gameOverState) {
+        return;
     }
 
 
-    finalDistanceEl.textContent =
-        final + " M";
+    /* PLAYER */
+
+    player.velocityY +=
+        GRAVITY * delta;
+
+    player.y +=
+        player.velocityY * delta;
 
 
-    updateHUD();
-
-
-    gameOverEl.style.display =
-        "flex";
-
-
-    createExplosion(
-        player.x +
-        player.width / 2,
-
+    if (
         player.y +
-        player.height / 2
-    );
+        player.height >=
+        GROUND_Y
+    ) {
 
+        player.y =
+            GROUND_Y -
+            player.height;
 
-    beep(
-        150,
-        0.2
-    );
+        player.velocityY = 0;
 
-}
-
-
-/* =========================================
-   HUD
-========================================= */
-
-function updateHUD(){
-
-    distanceEl.textContent =
-        Math.floor(
-            distance
-        );
-
-
-    speedEl.textContent =
-        (
-            worldSpeed /
-            6
-        ).toFixed(1);
-
-
-    bestEl.textContent =
-        best;
-
-
-    bestInfoEl.textContent =
-        best;
-
-
-    obstaclesPassedEl.textContent =
-        obstacleCount;
-
-}
-
-
-/* =========================================
-   DRAW
-========================================= */
-
-function draw(){
-
-    ctx.clearRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-
-    drawBackground();
-
-    drawGround();
-
-    drawObstacles();
-
-    drawPlayer();
-
-    drawParticles();
-
-}
-
-
-/* =========================================
-   BACKGROUND
-========================================= */
-
-function drawBackground(){
-
-    /* moon */
-
-    ctx.beginPath();
-
-    ctx.arc(
-        760,
-        95,
-        48,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fillStyle =
-        "#e7f1ff";
-
-    ctx.globalAlpha =
-        0.9;
-
-    ctx.fill();
-
-    ctx.globalAlpha =
-        1;
-
-
-    /* stars */
-
-    const stars = [
-        [80,80,2],
-        [180,130,1],
-        [300,65,2],
-        [420,110,1],
-        [530,55,2],
-        [650,155,1],
-        [850,65,2],
-        [720,210,1]
-    ];
-
-
-    for(
-        const star of stars
-    ){
-
-        ctx.beginPath();
-
-        ctx.arc(
-            star[0],
-            star[1],
-            star[2],
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fillStyle =
-            "#ffffff";
-
-        ctx.globalAlpha =
-            0.75;
-
-        ctx.fill();
+        player.grounded = true;
 
     }
 
-    ctx.globalAlpha =
-        1;
+
+    /* DISTANCE */
+
+    distance +=
+        speed *
+        delta *
+        0.08;
+
+    distance =
+        Math.floor(distance);
 
 
-    /* distant city */
+    score =
+        distance;
 
-    ctx.fillStyle =
-        "#101a32";
 
-    for(
-        let x=0;
-        x<W;
-        x+=55
-    ){
+    distanceText.textContent =
+        distance;
 
-        const h =
-            40 +
-            ((x * 17) % 80);
+    scoreText.textContent =
+        score;
 
-        ctx.fillRect(
-            x,
-            groundY - h,
-            40,
-            h
+
+    /* SPEED */
+
+    speed =
+        Math.min(
+            13,
+            6 +
+            distance / 450
         );
+
+
+    /* OBSTACLES */
+
+    obstacleTimer +=
+        delta;
+
+    if (
+        obstacleTimer >=
+        nextObstacle
+    ) {
+
+        createObstacle();
+
+        obstacleTimer = 0;
+
+        nextObstacle =
+            65 +
+            Math.random() * 85;
 
     }
 
-}
 
+    for (
+        let i = obstacles.length - 1;
+        i >= 0;
+        i--
+    ) {
 
-/* =========================================
-   GROUND
-========================================= */
+        const obstacle =
+            obstacles[i];
 
-function drawGround(){
+        obstacle.x -=
+            speed *
+            delta;
 
-    ctx.fillStyle =
-        "#0b101c";
 
-    ctx.fillRect(
-        0,
-        groundY,
-        W,
-        H-groundY
-    );
-
-
-    ctx.fillStyle =
-        "#24304a";
-
-    ctx.fillRect(
-        0,
-        groundY,
-        W,
-        5
-    );
-
-
-    ctx.fillStyle =
-        "#39ff70";
-
-    ctx.globalAlpha =
-        0.35;
-
-    ctx.fillRect(
-        0,
-        groundY,
-        W,
-        2
-    );
-
-    ctx.globalAlpha =
-        1;
-
-
-    /* ground lines */
-
-    ctx.strokeStyle =
-        "#192239";
-
-    ctx.lineWidth =
-        2;
-
-    for(
-        let x=0;
-        x<W;
-        x+=45
-    ){
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            x,
-            groundY + 30
-        );
-
-        ctx.lineTo(
-            x + 20,
-            groundY + 30
-        );
-
-        ctx.stroke();
-
-    }
-
-}
-
-
-/* =========================================
-   PLAYER
-========================================= */
-
-function drawPlayer(){
-
-    const x =
-        player.x;
-
-    const y =
-        player.y;
-
-
-    /* shadow */
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-        x + player.width/2,
-        groundY + 3,
-        28,
-        7,
-        0,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fillStyle =
-        "#000000";
-
-    ctx.globalAlpha =
-        0.35;
-
-    ctx.fill();
-
-    ctx.globalAlpha =
-        1;
-
-
-    /* body */
-
-    ctx.fillStyle =
-        "#2ddcff";
-
-    ctx.fillRect(
-        x + 8,
-        y + 25,
-        26,
-        34
-    );
-
-
-    /* head */
-
-    ctx.beginPath();
-
-    ctx.arc(
-        x + 21,
-        y + 15,
-        15,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fillStyle =
-        "#ffd2b3";
-
-    ctx.fill();
-
-
-    /* hair */
-
-    ctx.fillStyle =
-        "#151515";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        x + 21,
-        y + 11,
-        15,
-        Math.PI,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    /* legs */
-
-    ctx.fillStyle =
-        "#e8edf7";
-
-    ctx.fillRect(
-        x + 10,
-        y + 55,
-        8,
-        10
-    );
-
-    ctx.fillRect(
-        x + 24,
-        y + 55,
-        8,
-        10
-    );
-
-
-    /* eye */
-
-    ctx.fillStyle =
-        "#111";
-
-    ctx.fillRect(
-        x + 26,
-        y + 12,
-        3,
-        3
-    );
-
-}
-
-
-/* =========================================
-   OBSTACLES
-========================================= */
-
-function drawObstacles(){
-
-    for(
-        const obstacle of obstacles
-    ){
-
-        if(
-            obstacle.type ===
-            "spike"
-        ){
-
-            drawSpike(
+        if (
+            collision(
+                player,
                 obstacle
-            );
+            )
+        ) {
 
-        }else{
+            endGame();
 
-            drawRock(
-                obstacle
+            return;
+
+        }
+
+
+        if (
+            obstacle.x +
+            obstacle.width <
+            -50
+        ) {
+
+            obstacles.splice(
+                i,
+                1
             );
 
         }
@@ -1595,12 +1032,436 @@ function drawObstacles(){
 }
 
 
-function drawSpike(o){
+/* =====================================================
+   DRAW SKY
+===================================================== */
+
+function drawSky() {
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            0,
+            HEIGHT
+        );
+
+    gradient.addColorStop(
+        0,
+        "#182c68"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#6f356b"
+    );
 
     ctx.fillStyle =
-        "#ff4c9a";
+        gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        WIDTH,
+        HEIGHT
+    );
+
+
+    /* SUN */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        760,
+        100,
+        55,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        "#ffd86b";
+
+    ctx.fill();
+
+
+    /* CLOUDS */
+
+    clouds.forEach(cloud => {
+
+        drawCloud(
+            cloud.x,
+            cloud.y,
+            cloud.size
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   CLOUD
+===================================================== */
+
+function drawCloud(
+    x,
+    y,
+    scale
+) {
+
+    ctx.save();
+
+    ctx.translate(
+        x,
+        y
+    );
+
+    ctx.scale(
+        scale,
+        scale
+    );
+
+    ctx.fillStyle =
+        "rgba(255,255,255,.82)";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        10,
+        20,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.arc(
+        25,
+        0,
+        27,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.arc(
+        55,
+        12,
+        20,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillRect(
+        0,
+        10,
+        55,
+        22
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+}
+
+
+/* =====================================================
+   DRAW MOUNTAINS
+===================================================== */
+
+function drawMountains() {
+
+    ctx.fillStyle =
+        "#17254a";
 
     ctx.beginPath();
 
     ctx.moveTo(
-       
+        0,
+        GROUND_Y
+    );
+
+    for (
+        let x = 0;
+        x <= WIDTH;
+        x += 100
+    ) {
+
+        const h =
+            80 +
+            Math.sin(x * .018) * 35;
+
+        ctx.lineTo(
+            x,
+            GROUND_Y - h
+        );
+
+    }
+
+    ctx.lineTo(
+        WIDTH,
+        GROUND_Y
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    ctx.fillStyle =
+        "#101a36";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        0,
+        GROUND_Y
+    );
+
+    for (
+        let x = 0;
+        x <= WIDTH;
+        x += 75
+    ) {
+
+        const h =
+            45 +
+            Math.cos(x * .025) * 25;
+
+        ctx.lineTo(
+            x,
+            GROUND_Y - h
+        );
+
+    }
+
+    ctx.lineTo(
+        WIDTH,
+        GROUND_Y
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+}
+
+
+/* =====================================================
+   DRAW GROUND
+===================================================== */
+
+function drawGround() {
+
+    ctx.fillStyle =
+        "#202b25";
+
+    ctx.fillRect(
+        0,
+        GROUND_Y,
+        WIDTH,
+        HEIGHT -
+        GROUND_Y
+    );
+
+
+    ctx.fillStyle =
+        "#39ff70";
+
+    ctx.fillRect(
+        0,
+        GROUND_Y,
+        WIDTH,
+        6
+    );
+
+
+    ctx.fillStyle =
+        "#303b31";
+
+    const offset =
+        -(distance * 4) % 50;
+
+    for (
+        let x = offset;
+        x < WIDTH;
+        x += 50
+    ) {
+
+        ctx.fillRect(
+            x,
+            GROUND_Y + 35,
+            25,
+            5
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DRAW PLAYER
+===================================================== */
+
+function drawPlayer() {
+
+    const x =
+        player.x;
+
+    const y =
+        player.y;
+
+
+    /* SHADOW */
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        x + player.width / 2,
+        GROUND_Y + 4,
+        28,
+        7,
+        0,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        "rgba(0,0,0,.3)";
+
+    ctx.fill();
+
+
+    /* BODY */
+
+    ctx.fillStyle =
+        "#39ff70";
+
+    ctx.fillRect(
+        x + 8,
+        y + 25,
+        32,
+        42
+    );
+
+
+    /* HEAD */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x + 24,
+        y + 15,
+        17,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        "#ffd0a6";
+
+    ctx.fill();
+
+
+    /* HAIR */
+
+    ctx.fillStyle =
+        "#171717";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x + 24,
+        y + 10,
+        17,
+        Math.PI,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /* EYES */
+
+    ctx.fillStyle =
+        "#111";
+
+    ctx.fillRect(
+        x + 17,
+        y + 13,
+        4,
+        5
+    );
+
+    ctx.fillRect(
+        x + 28,
+        y + 13,
+        4,
+        5
+    );
+
+
+    /* LEGS */
+
+    ctx.fillStyle =
+        "#25324f";
+
+    ctx.fillRect(
+        x + 10,
+        y + 65,
+        11,
+        7
+    );
+
+    ctx.fillRect(
+        x + 28,
+        y + 65,
+        11,
+        7
+    );
+
+
+    /* ARMS */
+
+    ctx.strokeStyle =
+        "#ffd0a6";
+
+    ctx.lineWidth = 7;
+
+    ctx.lineCap =
+        "round";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        x + 8,
+        y + 32
+    );
+
+    ctx.lineTo(
+        x - 2,
+        y + 48
+    );
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        x + 40,
+        y + 32
+    );
+
+    ctx.lineTo(
+        x + 50,
+        y + 48
+    );
+
+    ctx.stroke();
+
+}
+
+
+/* ================
