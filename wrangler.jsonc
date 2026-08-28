@@ -1,5 +1,5 @@
 {
- "name": "qaqlil-rush",
+  "name": "qaqlil-rush",
   "main": "worker.js",
   "compatibility_date": "2026-08-28",
 
@@ -8,11 +8,21 @@
     "binding": "ASSETS"
   },
 
-  "d1_databases": [
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "GAME",
+        "class_name": "GameRoom"
+      }
+    ]
+  },
+
+  "migrations": [
     {
-      "binding": "DB",
-      "database_name": "qaqlil-rush-db",
-      "database_id": "865a8697-ef03-4c08-9fbf-56a636444903"
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "GameRoom"
+      ]
     }
   ]
 }
