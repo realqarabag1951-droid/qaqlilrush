@@ -6,5 +6,13 @@
   "assets": {
     "directory": ".",
     "binding": "ASSETS"
-  }
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "qaqlil-rush-db",
+      "database_id": "865a8697-ef03-4c08-9fbf-56a636444903"
+    }
+  ]
 }
