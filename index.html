@@ -2,28 +2,50 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+>
 
 <title>QAQLIL RUSH</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
+html,
 body{
-    min-height:100vh;
-    font-family:Arial,sans-serif;
-    color:#fff;
-    background:
-        radial-gradient(circle at 10% 10%,#3047c7 0,transparent 30%),
-        radial-gradient(circle at 90% 90%,#b81772 0,transparent 35%),
-        linear-gradient(135deg,#070a13,#111936);
+    min-height:100%;
 }
 
-button,input{
+body{
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            #253c9c 0,
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 90% 80%,
+            #92145f 0,
+            transparent 35%
+        ),
+
+        #070a13;
+}
+
+button,
+input{
     font:inherit;
 }
 
@@ -32,36 +54,50 @@ button{
     -webkit-tap-highlight-color:transparent;
 }
 
+button:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+}
+
 .hidden{
-    display:none!important;
+    display:none !important;
 }
 
 
-/* =========================
-        AUTH
-========================= */
+/* =====================================================
+   AUTH
+===================================================== */
 
 #authPage{
     min-height:100vh;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:20px;
 }
 
 .authBox{
     width:100%;
     max-width:430px;
-    padding:32px;
+
+    padding:30px;
+
     text-align:center;
-    background:rgba(10,15,29,.96);
-    border:1px solid #344267;
-    border-radius:26px;
-    box-shadow:0 25px 90px #000c;
+
+    background:#0c111d;
+
+    border:1px solid #35415e;
+
+    border-radius:25px;
+
+    box-shadow:
+        0 25px 80px #000b;
 }
 
 .logo{
-    font-size:43px;
+    font-size:42px;
     font-weight:1000;
     letter-spacing:2px;
 }
@@ -72,8 +108,8 @@ button{
 }
 
 .subtitle{
-    color:#a5aec0;
-    margin:9px 0 25px;
+    color:#9da8bb;
+    margin:8px 0 25px;
 }
 
 .authTabs{
@@ -88,97 +124,133 @@ button{
 
 input{
     width:100%;
+
     padding:15px;
+
     margin:6px 0;
-    color:white;
-    background:#121a2b;
-    border:1px solid #35425f;
+
+    color:#fff;
+
+    background:#111827;
+
+    border:1px solid #303c58;
+
     border-radius:13px;
+
     outline:none;
 }
 
 input:focus{
     border-color:#2ddcff;
-    box-shadow:0 0 15px #2ddcff33;
-}
 
-.btn{
-    width:100%;
-    padding:14px;
-    margin-top:8px;
-    border-radius:13px;
-    font-weight:900;
-    border:0;
+    box-shadow:
+        0 0 0 2px #2ddcff22;
 }
 
 .primary{
-    background:linear-gradient(90deg,#39ff70,#2ddcff);
+    background:
+        linear-gradient(
+            90deg,
+            #39ff70,
+            #2ddcff
+        );
+
     color:#06100d;
+
+    border:0;
 }
 
 .secondary{
     background:#171f2e;
+
     color:#fff;
+
     border:1px solid #34405b;
 }
 
-.btn:disabled{
-    opacity:.6;
-    cursor:not-allowed;
+.btn{
+    width:100%;
+
+    padding:14px;
+
+    margin-top:8px;
+
+    border-radius:13px;
+
+    font-weight:900;
 }
 
 #authError{
-    min-height:24px;
+    min-height:22px;
+
     margin-top:10px;
+
     color:#ff5e94;
-    font-weight:800;
+
+    font-weight:700;
 }
 
 
-/* =========================
-        GAME PAGE
-========================= */
+/* =====================================================
+   MAIN
+===================================================== */
 
 #gamePage{
     width:min(1100px,100%);
+
     margin:auto;
+
     padding:12px;
 }
 
 header{
     display:flex;
+
     justify-content:space-between;
     align-items:center;
+
     gap:10px;
+
     margin-bottom:12px;
 }
 
 .headerLogo{
     font-size:clamp(27px,6vw,42px);
+
     font-weight:1000;
 }
 
 .userInfo{
     padding:10px 13px;
+
     border-radius:15px;
+
     background:#0c1320;
+
     border:1px solid #303b56;
+
     font-weight:800;
+
     font-size:14px;
 }
 
 .card{
     background:#0c111d;
+
     border:1px solid #2d3954;
+
     border-radius:20px;
+
     overflow:hidden;
-    box-shadow:0 18px 50px #0008;
+
+    box-shadow:
+        0 18px 50px #0008;
 }
 
 
-/* =========================
-          GAME
-========================= */
+/* =====================================================
+   GAME
+===================================================== */
 
 .gameCard{
     position:relative;
@@ -186,12 +258,19 @@ header{
 
 .hud{
     height:52px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:0 15px;
+
     background:#090e18;
+
     font-weight:900;
+
     font-size:14px;
 }
 
@@ -201,77 +280,112 @@ header{
 
 canvas{
     display:block;
+
     width:100%;
+
     height:auto;
+
     touch-action:none;
+
+    user-select:none;
+
+    -webkit-user-select:none;
 }
 
 
-/* =========================
-        GAME OVER
-========================= */
+/* =====================================================
+   GAME OVER
+===================================================== */
 
 #gameOver{
     display:none;
+
     position:absolute;
+
     inset:52px 0 0;
+
     align-items:center;
     justify-content:center;
+
     background:#000b;
+
+    z-index:10;
 }
 
 .gameOverBox{
     width:min(390px,90%);
+
     padding:28px;
+
     text-align:center;
+
     background:#0c111d;
+
     border:1px solid #485675;
+
     border-radius:20px;
+
+    box-shadow:
+        0 20px 70px #000c;
 }
 
 .gameOverBox h1{
     color:#ff4c9a;
+
+    margin-bottom:5px;
 }
 
 .finalDistance{
     margin:7px;
+
     font-size:44px;
+
     font-weight:1000;
+
     color:#2ddcff;
 }
 
 .earned{
     margin-bottom:18px;
+
     color:#39ff70;
+
     font-size:22px;
+
     font-weight:1000;
 }
 
 
-/* =========================
-        CONTROLS
-========================= */
+/* =====================================================
+   CONTROLS
+===================================================== */
 
 .controls{
     display:flex;
+
     gap:10px;
+
     margin-top:10px;
 }
 
 .controls button{
     flex:1;
+
     padding:14px;
+
     border-radius:13px;
+
     font-weight:900;
 }
 
 
-/* =========================
-       LEADERBOARD
-========================= */
+/* =====================================================
+   LEADERBOARD
+===================================================== */
 
 .leaderCard{
     margin-top:12px;
+
     padding:15px;
 }
 
@@ -281,57 +395,75 @@ canvas{
 
 .leader{
     display:flex;
+
     align-items:center;
+
     gap:10px;
+
     padding:12px 7px;
+
     border-bottom:1px solid #20293a;
 }
 
 .rank{
     width:30px;
+
     color:#8f9aae;
+
     font-weight:900;
 }
 
 .player{
     flex:1;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
+
     white-space:nowrap;
 }
 
 .xp{
     color:#39ff70;
+
     font-weight:900;
+
+    white-space:nowrap;
 }
 
 .myRank{
     background:#123c24;
+
     border-radius:10px;
 }
 
 
-/* =========================
-          FOOTER
-========================= */
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer{
     padding:25px 5px 12px;
+
     text-align:center;
+
     color:#8e99ac;
+
     font-size:14px;
 }
 
 footer a{
     color:#2ddcff;
+
     font-weight:900;
+
     text-decoration:none;
 }
 
 
-/* =========================
-          MOBILE
-========================= */
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:600px){
 
@@ -355,130 +487,137 @@ footer a{
         font-size:11px;
     }
 
+    .controls{
+        flex-direction:column;
+    }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
 
-<!-- =========================
-          AUTH PAGE
-========================= -->
+<!-- =====================================================
+     AUTH PAGE
+===================================================== -->
 
 <section id="authPage">
 
-<div class="authBox">
+    <div class="authBox">
 
-    <div class="logo">
-        QAQLIL <span>RUSH</span>
+        <div class="logo">
+            QAQLIL <span>RUSH</span>
+        </div>
+
+        <div class="subtitle">
+            Maneələrdən qaç. Rekordu qır. 🔥
+        </div>
+
+
+        <div class="authTabs">
+
+            <button
+                id="registerTab"
+                class="btn primary"
+                type="button"
+            >
+                HESAB YARAT
+            </button>
+
+
+            <button
+                id="loginTab"
+                class="btn secondary"
+                type="button"
+            >
+                DAXİL OL
+            </button>
+
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div id="registerForm">
+
+            <input
+                id="registerUsername"
+                maxlength="18"
+                autocomplete="off"
+                placeholder="İstifadəçi adı"
+            >
+
+            <input
+                id="registerCode"
+                maxlength="10"
+                autocomplete="new-password"
+                type="password"
+                placeholder="Giriş kodu"
+            >
+
+            <button
+                id="registerButton"
+                class="btn primary"
+                type="button"
+            >
+                🚀 HESAB YARAT
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <div
+            id="loginForm"
+            class="hidden"
+        >
+
+            <input
+                id="loginUsername"
+                maxlength="18"
+                autocomplete="username"
+                placeholder="İstifadəçi adı"
+            >
+
+            <input
+                id="loginCode"
+                maxlength="10"
+                autocomplete="current-password"
+                type="password"
+                placeholder="Giriş kodu"
+            >
+
+            <button
+                id="loginButton"
+                class="btn primary"
+                type="button"
+            >
+                🔥 DAXİL OL
+            </button>
+
+        </div>
+
+
+        <div id="authError"></div>
+
     </div>
-
-    <div class="subtitle">
-        Maneələrdən qaç. Rekordu qır. 🔥
-    </div>
-
-
-    <div class="authTabs">
-
-        <button
-            id="registerTab"
-            class="btn primary"
-            type="button">
-
-            HESAB YARAT
-
-        </button>
-
-        <button
-            id="loginTab"
-            class="btn secondary"
-            type="button">
-
-            DAXİL OL
-
-        </button>
-
-    </div>
-
-
-    <!-- REGISTER -->
-
-    <div id="registerForm">
-
-        <input
-            id="registerUsername"
-            type="text"
-            maxlength="18"
-            autocomplete="off"
-            placeholder="İstifadəçi adı">
-
-        <input
-            id="registerCode"
-            type="password"
-            maxlength="10"
-            autocomplete="new-password"
-            placeholder="Giriş kodu">
-
-        <button
-            id="registerButton"
-            class="btn primary"
-            type="button">
-
-            🚀 HESAB YARAT
-
-        </button>
-
-    </div>
-
-
-    <!-- LOGIN -->
-
-    <div
-        id="loginForm"
-        class="hidden">
-
-        <input
-            id="loginUsername"
-            type="text"
-            maxlength="18"
-            autocomplete="username"
-            placeholder="İstifadəçi adı">
-
-        <input
-            id="loginCode"
-            type="password"
-            maxlength="10"
-            autocomplete="current-password"
-            placeholder="Giriş kodu">
-
-        <button
-            id="loginButton"
-            class="btn primary"
-            type="button">
-
-            🔥 DAXİL OL
-
-        </button>
-
-    </div>
-
-
-    <div id="authError"></div>
-
-</div>
 
 </section>
 
 
 
-<!-- =========================
-          GAME PAGE
-========================= -->
+<!-- =====================================================
+     GAME PAGE
+===================================================== -->
 
 <main
     id="gamePage"
-    class="hidden">
+    class="hidden"
+>
 
 <header>
 
@@ -486,14 +625,19 @@ footer a{
         QAQLIL <span>RUSH</span>
     </div>
 
+
     <div class="userInfo">
 
         👤
-        <span id="username">---</span>
+        <span id="username">
+            ---
+        </span>
 
         · ⭐
 
-        <span id="totalXP">0</span>
+        <span id="totalXP">
+            0
+        </span>
 
         XP
 
@@ -503,20 +647,39 @@ footer a{
 
 
 
+<!-- GAME -->
+
 <div class="card gameCard">
 
     <div class="hud">
 
         <span>
+
             ⭐ RUN XP:
-            <b id="runXP">0</b>
+
+            <b id="runXP">
+                0
+            </b>
+
         </span>
 
+
         <span>
+
             🏆
-            <b id="distance">0</b>M
+
+            <b id="distance">
+                0
+            </b>
+
+            M
+
             · BEST
-            <b id="best">0</b>
+
+            <b id="best">
+                0
+            </b>
+
         </span>
 
     </div>
@@ -525,9 +688,11 @@ footer a{
     <canvas
         id="gameCanvas"
         width="900"
-        height="500">
-    </canvas>
+        height="500"
+    ></canvas>
 
+
+    <!-- GAME OVER -->
 
     <div id="gameOver">
 
@@ -541,29 +706,29 @@ footer a{
                 Məsafə
             </div>
 
+
             <div
                 id="finalDistance"
-                class="finalDistance">
-
+                class="finalDistance"
+            >
                 0 M
-
             </div>
+
 
             <div
                 id="earnedXP"
-                class="earned">
-
+                class="earned"
+            >
                 +0 XP
-
             </div>
 
+
             <button
-                id="restartButton"
+                id="restartGameOver"
                 class="btn primary"
-                type="button">
-
+                type="button"
+            >
                 ↻ RESTART
-
             </button>
 
         </div>
@@ -574,33 +739,32 @@ footer a{
 
 
 
+<!-- CONTROLS -->
+
 <div class="controls">
 
     <button
         id="jumpButton"
         class="primary"
-        type="button">
-
+        type="button"
+    >
         ⬆ TULLAN — SPACE
-
     </button>
 
+
     <button
-        id="restartGameButton"
+        id="restartButton"
         class="secondary"
-        type="button">
-
+        type="button"
+    >
         ↻ YENİDƏN
-
     </button>
 
 </div>
 
 
 
-<!-- =========================
-       LEADERBOARD
-========================= -->
+<!-- LEADERBOARD -->
 
 <div class="card leaderCard">
 
@@ -608,8 +772,13 @@ footer a{
         🌍 XP LİDERLƏRİ
     </h2>
 
+
     <div id="leaderboard">
-        Yüklənir...
+
+        <div class="leader">
+            Yüklənir...
+        </div>
+
     </div>
 
 </div>
@@ -623,10 +792,9 @@ footer a{
     <a
         href="https://www.tiktok.com/@ssamirreds"
         target="_blank"
-        rel="noopener noreferrer">
-
+        rel="noopener noreferrer"
+    >
         TikTok — ssamirreds
-
     </a>
 
 </footer>
@@ -637,49 +805,97 @@ footer a{
 
 <script>
 
+"use strict";
+
+
 /* =====================================================
-                    GLOBAL
+   API CONFIG
+===================================================== */
+
+const API_BASE =
+    "https://qaqlilrush.azfootball.workers.dev";
+
+
+/* =====================================================
+   GLOBAL
 ===================================================== */
 
 let token =
-    localStorage.getItem("qaqlil_token");
+    localStorage.getItem(
+        "qaqlil_token"
+    );
 
-let currentUser = null;
+let currentUser =
+    null;
 
 
-const $ = id =>
-    document.getElementById(id);
+const $ =
+    id =>
+        document.getElementById(id);
 
 
 /* =====================================================
-                    API
+   API
 ===================================================== */
 
-async function api(endpoint, options = {}){
+async function api(
+    endpoint,
+    options = {}
+){
 
     const headers = {
-        "Content-Type":"application/json",
+
+        "Content-Type":
+            "application/json",
+
         ...(options.headers || {})
+
     };
 
+
     if(token){
+
         headers.Authorization =
             "Bearer " + token;
+
     }
 
-    const response =
-        await fetch(
-            endpoint,
-            {
-                ...options,
-                headers
-            }
+
+    let response;
+
+
+    try{
+
+        response =
+            await fetch(
+                API_BASE + endpoint,
+                {
+                    ...options,
+                    headers
+                }
+            );
+
+    }catch(error){
+
+        console.error(
+            "FETCH ERROR:",
+            error
         );
+
+        throw new Error(
+            "Serverə qoşulmaq mümkün olmadı."
+        );
+
+    }
+
 
     const data =
         await response
-        .json()
-        .catch(() => ({}));
+            .json()
+            .catch(
+                () => ({})
+            );
+
 
     if(!response.ok){
 
@@ -690,12 +906,37 @@ async function api(endpoint, options = {}){
 
     }
 
+
     return data;
 }
 
 
 /* =====================================================
-                    AUTH TABS
+   ERROR
+===================================================== */
+
+function showError(
+    message
+){
+
+    $("authError")
+        .textContent =
+        message;
+
+}
+
+
+function clearError(){
+
+    $("authError")
+        .textContent =
+        "";
+
+}
+
+
+/* =====================================================
+   AUTH TABS
 ===================================================== */
 
 function showRegister(){
@@ -704,20 +945,23 @@ function showRegister(){
         .classList
         .remove("hidden");
 
+
     $("loginForm")
         .classList
         .add("hidden");
+
 
     $("registerTab")
         .className =
         "btn primary";
 
+
     $("loginTab")
         .className =
         "btn secondary";
 
-    $("authError")
-        .textContent = "";
+
+    clearError();
 }
 
 
@@ -727,48 +971,55 @@ function showLogin(){
         .classList
         .add("hidden");
 
+
     $("loginForm")
         .classList
         .remove("hidden");
+
 
     $("registerTab")
         .className =
         "btn secondary";
 
+
     $("loginTab")
         .className =
         "btn primary";
 
-    $("authError")
-        .textContent = "";
+
+    clearError();
 }
 
 
 /* =====================================================
-                    REGISTER
+   REGISTER
 ===================================================== */
 
 async function register(){
 
+    clearError();
+
+
     const username =
         $("registerUsername")
-        .value
-        .trim();
+            .value
+            .trim();
+
 
     const code =
         $("registerCode")
-        .value
-        .trim();
+            .value
+            .trim();
 
 
     if(
         !/^[A-Za-z0-9_]{3,18}$/
-        .test(username)
+            .test(username)
     ){
 
-        $("authError")
-            .textContent =
-            "İstifadəçi adı 3-18 simvol olmalıdır.";
+        showError(
+            "İstifadəçi adı 3-18 simvol olmalıdır."
+        );
 
         return;
     }
@@ -776,12 +1027,12 @@ async function register(){
 
     if(
         !/^[A-Za-z0-9]{4,10}$/
-        .test(code)
+            .test(code)
     ){
 
-        $("authError")
-            .textContent =
-            "Kod 4-10 hərf və rəqəmdən ibarət olmalıdır.";
+        showError(
+            "Kod 4-10 hərf və rəqəmdən ibarət olmalıdır."
+        );
 
         return;
     }
@@ -790,16 +1041,21 @@ async function register(){
     const button =
         $("registerButton");
 
-    button.disabled = true;
+
+    button.disabled =
+        true;
+
 
     button.textContent =
         "YARADILIR...";
 
-    $("authError")
-        .textContent = "";
-
 
     try{
+
+        console.log(
+            "REGISTER REQUEST"
+        );
+
 
         const data =
             await api(
@@ -816,10 +1072,19 @@ async function register(){
             );
 
 
-        if(!data.token){
+        console.log(
+            "REGISTER RESPONSE:",
+            data
+        );
+
+
+        if(
+            !data.ok ||
+            !data.token
+        ){
 
             throw new Error(
-                "Server token qaytarmadı."
+                "Server token göndərmədi."
             );
 
         }
@@ -827,6 +1092,7 @@ async function register(){
 
         token =
             data.token;
+
 
         localStorage.setItem(
             "qaqlil_token",
@@ -844,41 +1110,60 @@ async function register(){
             error
         );
 
-        $("authError")
-            .textContent =
-            error.message;
+
+        showError(
+            error.message
+        );
 
 
-        button.disabled = false;
+        button.disabled =
+            false;
+
 
         button.textContent =
             "🚀 HESAB YARAT";
+
     }
+
 }
 
 
 /* =====================================================
-                    LOGIN
+   LOGIN
 ===================================================== */
 
 async function login(){
 
+    clearError();
+
+
     const username =
         $("loginUsername")
-        .value
-        .trim();
+            .value
+            .trim();
+
 
     const code =
         $("loginCode")
-        .value
-        .trim();
+            .value
+            .trim();
 
 
-    if(!username || !code){
+    if(!username){
 
-        $("authError")
-            .textContent =
-            "İstifadəçi adı və kodu yaz.";
+        showError(
+            "İstifadəçi adını yaz."
+        );
+
+        return;
+    }
+
+
+    if(!code){
+
+        showError(
+            "Giriş kodunu yaz."
+        );
 
         return;
     }
@@ -887,16 +1172,21 @@ async function login(){
     const button =
         $("loginButton");
 
-    button.disabled = true;
+
+    button.disabled =
+        true;
+
 
     button.textContent =
         "DAXİL OLUNUR...";
 
-    $("authError")
-        .textContent = "";
-
 
     try{
+
+        console.log(
+            "LOGIN REQUEST"
+        );
+
 
         const data =
             await api(
@@ -913,10 +1203,19 @@ async function login(){
             );
 
 
-        if(!data.token){
+        console.log(
+            "LOGIN RESPONSE:",
+            data
+        );
+
+
+        if(
+            !data.ok ||
+            !data.token
+        ){
 
             throw new Error(
-                "Server token qaytarmadı."
+                "Server token göndərmədi."
             );
 
         }
@@ -924,6 +1223,7 @@ async function login(){
 
         token =
             data.token;
+
 
         localStorage.setItem(
             "qaqlil_token",
@@ -941,84 +1241,109 @@ async function login(){
             error
         );
 
-        $("authError")
-            .textContent =
-            error.message;
+
+        showError(
+            error.message
+        );
 
 
-        button.disabled = false;
+        button.disabled =
+            false;
+
 
         button.textContent =
             "🔥 DAXİL OL";
+
     }
+
 }
 
 
 /* =====================================================
-                    ENTER GAME
+   ENTER GAME
 ===================================================== */
 
 async function enterGame(){
 
-    currentUser =
-        await api("/api/me");
+    try{
+
+        currentUser =
+            await api(
+                "/api/me"
+            );
 
 
-    $("authPage")
-        .classList
-        .add("hidden");
+        if(!currentUser){
 
-    $("gamePage")
-        .classList
-        .remove("hidden");
+            throw new Error(
+                "İstifadəçi məlumatı alınmadı."
+            );
+
+        }
 
 
-    updateUserUI();
+        $("authPage")
+            .classList
+            .add("hidden");
 
-    await loadLeaderboard();
 
-    restartGame();
+        $("gamePage")
+            .classList
+            .remove("hidden");
+
+
+        $("username")
+            .textContent =
+            currentUser.username;
+
+
+        $("totalXP")
+            .textContent =
+            Number(
+                currentUser.xp || 0
+            ).toLocaleString();
+
+
+        $("best")
+            .textContent =
+            Number(
+                currentUser.best_distance || 0
+            ).toLocaleString();
+
+
+        await loadLeaderboard();
+
+
+        restartGame();
+
+
+    }catch(error){
+
+        console.error(
+            "ENTER GAME ERROR:",
+            error
+        );
+
+
+        throw error;
+
+    }
+
 }
 
 
 /* =====================================================
-                    USER UI
-===================================================== */
-
-function updateUserUI(){
-
-    if(!currentUser)
-        return;
-
-
-    $("username")
-        .textContent =
-        currentUser.username;
-
-
-    $("totalXP")
-        .textContent =
-        Number(
-            currentUser.xp || 0
-        ).toLocaleString();
-
-
-    $("best")
-        .textContent =
-        Number(
-            currentUser.best_distance || 0
-        ).toLocaleString();
-}
-
-
-/* =====================================================
-                    LEADERBOARD
+   LEADERBOARD
 ===================================================== */
 
 async function loadLeaderboard(){
 
     const box =
         $("leaderboard");
+
+
+    box.innerHTML =
+        "<div class='leader'>Yüklənir...</div>";
 
 
     try{
@@ -1029,7 +1354,8 @@ async function loadLeaderboard(){
             );
 
 
-        box.innerHTML = "";
+        box.innerHTML =
+            "";
 
 
         if(
@@ -1045,11 +1371,13 @@ async function loadLeaderboard(){
 
 
         data.players.forEach(
-            (player,index) => {
+            (player,index)=>{
 
                 const row =
                     document
-                    .createElement("div");
+                        .createElement(
+                            "div"
+                        );
 
 
                 row.className =
@@ -1065,239 +1393,36 @@ async function loadLeaderboard(){
                     row.classList.add(
                         "myRank"
                     );
+
                 }
 
 
-                row.innerHTML = `
+                const rank =
+                    document.createElement(
+                        "span"
+                    );
 
-                    <span class="rank">
-                        ${index + 1}
-                    </span>
 
-                    <span class="player">
-                        ${escapeHTML(
-                            player.username
-                        )}
-                    </span>
+                rank.className =
+                    "rank";
 
-                    <span class="xp">
-                        ${Number(
-                            player.xp || 0
-                        ).toLocaleString()}
-                        XP
-                    </span>
 
-                `;
+                rank.textContent =
+                    index + 1;
 
 
-                box.appendChild(row);
+                const name =
+                    document.createElement(
+                        "span"
+                    );
 
-            }
-        );
 
+                name.className =
+                    "player";
 
-    }catch(error){
 
-        console.error(
-            "LEADERBOARD ERROR:",
-            error
-        );
+                name.textContent =
+                    player.username;
 
-        box.innerHTML =
-            "<div class='leader'>Leaderboard yüklənmədi.</div>";
-    }
-}
 
-
-function escapeHTML(text){
-
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-
-/* =====================================================
-                    GAME VARIABLES
-===================================================== */
-
-const canvas =
-    $("gameCanvas");
-
-const ctx =
-    canvas.getContext("2d");
-
-
-let gameRunning = false;
-let gameEnded = false;
-let lastTime = 0;
-
-let distance = 0;
-let runXP = 0;
-
-let speed = 6;
-
-let obstacleTimer = 70;
-
-let obstacles = [];
-
-
-const groundY = 375;
-
-
-const player = {
-
-    x:120,
-
-    y:groundY - 130,
-
-    width:90,
-
-    height:130,
-
-    velocityY:0,
-
-    onGround:true
-};
-
-
-/* =====================================================
-                    JUMP
-===================================================== */
-
-function jump(){
-
-    if(gameEnded){
-
-        restartGame();
-
-        return;
-    }
-
-
-    if(player.onGround){
-
-        player.velocityY =
-            -17;
-
-        player.onGround =
-            false;
-
-        if(!gameRunning){
-
-            startGame();
-        }
-    }
-}
-
-
-/* =====================================================
-                    START
-===================================================== */
-
-function startGame(){
-
-    if(gameRunning)
-        return;
-
-
-    gameRunning = true;
-
-    lastTime =
-        performance.now();
-
-
-    requestAnimationFrame(
-        gameLoop
-    );
-}
-
-
-/* =====================================================
-                    RESTART
-===================================================== */
-
-function restartGame(){
-
-    gameRunning = false;
-
-    gameEnded = false;
-
-    distance = 0;
-
-    runXP = 0;
-
-    speed = 6;
-
-    obstacleTimer = 70;
-
-    obstacles = [];
-
-
-    player.x = 120;
-
-    player.y =
-        groundY -
-        player.height;
-
-    player.velocityY = 0;
-
-    player.onGround = true;
-
-
-    $("gameOver")
-        .style
-        .display = "none";
-
-
-    updateGameUI();
-
-    draw();
-
-    startGame();
-}
-
-
-/* =====================================================
-                    OBSTACLE
-===================================================== */
-
-function createObstacle(){
-
-    const tall =
-        Math.random() < .45;
-
-
-    const width =
-        tall ? 38 : 45;
-
-
-    const height =
-        tall
-        ? 70 + Math.random() * 65
-        : 30 + Math.random() * 25;
-
-
-    obstacles.push({
-
-        x:canvas.width,
-
-        y:groundY-height,
-
-        width,
-
-        height
-    });
-
-
-    obstacleTimer =
-        70 + Math.random() * 90;
-}
-
-
-/* =====================================================
-                    COLLISION
-=========================
+  
