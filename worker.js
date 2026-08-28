@@ -1,13 +1,17 @@
 const encoder = new TextEncoder();
 
+const CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+};
+
 function json(data, status = 200) {
     return new Response(JSON.stringify(data), {
         status,
         headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+            ...CORS_HEADERS
         }
     });
 }
@@ -19,7 +23,7 @@ async function hash(text) {
     );
 
     return [...new Uint8Array(buffer)]
-        .map(byte => byte.toString(16).padStart(2, "0"))
+        .map(x => x.toString(16).padStart(2, "0"))
         .join("");
 }
 
@@ -37,23 +41,19 @@ function validCode(code) {
 
 
 /* =========================
-   LOGIN EDƏN İSTİFADƏÇİNİ TAP
+   USER AUTH
 ========================= */
 
 async function getUser(request, env) {
 
-    const authorization =
+    const auth =
         request.headers.get("Authorization");
 
-    if (
-        !authorization ||
-        !authorization.startsWith("Bearer ")
-    ) {
+    if (!auth || !auth.startsWith("Bearer ")) {
         return null;
     }
 
-    const token =
-        authorization.substring(7);
+    const token = auth.slice(7);
 
     const user =
         await env.DB.prepare(`
@@ -66,12 +66,9 @@ async function getUser(request, env) {
             JOIN users u
                 ON u.id = s.user_id
             WHERE s.token = ?
-            AND s.expires_at > ?
+              AND s.expires_at > ?
         `)
-        .bind(
-            token,
-            Date.now()
-        )
+        .bind(token, Date.now())
         .first();
 
     return user || null;
@@ -79,21 +76,21 @@ async function getUser(request, env) {
 
 
 /* =========================
-   SERVER
+   MAIN WORKER
 ========================= */
 
 export default {
 
     async fetch(request, env) {
 
-        /* CORS */
+        /* OPTIONS / CORS */
 
         if (request.method === "OPTIONS") {
-            return json({
-                ok: true
+            return new Response(null, {
+                status: 204,
+                headers: CORS_HEADERS
             });
         }
-
 
         const url =
             new URL(request.url);
@@ -102,7 +99,7 @@ export default {
         try {
 
             /* =================================
-               HESAB YARAT
+               REGISTER
             ================================= */
 
             if (
@@ -114,45 +111,36 @@ export default {
                     await request.json();
 
                 const username =
-                    String(
-                        body.username || ""
-                    ).trim();
+                    String(body.username || "")
+                        .trim();
 
                 const code =
-                    String(
-                        body.code || ""
-                    ).trim();
+                    String(body.code || "")
+                        .trim();
 
 
-                if (
-                    !validUsername(username)
-                ) {
+                if (!validUsername(username)) {
 
                     return json({
                         error:
-                            "Istifadeci adi 3-18 simvol olmalidir. Yalniz herf, reqem ve _ istifade et."
+                            "Istifadeci adi 3-18 simvol olmalidir."
                     }, 400);
 
                 }
 
 
-                if (
-                    !validCode(code)
-                ) {
+                if (!validCode(code)) {
 
                     return json({
                         error:
-                            "Giris kodu 4-10 herf ve ya reqem olmalidir."
+                            "Giris kodu 4-10 herf ve reqem olmalidir."
                     }, 400);
 
                 }
 
-
-                /* USERNAME YOXLAMA */
 
                 const exists =
-                    await env.DB
-                    .prepare(`
+                    await env.DB.prepare(`
                         SELECT id
                         FROM users
                         WHERE username = ?
@@ -165,29 +153,28 @@ export default {
 
                     return json({
                         error:
-                            "Bu istifadeci adi artiq movcuddur."
+                            "Bu istifadeci adi artiq istifade olunur."
                     }, 409);
 
                 }
 
 
-                /* KODU HASH ET */
-
                 const codeHash =
                     await hash(code);
-
 
                 const userId =
                     crypto.randomUUID();
 
-                const sessionToken =
+                const token =
                     createToken();
 
                 const now =
                     Date.now();
 
+                const expires =
+                    now +
+                    1000 * 60 * 60 * 24 * 30;
 
-                /* DATABASE */
 
                 await env.DB.batch([
 
@@ -211,7 +198,6 @@ export default {
                         now
                     ),
 
-
                     env.DB.prepare(`
                         INSERT INTO sessions
                         (
@@ -223,24 +209,24 @@ export default {
                         (?, ?, ?)
                     `)
                     .bind(
-                        sessionToken,
+                        token,
                         userId,
-                        now +
-                        1000 * 60 * 60 * 24 * 30
+                        expires
                     )
 
                 ]);
 
 
                 return json({
-                    token: sessionToken
+                    ok: true,
+                    token
                 });
 
             }
 
 
             /* =================================
-               DAXIL OL
+               LOGIN
             ================================= */
 
             if (
@@ -252,21 +238,19 @@ export default {
                     await request.json();
 
                 const username =
-                    String(
-                        body.username || ""
-                    ).trim();
+                    String(body.username || "")
+                        .trim();
 
                 const code =
-                    String(
-                        body.code || ""
-                    ).trim();
+                    String(body.code || "")
+                        .trim();
 
 
                 const user =
-                    await env.DB
-                    .prepare(`
+                    await env.DB.prepare(`
                         SELECT
                             id,
+                            username,
                             code_hash
                         FROM users
                         WHERE username = ?
@@ -290,8 +274,7 @@ export default {
 
 
                 if (
-                    codeHash !==
-                    user.code_hash
+                    codeHash !== user.code_hash
                 ) {
 
                     return json({
@@ -302,39 +285,42 @@ export default {
                 }
 
 
-                const sessionToken =
+                const token =
                     createToken();
 
+                const expires =
+                    Date.now() +
+                    1000 * 60 * 60 * 24 * 30;
 
-                await env.DB
-                    .prepare(`
-                        INSERT INTO sessions
-                        (
-                            token,
-                            user_id,
-                            expires_at
-                        )
-                        VALUES
-                        (?, ?, ?)
-                    `)
-                    .bind(
-                        sessionToken,
-                        user.id,
-                        Date.now() +
-                        1000 * 60 * 60 * 24 * 30
+
+                await env.DB.prepare(`
+                    INSERT INTO sessions
+                    (
+                        token,
+                        user_id,
+                        expires_at
                     )
-                    .run();
+                    VALUES
+                    (?, ?, ?)
+                `)
+                .bind(
+                    token,
+                    user.id,
+                    expires
+                )
+                .run();
 
 
                 return json({
-                    token: sessionToken
+                    ok: true,
+                    token
                 });
 
             }
 
 
             /* =================================
-               PROFIL
+               CURRENT USER
             ================================= */
 
             if (
@@ -353,7 +339,7 @@ export default {
 
                     return json({
                         error:
-                            "Unauthorized"
+                            "Giris edilmemisdir."
                     }, 401);
 
                 }
@@ -374,7 +360,7 @@ export default {
 
 
             /* =================================
-               OYUN NƏTİCƏSİ
+               SAVE SCORE
             ================================= */
 
             if (
@@ -393,7 +379,7 @@ export default {
 
                     return json({
                         error:
-                            "Unauthorized"
+                            "Giris edilmemisdir."
                     }, 401);
 
                 }
@@ -402,36 +388,32 @@ export default {
                 const body =
                     await request.json();
 
-
                 const distance =
-                    Number(
-                        body.distance
+                    Math.floor(
+                        Number(body.distance)
                     );
 
 
                 if (
                     !Number.isFinite(distance) ||
-                    distance < 0
+                    distance < 0 ||
+                    distance > 10000000
                 ) {
 
                     return json({
                         error:
-                            "Yanlis oyun neticesi."
+                            "Yanlis netice."
                     }, 400);
 
                 }
 
 
                 /*
-                XP MƏNTİQİ
+                    Hər run-dan XP qazanılır.
 
-                Məsələn:
-
-                100 metr
-                = 20 XP
-
-                5000 metr
-                = 1000 XP
+                    100 metr  = 20 XP
+                    500 metr  = 100 XP
+                    5000 metr = 1000 XP
                 */
 
                 const earnedXP =
@@ -441,53 +423,45 @@ export default {
 
 
                 /*
-                ÇOX VACİB:
+                    XP toplanır.
 
-                Əvvəlki XP heç vaxt
-                aşağı nəticəyə görə
-                silinmir.
+                    Əvvəl:
+                    500000 XP
 
-                500000 XP varsa:
+                    + yeni 1000 XP
 
-                yeni nəticə 100 XP
-                → 500000 qalır.
+                    = 501000 XP
 
-                yeni nəticə 700000 XP
-                → 700000 olur.
+
+                    Best distance isə
+                    yalnız daha böyük nəticə
+                    gələndə dəyişir.
                 */
 
+                await env.DB.prepare(`
+                    UPDATE users
 
-                await env.DB
-                    .prepare(`
-                        UPDATE users
+                    SET
+                        xp = xp + ?,
 
-                        SET
+                        best_distance =
+                            MAX(
+                                best_distance,
+                                ?
+                            )
 
-                            xp =
-                                MAX(
-                                    xp,
-                                    ?
-                                ),
-
-                            best_distance =
-                                MAX(
-                                    best_distance,
-                                    ?
-                                )
-
-                        WHERE id = ?
-                    `)
-                    .bind(
-                        earnedXP,
-                        Math.floor(distance),
-                        user.id
-                    )
-                    .run();
+                    WHERE id = ?
+                `)
+                .bind(
+                    earnedXP,
+                    distance,
+                    user.id
+                )
+                .run();
 
 
                 const updated =
-                    await env.DB
-                    .prepare(`
+                    await env.DB.prepare(`
                         SELECT
                             username,
                             xp,
@@ -499,15 +473,17 @@ export default {
                     .first();
 
 
-                return json(
-                    updated
-                );
+                return json({
+                    ok: true,
+                    ...updated,
+                    earnedXP
+                });
 
             }
 
 
             /* =================================
-               REAL LEADERBOARD
+               GLOBAL LEADERBOARD
             ================================= */
 
             if (
@@ -516,8 +492,7 @@ export default {
             ) {
 
                 const result =
-                    await env.DB
-                    .prepare(`
+                    await env.DB.prepare(`
                         SELECT
                             username,
                             xp,
@@ -525,45 +500,76 @@ export default {
                         FROM users
                         ORDER BY
                             xp DESC,
-                            best_distance DESC,
-                            created_at ASC
+                            best_distance DESC
                         LIMIT 100
                     `)
                     .all();
 
 
-                return json(
-                    result.results
-                );
+                return json({
+                    ok: true,
+                    players:
+                        result.results
+                });
 
             }
 
 
             /* =================================
-               SERVER TEST
+               HEALTH CHECK
             ================================= */
 
-            return json({
+            if (
+                url.pathname === "/api/health"
+            ) {
 
-                status: "online",
+                return json({
+                    ok: true,
+                    game: "QAQLIL RUSH",
+                    server: "online"
+                });
 
-                game: "QAQLIL RUSH",
+            }
 
-                message:
-                    "QAQLIL RUSH server is running 🚀"
 
-            });
+            /* =================================
+               WEBSITE
+            ================================= */
+
+            /*
+                API deyilsə,
+                GitHub-dakı index.html
+                Cloudflare Assets vasitəsilə açılır.
+            */
+
+            if (env.ASSETS) {
+
+                return env.ASSETS.fetch(
+                    request
+                );
+
+            }
+
+
+            return new Response(
+                "QAQLIL RUSH is online!",
+                {
+                    status: 200,
+                    headers: CORS_HEADERS
+                }
+            );
 
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "SERVER ERROR:",
+                error
+            );
 
             return json({
-
                 error:
-                    "Server xetasi."
-
+                    "Server xetasi bas verdi."
             }, 500);
 
         }
