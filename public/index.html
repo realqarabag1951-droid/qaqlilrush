@@ -2,427 +2,358 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <title>QAQLIL RUSH</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html,
-body {
-    min-height: 100%;
+html,body{
+    min-height:100%;
 }
 
-body {
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #fff;
-
+body{
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
     background:
-        radial-gradient(
-            circle at 15% 10%,
-            #253c9c 0,
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 90% 80%,
-            #92145f 0,
-            transparent 35%
-        ),
+        radial-gradient(circle at 15% 10%,#253c9c 0,transparent 32%),
+        radial-gradient(circle at 90% 80%,#92145f 0,transparent 35%),
         #070a13;
 }
 
-button,
-input {
-    font: inherit;
+button,input{
+    font:inherit;
 }
 
-button {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+button{
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
 }
 
-button:disabled {
-    opacity: .65;
-    cursor: not-allowed;
+button:disabled{
+    opacity:.65;
+    cursor:not-allowed;
 }
 
-.hidden {
-    display: none !important;
+.hidden{
+    display:none!important;
 }
 
-/* =========================
-   AUTH
-========================= */
+/* AUTH */
 
-#authPage {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+#authPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
-.authBox {
-    width: 100%;
-    max-width: 430px;
-    padding: 30px;
-    text-align: center;
-
-    background: #0c111d;
-    border: 1px solid #35415e;
-    border-radius: 25px;
-
-    box-shadow: 0 25px 80px #000b;
+.authBox{
+    width:100%;
+    max-width:430px;
+    padding:30px;
+    text-align:center;
+    background:#0c111d;
+    border:1px solid #35415e;
+    border-radius:25px;
+    box-shadow:0 25px 80px #000b;
 }
 
-.logo {
-    font-size: 42px;
-    font-weight: 1000;
-    letter-spacing: 2px;
+.logo{
+    font-size:42px;
+    font-weight:1000;
+    letter-spacing:2px;
 }
 
 .logo span,
-.headerLogo span {
-    color: #39ff70;
+.headerLogo span{
+    color:#39ff70;
 }
 
-.subtitle {
-    color: #9da8bb;
-    margin: 8px 0 25px;
+.subtitle{
+    color:#9da8bb;
+    margin:8px 0 25px;
 }
 
-.authTabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
+.authTabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:16px;
 }
 
-.authTabs button {
-    flex: 1;
+.authTabs button{
+    flex:1;
 }
 
-input {
-    width: 100%;
-    padding: 15px;
-    margin: 6px 0;
-
-    color: #fff;
-    background: #111827;
-
-    border: 1px solid #303c58;
-    border-radius: 13px;
-    outline: none;
+input{
+    width:100%;
+    padding:15px;
+    margin:6px 0;
+    color:#fff;
+    background:#111827;
+    border:1px solid #303c58;
+    border-radius:13px;
+    outline:none;
 }
 
-input::placeholder {
-    color: #7f8aa0;
+input:focus{
+    border-color:#2ddcff;
+    box-shadow:0 0 0 2px #2ddcff22;
 }
 
-input:focus {
-    border-color: #2ddcff;
-    box-shadow: 0 0 0 2px #2ddcff22;
+.primary{
+    background:linear-gradient(90deg,#39ff70,#2ddcff);
+    color:#06100d;
+    border:0;
 }
 
-.primary {
-    background:
-        linear-gradient(
-            90deg,
-            #39ff70,
-            #2ddcff
-        );
-
-    color: #06100d;
-    border: 0;
+.secondary{
+    background:#171f2e;
+    color:#fff;
+    border:1px solid #34405b;
 }
 
-.secondary {
-    background: #171f2e;
-    color: #fff;
-    border: 1px solid #34405b;
+.btn{
+    width:100%;
+    padding:14px;
+    margin-top:8px;
+    border-radius:13px;
+    font-weight:900;
 }
 
-.btn {
-    width: 100%;
-    padding: 14px;
-    margin-top: 8px;
-
-    border-radius: 13px;
-    font-weight: 900;
+#authError{
+    min-height:22px;
+    margin-top:10px;
+    color:#ff5e94;
+    font-weight:700;
 }
 
-#authError {
-    min-height: 22px;
-    margin-top: 10px;
+/* MAIN */
 
-    color: #ff5e94;
-    font-weight: 700;
+#gamePage{
+    width:min(1100px,100%);
+    margin:auto;
+    padding:12px;
 }
 
-/* =========================
-   MAIN
-========================= */
-
-#gamePage {
-    width: min(1100px, 100%);
-    margin: auto;
-    padding: 12px;
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 10px;
-    margin-bottom: 12px;
+.headerLogo{
+    font-size:clamp(27px,6vw,42px);
+    font-weight:1000;
 }
 
-.headerLogo {
-    font-size: clamp(27px, 6vw, 42px);
-    font-weight: 1000;
+.userInfo{
+    padding:10px 13px;
+    border-radius:15px;
+    background:#0c1320;
+    border:1px solid #303b56;
+    font-weight:800;
+    font-size:14px;
 }
 
-.userInfo {
-    padding: 10px 13px;
-
-    border-radius: 15px;
-    background: #0c1320;
-    border: 1px solid #303b56;
-
-    font-weight: 800;
-    font-size: 14px;
+.card{
+    background:#0c111d;
+    border:1px solid #2d3954;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 18px 50px #0008;
 }
 
-.card {
-    background: #0c111d;
-    border: 1px solid #2d3954;
-    border-radius: 20px;
-    overflow: hidden;
+/* GAME */
 
-    box-shadow: 0 18px 50px #0008;
+.gameCard{
+    position:relative;
 }
 
-/* =========================
-   GAME
-========================= */
-
-.gameCard {
-    position: relative;
+.hud{
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 15px;
+    background:#090e18;
+    font-weight:900;
+    font-size:14px;
 }
 
-.hud {
-    height: 52px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 15px;
-
-    background: #090e18;
-
-    font-weight: 900;
-    font-size: 14px;
+.hud b{
+    color:#39ff70;
 }
 
-.hud b {
-    color: #39ff70;
+canvas{
+    display:block;
+    width:100%;
+    height:auto;
+    background:#111827;
+    touch-action:none;
+    user-select:none;
+    -webkit-user-select:none;
 }
 
-canvas {
-    display: block;
-    width: 100%;
-    height: auto;
+/* GAME OVER */
 
-    touch-action: none;
-    user-select: none;
-    -webkit-user-select: none;
+#gameOver{
+    display:none;
+    position:absolute;
+    inset:52px 0 0;
+    align-items:center;
+    justify-content:center;
+    background:#000b;
+    z-index:10;
 }
 
-/* =========================
-   GAME OVER
-========================= */
-
-#gameOver {
-    display: none;
-
-    position: absolute;
-    inset: 52px 0 0;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #000b;
-    z-index: 10;
+#gameOver.show{
+    display:flex;
 }
 
-.gameOverBox {
-    width: min(390px, 90%);
-    padding: 28px;
-
-    text-align: center;
-
-    background: #0c111d;
-    border: 1px solid #485675;
-    border-radius: 20px;
-
-    box-shadow: 0 20px 70px #000c;
+.gameOverBox{
+    width:min(390px,90%);
+    padding:28px;
+    text-align:center;
+    background:#0c111d;
+    border:1px solid #485675;
+    border-radius:20px;
+    box-shadow:0 20px 70px #000c;
 }
 
-.gameOverBox h1 {
-    color: #ff4c9a;
-    margin-bottom: 5px;
+.gameOverBox h1{
+    color:#ff4c9a;
+    margin-bottom:5px;
 }
 
-.finalDistance {
-    margin: 7px;
-
-    font-size: 44px;
-    font-weight: 1000;
-    color: #2ddcff;
+.finalDistance{
+    margin:7px;
+    font-size:44px;
+    font-weight:1000;
+    color:#2ddcff;
 }
 
-.earned {
-    margin-bottom: 18px;
-
-    color: #39ff70;
-    font-size: 22px;
-    font-weight: 1000;
+.earned{
+    margin-bottom:18px;
+    color:#39ff70;
+    font-size:22px;
+    font-weight:1000;
 }
 
-/* =========================
-   CONTROLS
-========================= */
+/* CONTROLS */
 
-.controls {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
+.controls{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
 }
 
-.controls button {
-    flex: 1;
-    padding: 14px;
-
-    border-radius: 13px;
-    font-weight: 900;
+.controls button{
+    flex:1;
+    padding:14px;
+    border-radius:13px;
+    font-weight:900;
 }
 
-/* =========================
-   LEADERBOARD
-========================= */
+/* LEADERBOARD */
 
-.leaderCard {
-    margin-top: 12px;
-    padding: 15px;
+.leaderCard{
+    margin-top:12px;
+    padding:15px;
 }
 
-.leaderCard h2 {
-    margin-bottom: 10px;
+.leaderCard h2{
+    margin-bottom:10px;
 }
 
-.leader {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 12px 7px;
-
-    border-bottom: 1px solid #20293a;
+.leader{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 7px;
+    border-bottom:1px solid #20293a;
 }
 
-.rank {
-    width: 30px;
-    color: #8f9aae;
-    font-weight: 900;
+.rank{
+    width:30px;
+    color:#8f9aae;
+    font-weight:900;
 }
 
-.player {
-    flex: 1;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.player{
+    flex:1;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 
-.xp {
-    color: #39ff70;
-    font-weight: 900;
-    white-space: nowrap;
+.xp{
+    color:#39ff70;
+    font-weight:900;
+    white-space:nowrap;
 }
 
-.myRank {
-    background: #123c24;
-    border-radius: 10px;
+.myRank{
+    background:#123c24;
+    border-radius:10px;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
-footer {
-    padding: 25px 5px 12px;
-
-    text-align: center;
-
-    color: #8e99ac;
-    font-size: 14px;
+footer{
+    padding:25px 5px 12px;
+    text-align:center;
+    color:#8e99ac;
+    font-size:14px;
 }
 
-footer a {
-    color: #2ddcff;
-    font-weight: 900;
-    text-decoration: none;
+footer a{
+    color:#2ddcff;
+    font-weight:900;
+    text-decoration:none;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
-@media (max-width: 600px) {
+@media(max-width:600px){
 
-    .authBox {
-        padding: 23px;
+    .authBox{
+        padding:23px;
     }
 
-    .logo {
-        font-size: 34px;
+    .logo{
+        font-size:34px;
     }
 
-    .headerLogo {
-        font-size: 27px;
+    .headerLogo{
+        font-size:27px;
     }
 
-    .userInfo {
-        font-size: 12px;
+    .userInfo{
+        font-size:12px;
     }
 
-    .hud {
-        font-size: 11px;
+    .hud{
+        font-size:11px;
     }
 
-    .controls {
-        flex-direction: column;
+    .controls{
+        flex-direction:column;
     }
 }
 </style>
 </head>
 
 <body>
-
-<!-- =====================================================
-     AUTH PAGE
-===================================================== -->
 
 <section id="authPage">
 
@@ -441,22 +372,18 @@ footer a {
             <button
                 id="registerTab"
                 class="btn primary"
-                type="button"
-            >
+                type="button">
                 HESAB YARAT
             </button>
 
             <button
                 id="loginTab"
                 class="btn secondary"
-                type="button"
-            >
+                type="button">
                 DAXİL OL
             </button>
 
         </div>
-
-        <!-- REGISTER -->
 
         <div id="registerForm">
 
@@ -464,56 +391,43 @@ footer a {
                 id="registerUsername"
                 maxlength="18"
                 autocomplete="off"
-                spellcheck="false"
-                placeholder="İstifadəçi adı"
-            >
+                placeholder="İstifadəçi adı">
 
             <input
                 id="registerCode"
                 maxlength="10"
                 autocomplete="new-password"
                 type="password"
-                placeholder="Giriş kodu"
-            >
+                placeholder="Giriş kodu">
 
             <button
                 id="registerButton"
                 class="btn primary"
-                type="button"
-            >
+                type="button">
                 🚀 HESAB YARAT
             </button>
 
         </div>
 
-        <!-- LOGIN -->
-
-        <div
-            id="loginForm"
-            class="hidden"
-        >
+        <div id="loginForm" class="hidden">
 
             <input
                 id="loginUsername"
                 maxlength="18"
                 autocomplete="username"
-                spellcheck="false"
-                placeholder="İstifadəçi adı"
-            >
+                placeholder="İstifadəçi adı">
 
             <input
                 id="loginCode"
                 maxlength="10"
                 autocomplete="current-password"
                 type="password"
-                placeholder="Giriş kodu"
-            >
+                placeholder="Giriş kodu">
 
             <button
                 id="loginButton"
                 class="btn primary"
-                type="button"
-            >
+                type="button">
                 🔥 DAXİL OL
             </button>
 
@@ -526,14 +440,7 @@ footer a {
 </section>
 
 
-<!-- =====================================================
-     GAME PAGE
-===================================================== -->
-
-<main
-    id="gamePage"
-    class="hidden"
->
+<main id="gamePage" class="hidden">
 
 <header>
 
@@ -542,22 +449,15 @@ footer a {
     </div>
 
     <div class="userInfo">
-
         👤
         <span id="username">---</span>
-
         · ⭐
-
         <span id="totalXP">0</span>
-
         XP
-
     </div>
 
 </header>
 
-
-<!-- GAME -->
 
 <div class="card gameCard">
 
@@ -581,43 +481,33 @@ footer a {
     <canvas
         id="gameCanvas"
         width="900"
-        height="500"
-    ></canvas>
-
-
-    <!-- GAME OVER -->
+        height="500">
+    </canvas>
 
     <div id="gameOver">
 
         <div class="gameOverBox">
 
-            <h1>
-                OYUN BİTDİ!
-            </h1>
+            <h1>OYUN BİTDİ!</h1>
 
-            <div>
-                Məsafə
-            </div>
+            <div>Məsafə</div>
 
             <div
                 id="finalDistance"
-                class="finalDistance"
-            >
+                class="finalDistance">
                 0 M
             </div>
 
             <div
                 id="earnedXP"
-                class="earned"
-            >
+                class="earned">
                 +0 XP
             </div>
 
             <button
                 id="restartGameOver"
                 class="btn primary"
-                type="button"
-            >
+                type="button">
                 ↻ RESTART
             </button>
 
@@ -628,43 +518,33 @@ footer a {
 </div>
 
 
-<!-- CONTROLS -->
-
 <div class="controls">
 
     <button
         id="jumpButton"
         class="primary"
-        type="button"
-    >
+        type="button">
         ⬆ TULLAN — SPACE
     </button>
 
     <button
         id="restartButton"
         class="secondary"
-        type="button"
-    >
+        type="button">
         ↻ YENİDƏN
     </button>
 
 </div>
 
 
-<!-- LEADERBOARD -->
-
 <div class="card leaderCard">
 
-    <h2>
-        🌍 XP LİDERLƏRİ
-    </h2>
+    <h2>🌍 XP LİDERLƏRİ</h2>
 
     <div id="leaderboard">
-
         <div class="leader">
             Yüklənir...
         </div>
-
     </div>
 
 </div>
@@ -677,8 +557,7 @@ footer a {
     <a
         href="https://www.tiktok.com/@ssamirreds"
         target="_blank"
-        rel="noopener noreferrer"
-    >
+        rel="noopener noreferrer">
         TikTok — ssamirreds
     </a>
 
@@ -691,7 +570,7 @@ footer a {
 "use strict";
 
 /* =====================================================
-   GLOBAL
+   STATE
 ===================================================== */
 
 let token = localStorage.getItem("qaqlil_token");
@@ -704,134 +583,102 @@ const $ = id => document.getElementById(id);
    API
 ===================================================== */
 
-async function api(endpoint, options = {}) {
+async function api(endpoint, options = {}){
 
     const headers = {
-        "Content-Type": "application/json",
+        "Content-Type":"application/json",
         ...(options.headers || {})
     };
 
-    if (token) {
+    if(token){
         headers.Authorization = "Bearer " + token;
     }
 
     let response;
 
-    try {
+    try{
 
-        response = await fetch(endpoint, {
+        response = await fetch(endpoint,{
             ...options,
             headers
         });
 
-    } catch (error) {
+    }catch(error){
 
-        console.error("FETCH ERROR:", error);
+        console.error(error);
 
         throw new Error(
             "Serverə qoşulmaq mümkün olmadı."
         );
     }
 
-
     const contentType =
         response.headers.get("content-type") || "";
 
     let data = {};
 
+    if(contentType.includes("application/json")){
 
-    if (contentType.includes("application/json")) {
-
-        data = await response
-            .json()
-            .catch(() => ({}));
-
-    } else {
-
-        const text = await response
-            .text()
-            .catch(() => "");
-
-        console.error(
-            "SERVER NON-JSON:",
-            text
+        data = await response.json().catch(
+            () => ({})
         );
+
+    }else{
+
+        const text =
+            await response.text().catch(
+                () => ""
+            );
 
         data = {
             error:
                 text ||
-                "Server düzgün cavab göndərmədi."
+                "Server JSON cavabı göndərmədi."
         };
     }
 
-
-    if (!response.ok) {
+    if(!response.ok){
 
         throw new Error(
             data.error ||
-            `Server xətası (${response.status})`
+            `Server xətası: ${response.status}`
         );
     }
-
 
     return data;
 }
 
 
 /* =====================================================
-   ERROR
+   AUTH UI
 ===================================================== */
 
-function showError(message) {
-
+function showError(message){
     $("authError").textContent = message;
 }
 
-function clearError() {
-
+function clearError(){
     $("authError").textContent = "";
 }
 
+function showRegister(){
 
-/* =====================================================
-   AUTH TABS
-===================================================== */
+    $("registerForm").classList.remove("hidden");
+    $("loginForm").classList.add("hidden");
 
-function showRegister() {
-
-    $("registerForm")
-        .classList
-        .remove("hidden");
-
-    $("loginForm")
-        .classList
-        .add("hidden");
-
-    $("registerTab").className =
-        "btn primary";
-
-    $("loginTab").className =
-        "btn secondary";
+    $("registerTab").className = "btn primary";
+    $("loginTab").className = "btn secondary";
 
     clearError();
 }
 
+function showLogin(){
 
-function showLogin() {
+    $("registerForm").classList.add("hidden");
+    $("loginForm").classList.remove("hidden");
 
-    $("registerForm")
-        .classList
-        .add("hidden");
-
-    $("loginForm")
-        .classList
-        .remove("hidden");
-
-    $("registerTab").className =
-        "btn secondary";
-
-    $("loginTab").className =
-        "btn primary";
+    $("registerTab").className = "btn secondary";
+    $("loginTab").className = "btn primary";
 
     clearError();
 }
@@ -841,22 +688,17 @@ function showLogin() {
    REGISTER
 ===================================================== */
 
-async function register() {
+async function register(){
 
     clearError();
 
     const username =
-        $("registerUsername")
-            .value
-            .trim();
+        $("registerUsername").value.trim();
 
     const code =
-        $("registerCode")
-            .value
-            .trim();
+        $("registerCode").value.trim();
 
-
-    if (!/^[A-Za-z0-9_]{3,18}$/.test(username)) {
+    if(!/^[A-Za-z0-9_]{3,18}$/.test(username)){
 
         showError(
             "İstifadəçi adı 3-18 simvol olmalıdır."
@@ -865,53 +707,44 @@ async function register() {
         return;
     }
 
-
-    if (!/^[A-Za-z0-9]{4,10}$/.test(code)) {
+    if(!/^[A-Za-z0-9]{4,10}$/.test(code)){
 
         showError(
-            "Kod 4-10 hərf və rəqəmdən ibarət olmalıdır."
+            "Giriş kodu 4-10 hərf və rəqəmdən ibarət olmalıdır."
         );
 
         return;
     }
 
-
-    const button =
-        $("registerButton");
-
+    const button = $("registerButton");
 
     button.disabled = true;
     button.textContent = "YARADILIR...";
 
-
-    try {
+    try{
 
         const data = await api(
             "/api/register",
             {
-                method: "POST",
-
-                body: JSON.stringify({
-                    username: username,
-                    code: code
+                method:"POST",
+                body:JSON.stringify({
+                    username,
+                    code
                 })
             }
         );
-
 
         console.log(
             "REGISTER RESPONSE:",
             data
         );
 
-
-        if (!data || !data.token) {
+        if(!data || !data.token){
 
             throw new Error(
                 "Server token göndərmədi."
             );
         }
-
 
         token = data.token;
 
@@ -920,25 +753,19 @@ async function register() {
             token
         );
 
-
         await enterGame();
 
-
-    } catch (error) {
+    }catch(error){
 
         console.error(
             "REGISTER ERROR:",
             error
         );
 
-        showError(
-            error.message ||
-            "Hesab yaratmaq mümkün olmadı."
-        );
+        showError(error.message);
 
         button.disabled = false;
-        button.textContent =
-            "🚀 HESAB YARAT";
+        button.textContent = "🚀 HESAB YARAT";
     }
 }
 
@@ -947,22 +774,17 @@ async function register() {
    LOGIN
 ===================================================== */
 
-async function login() {
+async function login(){
 
     clearError();
 
     const username =
-        $("loginUsername")
-            .value
-            .trim();
+        $("loginUsername").value.trim();
 
     const code =
-        $("loginCode")
-            .value
-            .trim();
+        $("loginCode").value.trim();
 
-
-    if (!/^[A-Za-z0-9_]{3,18}$/.test(username)) {
+    if(!/^[A-Za-z0-9_]{3,18}$/.test(username)){
 
         showError(
             "İstifadəçi adı 3-18 simvol olmalıdır."
@@ -971,54 +793,44 @@ async function login() {
         return;
     }
 
-
-    if (!/^[A-Za-z0-9]{4,10}$/.test(code)) {
+    if(!/^[A-Za-z0-9]{4,10}$/.test(code)){
 
         showError(
-            "Kod 4-10 hərf və rəqəmdən ibarət olmalıdır."
+            "Giriş kodu 4-10 hərf və rəqəmdən ibarət olmalıdır."
         );
 
         return;
     }
 
-
-    const button =
-        $("loginButton");
-
+    const button = $("loginButton");
 
     button.disabled = true;
-    button.textContent =
-        "DAXİL OLUNUR...";
+    button.textContent = "DAXİL OLUNUR...";
 
-
-    try {
+    try{
 
         const data = await api(
             "/api/login",
             {
-                method: "POST",
-
-                body: JSON.stringify({
-                    username: username,
-                    code: code
+                method:"POST",
+                body:JSON.stringify({
+                    username,
+                    code
                 })
             }
         );
-
 
         console.log(
             "LOGIN RESPONSE:",
             data
         );
 
-
-        if (!data || !data.token) {
+        if(!data || !data.token){
 
             throw new Error(
                 "Server token göndərmədi."
             );
         }
-
 
         token = data.token;
 
@@ -1027,25 +839,19 @@ async function login() {
             token
         );
 
-
         await enterGame();
 
-
-    } catch (error) {
+    }catch(error){
 
         console.error(
             "LOGIN ERROR:",
             error
         );
 
-        showError(
-            error.message ||
-            "Daxil olmaq mümkün olmadı."
-        );
+        showError(error.message);
 
         button.disabled = false;
-        button.textContent =
-            "🔥 DAXİL OL";
+        button.textContent = "🔥 DAXİL OL";
     }
 }
 
@@ -1054,54 +860,66 @@ async function login() {
    ENTER GAME
 ===================================================== */
 
-async function enterGame() {
+async function enterGame(){
 
-    currentUser =
-        await api("/api/me");
+    try{
 
+        currentUser =
+            await api("/api/me");
 
-    if (
-        !currentUser ||
-        !currentUser.username
-    ) {
+        if(
+            !currentUser ||
+            !currentUser.username
+        ){
 
-        throw new Error(
-            "İstifadəçi məlumatı alınmadı."
+            throw new Error(
+                "İstifadəçi məlumatı alınmadı."
+            );
+        }
+
+        $("authPage")
+            .classList
+            .add("hidden");
+
+        $("gamePage")
+            .classList
+            .remove("hidden");
+
+        $("username")
+            .textContent =
+            currentUser.username;
+
+        $("totalXP")
+            .textContent =
+            Number(
+                currentUser.xp || 0
+            ).toLocaleString();
+
+        $("best")
+            .textContent =
+            Number(
+                currentUser.best_distance || 0
+            ).toLocaleString();
+
+        await loadLeaderboard();
+
+        restartGame();
+
+    }catch(error){
+
+        console.error(
+            "ENTER GAME ERROR:",
+            error
         );
+
+        localStorage.removeItem(
+            "qaqlil_token"
+        );
+
+        token = null;
+
+        throw error;
     }
-
-
-    $("authPage")
-        .classList
-        .add("hidden");
-
-    $("gamePage")
-        .classList
-        .remove("hidden");
-
-
-    $("username")
-        .textContent =
-        currentUser.username;
-
-
-    $("totalXP")
-        .textContent =
-        Number(
-            currentUser.xp || 0
-        ).toLocaleString();
-
-
-    $("best")
-        .textContent =
-        Number(
-            currentUser.best_distance || 0
-        ).toLocaleString();
-
-
-    await loadLeaderboard();
-
-    restartGame();
 }
 
 
@@ -1109,31 +927,27 @@ async function enterGame() {
    LEADERBOARD
 ===================================================== */
 
-async function loadLeaderboard() {
+async function loadLeaderboard(){
 
-    const box =
-        $("leaderboard");
-
+    const box = $("leaderboard");
 
     box.innerHTML =
         "<div class='leader'>Yüklənir...</div>";
 
-
-    try {
+    try{
 
         const data =
             await api(
                 "/api/leaderboard"
             );
 
-
         box.innerHTML = "";
 
-
-        if (
-            !data.players ||
-            !data.players.length
-        ) {
+        if(
+            !data ||
+            !Array.isArray(data.players) ||
+            data.players.length === 0
+        ){
 
             box.innerHTML =
                 "<div class='leader'>Hələ heç kim yoxdur.</div>";
@@ -1141,69 +955,51 @@ async function loadLeaderboard() {
             return;
         }
 
-
         data.players.forEach(
-            (player, index) => {
+            (player,index)=>{
 
                 const row =
-                    document.createElement(
-                        "div"
-                    );
+                    document.createElement("div");
 
-                row.className =
-                    "leader";
+                row.className = "leader";
 
-
-                if (
+                if(
                     currentUser &&
                     player.username ===
                     currentUser.username
-                ) {
+                ){
 
                     row.classList.add(
                         "myRank"
                     );
                 }
 
-
                 const rank =
-                    document.createElement(
-                        "span"
-                    );
+                    document.createElement("span");
 
-                rank.className =
-                    "rank";
+                rank.className = "rank";
 
                 rank.textContent =
-                    index + 1;
-
+                    "#" + (index + 1);
 
                 const name =
-                    document.createElement(
-                        "span"
-                    );
+                    document.createElement("span");
 
-                name.className =
-                    "player";
+                name.className = "player";
 
                 name.textContent =
                     player.username;
 
-
                 const xp =
-                    document.createElement(
-                        "span"
-                    );
+                    document.createElement("span");
 
-                xp.className =
-                    "xp";
+                xp.className = "xp";
 
                 xp.textContent =
                     Number(
                         player.xp || 0
-                    ).toLocaleString() +
-                    " XP";
-
+                    ).toLocaleString()
+                    + " XP";
 
                 row.appendChild(rank);
                 row.appendChild(name);
@@ -1213,8 +1009,7 @@ async function loadLeaderboard() {
             }
         );
 
-
-    } catch (error) {
+    }catch(error){
 
         console.error(
             "LEADERBOARD ERROR:",
@@ -1237,6 +1032,141 @@ const canvas =
 const ctx =
     canvas.getContext("2d");
 
+const W = canvas.width;
+const H = canvas.height;
+
+const groundY = 420;
 
 let gameRunning = false;
-let gameEnded = f
+let gameOver = false;
+
+let animationId = null;
+
+let lastTime = 0;
+
+let distanceValue = 0;
+let runXPValue = 0;
+
+let speed = 6;
+
+let spawnTimer = 0;
+
+let obstacles = [];
+
+const player = {
+    x:100,
+    y:groundY - 60,
+    width:42,
+    height:60,
+    vy:0,
+    gravity:0.8,
+    jumpPower:-15,
+    onGround:true
+};
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function restartGame(){
+
+    cancelAnimationFrame(animationId);
+
+    distanceValue = 0;
+    runXPValue = 0;
+
+    speed = 6;
+
+    spawnTimer = 0;
+
+    obstacles = [];
+
+    gameOver = false;
+    gameRunning = true;
+
+    player.x = 100;
+    player.y = groundY - player.height;
+    player.vy = 0;
+    player.onGround = true;
+
+    $("distance").textContent = "0";
+    $("runXP").textContent = "0";
+
+    $("gameOver").classList.remove("show");
+
+    lastTime = performance.now();
+
+    animationId =
+        requestAnimationFrame(gameLoop);
+}
+
+
+/* =====================================================
+   JUMP
+===================================================== */
+
+function jump(){
+
+    if(!gameRunning || gameOver){
+        return;
+    }
+
+    if(player.onGround){
+
+        player.vy =
+            player.jumpPower;
+
+        player.onGround =
+            false;
+    }
+}
+
+
+/* =====================================================
+   SPAWN OBSTACLE
+===================================================== */
+
+function spawnObstacle(){
+
+    const height =
+        35 +
+        Math.random() * 55;
+
+    const width =
+        25 +
+        Math.random() * 30;
+
+    obstacles.push({
+
+        x:W + 30,
+
+        y:groundY - height,
+
+        width,
+
+        height
+    });
+}
+
+
+/* =====================================================
+   COLLISION
+===================================================== */
+
+function collision(a,b){
+
+    return (
+        a.x < b.x + b.width &&
+        a.x + a.width > b.x &&
+        a.y < b.y + b.height &&
+        a.y + a.height > b.y
+    );
+}
+
+
+/* =====================================================
+   DRAW
+===================================================== */
+
+function dra
