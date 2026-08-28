@@ -1,21 +1,10 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-
   "name": "qaqlil-rush",
-
   "main": "worker.js",
-
   "compatibility_date": "2026-08-28",
 
   "assets": {
-    "directory": "."
-  },
-
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "qaqlil-rush",
-      "database_id": "BURAYA_DATABASE_ID"
-    }
-  ]
+    "directory": ".",
+    "binding": "ASSETS"
+  }
 }
