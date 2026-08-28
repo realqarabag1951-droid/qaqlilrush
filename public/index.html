@@ -11,588 +11,287 @@
 <title>QAQLIL RUSH</title>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-html,
-body{
+html,body{
     width:100%;
     min-height:100%;
 }
 
 body{
-    min-height:100vh;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color:white;
-
-    background:
-        radial-gradient(
-            circle at 20% 10%,
-            #293f91 0%,
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 90% 80%,
-            #711653 0%,
-            transparent 35%
-        ),
-        #070a12;
-
     overflow-x:hidden;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-    width:min(1100px,100%);
-
-    margin:auto;
-
-    padding:
-        15px
-        15px
-        10px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    gap:15px;
-}
-
-.logo{
-    font-size:
-        clamp(
-            27px,
-            7vw,
-            44px
-        );
-
-    font-weight:1000;
-
-    letter-spacing:2px;
-
-    text-shadow:
-        0 4px 20px #0008;
-}
-
-.logo span{
-    color:#39ff70;
-}
-
-.status{
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    padding:
-        9px
-        13px;
-
-    background:#0c1320;
-
-    border:
-        1px solid
-        #33415f;
-
-    border-radius:14px;
-
-    color:#9da9bc;
-
-    font-size:13px;
-
-    font-weight:800;
-}
-
-.statusDot{
-    width:8px;
-    height:8px;
-
-    border-radius:50%;
-
-    background:#39ff70;
-
-    box-shadow:
-        0 0 12px #39ff70;
-}
-
-
-/* =========================
-   GAME CONTAINER
-========================= */
-
-.gameWrap{
-    width:min(1100px,100%);
-
-    margin:auto;
-
-    padding:
-        0
-        12px;
-}
-
-.gameCard{
-    position:relative;
-
-    width:100%;
-
-    overflow:hidden;
-
-    border:
-        1px solid
-        #34415e;
-
-    border-radius:22px;
-
-    background:#090d16;
-
-    box-shadow:
-        0 25px 80px #000a;
-}
-
-
-/* =========================
-   HUD
-========================= */
-
-.hud{
-    height:56px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:
-        0
-        17px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #101827,
-            #090e18
-        );
-
-    border-bottom:
-        1px solid
-        #26334b;
-
-    position:relative;
-
-    z-index:5;
-}
-
-.hudItem{
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    color:#a9b5c9;
-
-    font-size:13px;
-
-    font-weight:800;
-}
-
-.hudValue{
-    color:#39ff70;
-
-    font-size:18px;
-
-    font-weight:1000;
-}
-
-.hudRecord{
-    color:#2ddcff;
-}
-
-
-/* =========================
-   CANVAS
-========================= */
-
-canvas{
-    display:block;
-
-    width:100%;
-
-    height:auto;
-
-    background:#111827;
-
-    touch-action:none;
-
+    background:#07111f;
+    font-family:Arial,Helvetica,sans-serif;
+    color:white;
     user-select:none;
-
     -webkit-user-select:none;
 }
 
-
-/* =========================
-   GAME OVER
-========================= */
-
-.gameOver{
-    position:absolute;
-
-    top:56px;
-    left:0;
-    right:0;
-    bottom:0;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#03050bcc;
-
-    backdrop-filter:
-        blur(4px);
-
-    z-index:20;
-}
-
-.gameOver.show{
-    display:flex;
-}
-
-.gameOverBox{
-    width:min(380px,90%);
-
-    padding:28px;
-
-    text-align:center;
-
-    border:
-        1px solid
-        #465675;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111827,
-            #090d16
-        );
-
-    box-shadow:
-        0 25px 80px #000d;
-}
-
-.gameOverTitle{
-    font-size:31px;
-
-    font-weight:1000;
-
-    color:#ff4c91;
-
-    margin-bottom:5px;
-}
-
-.gameOverSub{
-    color:#929eb2;
-
-    font-size:14px;
-}
-
-.finalDistance{
-    margin:
-        8px
-        0;
-
-    font-size:50px;
-
-    font-weight:1000;
-
-    color:#2ddcff;
-}
-
-.newRecord{
-    min-height:25px;
-
-    color:#39ff70;
-
-    font-weight:1000;
-
-    margin-bottom:12px;
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-.controls{
-    width:min(1100px,100%);
-
-    margin:auto;
-
-    padding:
-        10px
-        12px
-        0;
-}
-
-.restart{
+#app{
     width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:12px;
+}
 
-    padding:15px;
+.gameWrap{
+    width:min(1100px,100%);
+}
 
-    border:0;
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
 
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #39ff70,
-            #2ddcff
-        );
-
-    color:#06100d;
-
-    font-size:16px;
-
+.logo{
+    font-size:clamp(25px,5vw,42px);
     font-weight:1000;
+    letter-spacing:1px;
+    text-shadow:0 4px 15px #0008;
+}
 
+.logo span{
+    color:#39ff72;
+}
+
+.stats{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.stat{
+    padding:9px 13px;
+    border-radius:14px;
+    background:#101c2d;
+    border:1px solid #30425e;
+    font-size:14px;
+    font-weight:900;
+    box-shadow:0 5px 20px #0005;
+}
+
+.stat b{
+    color:#ffd43b;
+}
+
+.gameBox{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    border-radius:22px;
+    border:2px solid #344b68;
+    background:#101b29;
     box-shadow:
-        0 8px 30px #0005;
-
-    transition:
-        transform .12s ease,
-        filter .12s ease;
+        0 25px 80px #000b,
+        0 0 35px #2ddcff18;
 }
 
-.restart:active{
-    transform:scale(.98);
-
-    filter:brightness(.9);
+canvas{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:16 / 9;
+    touch-action:none;
 }
 
-
-/* =========================
-   TIP
-========================= */
-
-.tip{
-    width:min(1100px,100%);
-
-    margin:auto;
-
-    padding:
-        10px
-        15px;
-
+.hint{
     text-align:center;
-
-    color:#8f9bad;
-
-    font-size:12px;
-}
-
-.tip b{
-    color:#dce5f2;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    width:min(1100px,100%);
-
-    margin:auto;
-
-    padding:
-        24px
-        15px
-        18px;
-
-    text-align:center;
-
-    color:#7f8b9e;
-
+    margin-top:9px;
+    color:#9eacc0;
     font-size:13px;
 }
 
-footer a{
+.bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+}
+
+.restart{
+    border:0;
+    padding:13px 22px;
+    border-radius:13px;
+    background:linear-gradient(90deg,#ffb52e,#ff6b35);
+    color:#17100a;
+    font-weight:1000;
+    cursor:pointer;
+    box-shadow:0 7px 20px #0006;
+}
+
+.restart:active{
+    transform:scale(.96);
+}
+
+.social{
+    color:#9daabd;
+    font-size:13px;
+}
+
+.social a{
     color:#2ddcff;
-
-    font-weight:900;
-
     text-decoration:none;
+    font-weight:900;
 }
 
-footer a:hover{
-    text-decoration:underline;
+.overlay{
+    position:absolute;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:#020712aa;
+    backdrop-filter:blur(3px);
 }
 
+.overlay.show{
+    display:flex;
+}
 
-/* =========================
-   MOBILE
-========================= */
+.gameOver{
+    width:min(360px,88%);
+    padding:28px;
+    border-radius:22px;
+    text-align:center;
+    background:#0d1726;
+    border:1px solid #52647e;
+    box-shadow:0 20px 60px #000c;
+}
 
-@media(max-width:600px){
+.gameOver h1{
+    font-size:34px;
+    margin-bottom:8px;
+    color:#ff5d91;
+}
 
-    header{
-        padding:
-            12px
-            10px
-            8px;
+.gameOver p{
+    color:#aeb9ca;
+}
+
+.finalScore{
+    font-size:52px;
+    font-weight:1000;
+    color:#39ff72;
+    margin:8px 0 18px;
+}
+
+.restartBig{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:13px;
+    background:linear-gradient(90deg,#39ff72,#2ddcff);
+    color:#07120d;
+    font-weight:1000;
+    cursor:pointer;
+}
+
+@media(max-width:650px){
+
+    #app{
+        padding:7px;
     }
 
-    .logo{
-        font-size:27px;
+    .topbar{
+        align-items:flex-start;
     }
 
-    .status{
+    .stats{
+        gap:5px;
+    }
+
+    .stat{
+        padding:7px 9px;
         font-size:11px;
-
-        padding:
-            8px
-            10px;
     }
 
-    .hud{
-        height:48px;
-
-        padding:
-            0
-            11px;
+    .bottom{
+        flex-direction:column;
     }
 
-    .hudItem{
-        font-size:10px;
+    .restart{
+        width:100%;
     }
 
-    .hudValue{
-        font-size:15px;
-    }
-
-    .gameCard{
-        border-radius:16px;
-    }
-
-    .gameOver{
-        top:48px;
+    .social{
+        text-align:center;
     }
 
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<header>
-
-    <div class="logo">
-        QAQLIL <span>RUSH</span>
-    </div>
-
-    <div class="status">
-        <span class="statusDot"></span>
-        ONLINE GAME
-    </div>
-
-</header>
-
+<div id="app">
 
 <div class="gameWrap">
 
-    <div class="gameCard">
+    <div class="topbar">
 
-        <div class="hud">
+        <div class="logo">
+            QAQLIL <span>RUSH</span>
+        </div>
 
-            <div class="hudItem">
-                📏
-                MƏSAFƏ:
-                <span
-                    id="distance"
-                    class="hudValue"
-                >
-                    0
-                </span>
-                M
+        <div class="stats">
+
+            <div class="stat">
+                🏆 <b id="score">0</b> M
             </div>
 
-            <div class="hudItem">
-                🏆
-                REKORD:
-                <span
-                    id="best"
-                    class="hudValue hudRecord"
-                >
-                    0
-                </span>
-                M
+            <div class="stat">
+                ⭐ <b id="coins">0</b>
+            </div>
+
+            <div class="stat">
+                🔥 <b id="best">0</b>
             </div>
 
         </div>
 
+    </div>
+
+
+    <div class="gameBox">
 
         <canvas
-            id="gameCanvas"
-            width="1000"
-            height="560"
+            id="game"
+            width="960"
+            height="540"
         ></canvas>
 
 
         <div
             id="gameOver"
-            class="gameOver"
+            class="overlay"
         >
 
-            <div class="gameOverBox">
+            <div class="gameOver">
 
-                <div class="gameOverTitle">
-                    OYUN BİTDİ
-                </div>
+                <h1>OYUN BİTDİ!</h1>
 
-                <div class="gameOverSub">
-                    Maneəyə toxundun!
-                </div>
+                <p>Məsafən</p>
 
                 <div
-                    id="finalDistance"
-                    class="finalDistance"
+                    id="finalScore"
+                    class="finalScore"
                 >
                     0 M
                 </div>
 
-                <div
-                    id="newRecord"
-                    class="newRecord"
-                ></div>
-
                 <button
-                    id="restartButton"
-                    class="restart"
-                    type="button"
+                    id="restartBig"
+                    class="restartBig"
                 >
                     ↻ YENİDƏN OYNA
                 </button>
@@ -603,60 +302,48 @@ footer a:hover{
 
     </div>
 
+
+    <div class="hint">
+        🖐 Ekrana toxun və ya SPACE bas — tullanan oyunçu
+    </div>
+
+
+    <div class="bottom">
+
+        <button
+            id="restart"
+            class="restart"
+        >
+            ↻ RESTART
+        </button>
+
+        <div class="social">
+            TikTok:
+            <a
+                href="https://www.tiktok.com/@ssamirreds"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                @ssamirreds
+            </a>
+        </div>
+
+    </div>
+
 </div>
 
-
-<div class="controls">
-
-    <button
-        id="restartBottom"
-        class="restart"
-        type="button"
-    >
-        ↻ RESTART
-    </button>
-
 </div>
-
-
-<div class="tip">
-    👆 <b>Ekrana toxun</b> — tullanmısan &nbsp;•&nbsp;
-    ⌨️ <b>SPACE</b> — tullanmısan
-</div>
-
-
-<footer>
-
-    QAQLIL RUSH © 2026
-
-    <br><br>
-
-    İrad və tənqidlər üçün:
-
-    <a
-        href="https://www.tiktok.com/@ssamirreds"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        TikTok — @ssamirreds
-    </a>
-
-</footer>
 
 
 <script>
-
 "use strict";
-
 
 /* =====================================================
    CANVAS
 ===================================================== */
 
 const canvas =
-    document.getElementById(
-        "gameCanvas"
-    );
+    document.getElementById("game");
 
 const ctx =
     canvas.getContext("2d");
@@ -666,222 +353,157 @@ const ctx =
    UI
 ===================================================== */
 
-const distanceElement =
-    document.getElementById(
-        "distance"
-    );
+const scoreEl =
+    document.getElementById("score");
 
-const bestElement =
-    document.getElementById(
-        "best"
-    );
+const coinsEl =
+    document.getElementById("coins");
 
-const gameOverElement =
-    document.getElementById(
-        "gameOver"
-    );
+const bestEl =
+    document.getElementById("best");
 
-const finalDistanceElement =
-    document.getElementById(
-        "finalDistance"
-    );
+const gameOverEl =
+    document.getElementById("gameOver");
 
-const newRecordElement =
-    document.getElementById(
-        "newRecord"
-    );
+const finalScoreEl =
+    document.getElementById("finalScore");
 
 const restartButton =
-    document.getElementById(
-        "restartButton"
-    );
+    document.getElementById("restart");
 
-const restartBottom =
-    document.getElementById(
-        "restartBottom"
-    );
+const restartBig =
+    document.getElementById("restartBig");
 
 
 /* =====================================================
-   GAME VARIABLES
+   GAME STATE
 ===================================================== */
 
-const W = 1000;
-const H = 560;
+let running = true;
 
-const groundY = 455;
+let score = 0;
 
-let player;
-
-let obstacles = [];
-
-let particles = [];
-
-let clouds = [];
-
-let mountains = [];
-
-let distance = 0;
+let coins = 0;
 
 let best =
     Number(
-        localStorage.getItem(
-            "qaqlil_best"
-        ) || 0
+        localStorage.getItem("qaqlil_best") || 0
     );
 
 let speed = 6;
 
-let gameRunning = true;
+let frame = 0;
 
-let lastTime = 0;
+let groundY = 450;
 
 let obstacleTimer = 0;
 
-let nextObstacle = 1000;
+let coinTimer = 80;
 
-let worldOffset = 0;
+let clouds = [];
+
+let obstacles = [];
+
+let coinObjects = [];
+
+let particles = [];
 
 
 /* =====================================================
    PLAYER
 ===================================================== */
 
-function createPlayer(){
+const player = {
 
-    return {
+    x:150,
 
-        x:145,
+    y:370,
 
-        y:groundY - 72,
+    width:58,
 
-        width:46,
+    height:78,
 
-        height:72,
+    velocityY:0,
 
-        velocityY:0,
+    gravity:0.75,
 
-        gravity:0.75,
+    jumpPower:-14,
 
-        jumpPower:-14,
+    onGround:true,
 
-        grounded:true,
+    rotation:0,
 
-        squash:1
+    squash:1
 
-    };
+};
+
+
+/* =====================================================
+   BACKGROUND CLOUDS
+===================================================== */
+
+for(let i=0;i<12;i++){
+
+    clouds.push({
+
+        x:Math.random()*960,
+
+        y:50+Math.random()*190,
+
+        size:30+Math.random()*45,
+
+        speed:.25+Math.random()*.45
+
+    });
 
 }
 
 
 /* =====================================================
-   CLOUDS
+   HELPERS
 ===================================================== */
 
-function createClouds(){
+function random(min,max){
 
-    clouds = [];
-
-    for(
-        let i=0;
-        i<9;
-        i++
-    ){
-
-        clouds.push({
-
-            x:
-                Math.random()*W,
-
-            y:
-                70+
-                Math.random()*150,
-
-            size:
-                35+
-                Math.random()*55,
-
-            speed:
-                0.15+
-                Math.random()*0.3
-
-        });
-
-    }
+    return Math.random()*(max-min)+min;
 
 }
 
 
-/* =====================================================
-   MOUNTAINS
-===================================================== */
+function rectCollision(a,b){
 
-function createMountains(){
+    return (
 
-    mountains = [];
+        a.x < b.x+b.width &&
 
-    for(
-        let i=0;
-        i<9;
-        i++
-    ){
+        a.x+a.width > b.x &&
 
-        mountains.push({
+        a.y < b.y+b.height &&
 
-            x:i*150,
+        a.y+a.height > b.y
 
-            width:
-                170+
-                Math.random()*100,
-
-            height:
-                80+
-                Math.random()*130
-
-        });
-
-    }
+    );
 
 }
 
 
-/* =====================================================
-   RESET GAME
-===================================================== */
+function addParticle(x,y){
 
-function restartGame(){
+    particles.push({
 
-    player =
-        createPlayer();
+        x:x,
 
-    obstacles = [];
+        y:y,
 
-    particles = [];
+        vx:random(-2,2),
 
-    distance = 0;
+        vy:random(-3,-1),
 
-    speed = 6;
+        life:30,
 
-    obstacleTimer = 0;
+        size:random(2,5)
 
-    nextObstacle =
-        850+
-        Math.random()*650;
-
-    worldOffset = 0;
-
-    gameRunning = true;
-
-    gameOverElement
-        .classList
-        .remove("show");
-
-    distanceElement
-        .textContent = "0";
-
-    bestElement
-        .textContent =
-        Math.floor(best);
+    });
 
 }
 
@@ -892,7 +514,7 @@ function restartGame(){
 
 function jump(){
 
-    if(!gameRunning){
+    if(!running){
 
         restartGame();
 
@@ -900,20 +522,524 @@ function jump(){
 
     }
 
-    if(player.grounded){
+    if(player.onGround){
 
         player.velocityY =
             player.jumpPower;
 
-        player.grounded =
+        player.onGround =
             false;
 
         player.squash =
-            0.88;
+            .85;
 
-        createJumpParticles();
+        for(let i=0;i<8;i++){
+
+            addParticle(
+                player.x+20,
+                groundY
+            );
+
+        }
 
     }
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+canvas.addEventListener(
+    "pointerdown",
+    function(e){
+
+        e.preventDefault();
+
+        jump();
+
+    },
+    {passive:false}
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.code === "Space" ||
+            e.code === "ArrowUp"
+        ){
+
+            e.preventDefault();
+
+            jump();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restartGame(){
+
+    running = true;
+
+    score = 0;
+
+    coins = 0;
+
+    speed = 6;
+
+    frame = 0;
+
+    obstacleTimer = 60;
+
+    coinTimer = 50;
+
+    obstacles = [];
+
+    coinObjects = [];
+
+    particles = [];
+
+    player.x = 150;
+
+    player.y = groundY-player.height;
+
+    player.velocityY = 0;
+
+    player.onGround = true;
+
+    player.rotation = 0;
+
+    player.squash = 1;
+
+    gameOverEl.classList.remove("show");
+
+    updateUI();
+
+}
+
+
+restartButton.addEventListener(
+    "click",
+    restartGame
+);
+
+
+restartBig.addEventListener(
+    "click",
+    restartGame
+);
+
+
+/* =====================================================
+   GAME OVER
+===================================================== */
+
+function gameOver(){
+
+    if(!running) return;
+
+    running = false;
+
+    const final =
+        Math.floor(score);
+
+    if(final > best){
+
+        best = final;
+
+        localStorage.setItem(
+            "qaqlil_best",
+            String(best)
+        );
+
+    }
+
+    finalScoreEl.textContent =
+        final + " M";
+
+    gameOverEl.classList.add("show");
+
+    updateUI();
+
+}
+
+
+/* =====================================================
+   CREATE OBSTACLE
+===================================================== */
+
+function createObstacle(){
+
+    const type =
+        Math.floor(
+            Math.random()*5
+        );
+
+
+    let obstacle;
+
+
+    if(type === 0){
+
+        obstacle = {
+
+            type:"spikes",
+
+            x:1000,
+
+            y:400,
+
+            width:65,
+
+            height:50
+
+        };
+
+    }
+
+
+    else if(type === 1){
+
+        obstacle = {
+
+            type:"crate",
+
+            x:1000,
+
+            y:380,
+
+            width:70,
+
+            height:70
+
+        };
+
+    }
+
+
+    else if(type === 2){
+
+        obstacle = {
+
+            type:"barrel",
+
+            x:1000,
+
+            y:395,
+
+            width:55,
+
+            height:55
+
+        };
+
+    }
+
+
+    else if(type === 3){
+
+        obstacle = {
+
+            type:"wall",
+
+            x:1000,
+
+            y:350,
+
+            width:50,
+
+            height:100
+
+        };
+
+    }
+
+
+    else{
+
+        obstacle = {
+
+            type:"double",
+
+            x:1000,
+
+            y:395,
+
+            width:105,
+
+            height:55
+
+        };
+
+    }
+
+
+    obstacles.push(obstacle);
+
+}
+
+
+/* =====================================================
+   CREATE COIN
+===================================================== */
+
+function createCoin(){
+
+    coinObjects.push({
+
+        x:1000,
+
+        y:random(280,370),
+
+        r:13,
+
+        spin:0
+
+    });
+
+}
+
+
+/* =====================================================
+   UPDATE
+===================================================== */
+
+function update(){
+
+    frame++;
+
+
+    if(!running){
+
+        updateParticles();
+
+        return;
+
+    }
+
+
+    /* SPEED */
+
+    speed =
+        Math.min(
+            11,
+            6 + score/800
+        );
+
+
+    /* SCORE */
+
+    score += speed*0.045;
+
+
+    /* PLAYER PHYSICS */
+
+    player.velocityY +=
+        player.gravity;
+
+    player.y +=
+        player.velocityY;
+
+
+    if(
+        player.y +
+        player.height >=
+        groundY
+    ){
+
+        player.y =
+            groundY -
+            player.height;
+
+        player.velocityY = 0;
+
+        player.onGround = true;
+
+        player.rotation = 0;
+
+    }else{
+
+        player.rotation =
+            Math.max(
+                -0.25,
+                Math.min(
+                    0.25,
+                    player.velocityY*0.025
+                )
+            );
+
+    }
+
+
+    player.squash +=
+        (1-player.squash)*0.15;
+
+
+    /* OBSTACLES */
+
+    obstacleTimer--;
+
+    if(obstacleTimer <= 0){
+
+        createObstacle();
+
+        obstacleTimer =
+            Math.max(
+                55,
+                105 -
+                speed*4 +
+                random(-15,25)
+            );
+
+    }
+
+
+    for(
+        let i=obstacles.length-1;
+        i>=0;
+        i--
+    ){
+
+        const o =
+            obstacles[i];
+
+        o.x -= speed;
+
+
+        if(
+            rectCollision(
+                {
+                    x:player.x+8,
+                    y:player.y+7,
+                    width:player.width-16,
+                    height:player.height-10
+                },
+                {
+                    x:o.x+5,
+                    y:o.y+5,
+                    width:o.width-10,
+                    height:o.height-5
+                }
+            )
+        ){
+
+            gameOver();
+
+        }
+
+
+        if(o.x+o.width < 0){
+
+            obstacles.splice(i,1);
+
+        }
+
+    }
+
+
+    /* COINS */
+
+    coinTimer--;
+
+    if(coinTimer <= 0){
+
+        createCoin();
+
+        coinTimer =
+            random(45,95);
+
+    }
+
+
+    for(
+        let i=coinObjects.length-1;
+        i>=0;
+        i--
+    ){
+
+        const c =
+            coinObjects[i];
+
+        c.x -= speed;
+
+        c.spin += .15;
+
+
+        const dx =
+            player.x +
+            player.width/2 -
+            c.x;
+
+        const dy =
+            player.y +
+            player.height/2 -
+            c.y;
+
+
+        if(
+            Math.sqrt(dx*dx+dy*dy)
+            <
+            c.r+25
+        ){
+
+            coins++;
+
+            for(let j=0;j<8;j++){
+
+                addParticle(
+                    c.x,
+                    c.y
+                );
+
+            }
+
+            coinObjects.splice(i,1);
+
+            continue;
+
+        }
+
+
+        if(c.x < -30){
+
+            coinObjects.splice(i,1);
+
+        }
+
+    }
+
+
+    /* CLOUDS */
+
+    for(const cloud of clouds){
+
+        cloud.x -= cloud.speed;
+
+        if(cloud.x < -100){
+
+            cloud.x = 1000;
+
+            cloud.y =
+                50+Math.random()*180;
+
+        }
+
+    }
+
+
+    updateParticles();
+
+    updateUI();
 
 }
 
@@ -922,448 +1048,10 @@ function jump(){
    PARTICLES
 ===================================================== */
 
-function createJumpParticles(){
+function updateParticles(){
 
     for(
-        let i=0;
-        i<7;
-        i++
-    ){
-
-        particles.push({
-
-            x:
-                player.x+
-                10+
-                Math.random()*25,
-
-            y:
-                groundY-
-
-                Math.random()*8,
-
-            vx:
-                -1+
-                Math.random()*2,
-
-            vy:
-                -1-
-                Math.random()*2,
-
-            life:1,
-
-            size:
-                3+
-                Math.random()*4
-
-        });
-
-    }
-
-}
-
-
-function createCrashParticles(){
-
-    for(
-        let i=0;
-        i<20;
-        i++
-    ){
-
-        particles.push({
-
-            x:
-                player.x+
-                player.width/2,
-
-            y:
-                player.y+
-                player.height/2,
-
-            vx:
-                -5+
-                Math.random()*10,
-
-            vy:
-                -7+
-                Math.random()*8,
-
-            life:1,
-
-            size:
-                3+
-                Math.random()*5
-
-        });
-
-    }
-
-}
-
-
-/* =====================================================
-   OBSTACLE
-===================================================== */
-
-function createObstacle(){
-
-    const types = [
-        "rock",
-        "crate",
-        "cactus",
-        "barrier"
-    ];
-
-    const type =
-        types[
-            Math.floor(
-                Math.random()*
-                types.length
-            )
-        ];
-
-
-    let width;
-    let height;
-
-
-    if(type==="rock"){
-
-        width =
-            42+
-            Math.random()*25;
-
-        height =
-            35+
-            Math.random()*30;
-
-    }
-
-    else if(type==="crate"){
-
-        width =
-            42+
-            Math.random()*15;
-
-        height =
-            45+
-            Math.random()*15;
-
-    }
-
-    else if(type==="cactus"){
-
-        width =
-            30+
-            Math.random()*15;
-
-        height =
-            65+
-            Math.random()*20;
-
-    }
-
-    else{
-
-        width =
-            60+
-            Math.random()*20;
-
-        height =
-            38+
-            Math.random()*12;
-
-    }
-
-
-    obstacles.push({
-
-        x:
-            W+60,
-
-        y:
-            groundY-height,
-
-        width,
-
-        height,
-
-        type
-
-    });
-
-}
-
-
-/* =====================================================
-   COLLISION
-===================================================== */
-
-function collision(a,b){
-
-    const paddingX = 9;
-    const paddingY = 7;
-
-    return (
-
-        a.x+
-        paddingX
-        <
-        b.x+
-        b.width-
-
-        paddingX
-
-        &&
-
-        a.x+
-        a.width-
-        paddingX
-        >
-        b.x+
-        paddingX
-
-        &&
-
-        a.y+
-        paddingY
-        <
-        b.y+
-        b.height
-
-        &&
-
-        a.y+
-        a.height-
-        paddingY
-        >
-        b.y+
-        paddingY
-
-    );
-
-}
-
-
-/* =====================================================
-   GAME UPDATE
-===================================================== */
-
-function update(delta){
-
-    if(!gameRunning){
-
-        updateParticles(delta);
-
-        return;
-
-    }
-
-
-    /*
-        SPEED
-    */
-
-    speed +=
-        0.0009*
-        delta;
-
-    speed =
-        Math.min(
-            speed,
-            13
-        );
-
-
-    /*
-        DISTANCE
-    */
-
-    distance +=
-        speed*
-        delta/
-        100;
-
-    distanceElement
-        .textContent =
-        Math.floor(distance);
-
-
-    /*
-        PLAYER PHYSICS
-    */
-
-    player.velocityY +=
-        player.gravity*
-        delta/
-        16;
-
-    player.y +=
-        player.velocityY*
-        delta/
-        16;
-
-
-    if(
-        player.y+
-        player.height
-        >=
-        groundY
-    ){
-
-        player.y =
-            groundY-
-            player.height;
-
-        player.velocityY = 0;
-
-        player.grounded =
-            true;
-
-    }
-    else{
-
-        player.grounded =
-            false;
-
-    }
-
-
-    player.squash +=
-        (1-player.squash)*
-        0.15;
-
-
-    /*
-        OBSTACLES
-    */
-
-    obstacleTimer +=
-        delta;
-
-
-    if(
-        obstacleTimer >=
-        nextObstacle
-    ){
-
-        createObstacle();
-
-        obstacleTimer = 0;
-
-        nextObstacle =
-            Math.max(
-                600,
-                1100-
-                speed*40
-            )+
-            Math.random()*700;
-
-    }
-
-
-    for(
-        let i=
-        obstacles.length-1;
-        i>=0;
-        i--
-    ){
-
-        const obstacle =
-            obstacles[i];
-
-        obstacle.x -=
-            speed*
-            delta/
-            16;
-
-
-        if(
-            collision(
-                player,
-                obstacle
-            )
-        ){
-
-            endGame();
-
-            return;
-
-        }
-
-
-        if(
-            obstacle.x+
-            obstacle.width
-            <
-            -100
-        ){
-
-            obstacles.splice(
-                i,
-                1
-            );
-
-        }
-
-    }
-
-
-    /*
-        WORLD
-    */
-
-    worldOffset +=
-        speed*
-        delta/
-        16;
-
-
-    /*
-        CLOUDS
-    */
-
-    for(
-        const cloud
-        of clouds
-    ){
-
-        cloud.x -=
-            cloud.speed*
-            delta/
-            16;
-
-        if(
-            cloud.x+
-            cloud.size*3
-            <
-            0
-        ){
-
-            cloud.x =
-                W+
-                100;
-
-        }
-
-    }
-
-
-    updateParticles(delta);
-
-}
-
-
-/* =====================================================
-   PARTICLES UPDATE
-===================================================== */
-
-function updateParticles(delta){
-
-    for(
-        let i=
-        particles.length-1;
+        let i=particles.length-1;
         i>=0;
         i--
     ){
@@ -1371,33 +1059,17 @@ function updateParticles(delta){
         const p =
             particles[i];
 
-        p.x +=
-            p.vx*
-            delta/
-            16;
+        p.x += p.vx;
 
-        p.y +=
-            p.vy*
-            delta/
-            16;
+        p.y += p.vy;
 
-        p.vy +=
-            0.25*
-            delta/
-            16;
+        p.vy += .12;
 
-        p.life -=
-            0.025*
-            delta/
-            16;
+        p.life--;
 
+        if(p.life <= 0){
 
-        if(p.life<=0){
-
-            particles.splice(
-                i,
-                1
-            );
+            particles.splice(i,1);
 
         }
 
@@ -1407,70 +1079,19 @@ function updateParticles(delta){
 
 
 /* =====================================================
-   END GAME
+   UI
 ===================================================== */
 
-function endGame(){
+function updateUI(){
 
-    if(!gameRunning)
-        return;
+    scoreEl.textContent =
+        Math.floor(score);
 
+    coinsEl.textContent =
+        coins;
 
-    gameRunning =
-        false;
-
-
-    createCrashParticles();
-
-
-    const final =
-        Math.floor(distance);
-
-
-    const isNewRecord =
-        final > best;
-
-
-    if(isNewRecord){
-
-        best =
-            final;
-
-        localStorage.setItem(
-            "qaqlil_best",
-            best
-        );
-
-        newRecordElement
-            .textContent =
-            "🔥 YENİ REKORD!";
-
-    }
-    else{
-
-        newRecordElement
-            .textContent =
-            "Rekord: "+
-            best+
-            " M";
-
-    }
-
-
-    finalDistanceElement
-        .textContent =
-        final+
-        " M";
-
-
-    bestElement
-        .textContent =
+    bestEl.textContent =
         best;
-
-
-    gameOverElement
-        .classList
-        .add("show");
 
 }
 
@@ -1479,29 +1100,29 @@ function endGame(){
    DRAW SKY
 ===================================================== */
 
-function drawSky(){
+function drawBackground(){
 
     const gradient =
         ctx.createLinearGradient(
             0,
             0,
             0,
-            H
+            540
         );
 
     gradient.addColorStop(
         0,
-        "#17285d"
+        "#248de0"
     );
 
     gradient.addColorStop(
-        0.6,
-        "#496da0"
+        .55,
+        "#79d7ff"
     );
 
     gradient.addColorStop(
         1,
-        "#d69a6a"
+        "#d6f5ff"
     );
 
     ctx.fillStyle =
@@ -1510,21 +1131,371 @@ function drawSky(){
     ctx.fillRect(
         0,
         0,
-        W,
-        H
+        960,
+        540
     );
 
 
-    /*
-        SUN
-    */
+    /* SUN */
 
     ctx.beginPath();
 
     ctx.arc(
         790,
-        120,
-        58,
+        95,
+        48,
         0,
         Math.PI*2
-  
+    );
+
+    ctx.fillStyle =
+        "#ffe26a";
+
+    ctx.fill();
+
+
+    /* CLOUDS */
+
+    for(const cloud of clouds){
+
+        drawCloud(
+            cloud.x,
+            cloud.y,
+            cloud.size
+        );
+
+    }
+
+
+    /* FAR MOUNTAINS */
+
+    ctx.fillStyle =
+        "#729ab2";
+
+    ctx.beginPath();
+
+    ctx.moveTo(0,360);
+
+    ctx.lineTo(130,220);
+
+    ctx.lineTo(230,350);
+
+    ctx.lineTo(350,190);
+
+    ctx.lineTo(500,350);
+
+    ctx.lineTo(650,230);
+
+    ctx.lineTo(820,350);
+
+    ctx.lineTo(960,200);
+
+    ctx.lineTo(960,450);
+
+    ctx.lineTo(0,450);
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* NEAR MOUNTAINS */
+
+    ctx.fillStyle =
+        "#4e8192";
+
+    ctx.beginPath();
+
+    ctx.moveTo(0,400);
+
+    ctx.lineTo(190,275);
+
+    ctx.lineTo(330,400);
+
+    ctx.lineTo(500,260);
+
+    ctx.lineTo(700,400);
+
+    ctx.lineTo(830,290);
+
+    ctx.lineTo(960,400);
+
+    ctx.lineTo(960,450);
+
+    ctx.lineTo(0,450);
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* TREES */
+
+    drawTree(70,390,1);
+
+    drawTree(850,385,1.15);
+
+    drawTree(735,405,.75);
+
+
+    /* GROUND */
+
+    ctx.fillStyle =
+        "#5b371f";
+
+    ctx.fillRect(
+        0,
+        groundY,
+        960,
+        90
+    );
+
+
+    ctx.fillStyle =
+        "#3f2818";
+
+    for(let x=0;x<960;x+=55){
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x+20,
+            groundY+30+
+            Math.sin(x)*10,
+            8,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+    }
+
+
+    /* GRASS */
+
+    ctx.fillStyle =
+        "#43b83f";
+
+    ctx.fillRect(
+        0,
+        groundY-8,
+        960,
+        13
+    );
+
+    ctx.fillStyle =
+        "#7ce34c";
+
+    ctx.fillRect(
+        0,
+        groundY-8,
+        960,
+        4
+    );
+
+}
+
+
+/* =====================================================
+   CLOUD
+===================================================== */
+
+function drawCloud(x,y,size){
+
+    ctx.fillStyle =
+        "#ffffffcc";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        size*.45,
+        0,
+        Math.PI*2
+    );
+
+    ctx.arc(
+        x+size*.45,
+        y-10,
+        size*.6,
+        0,
+        Math.PI*2
+    );
+
+    ctx.arc(
+        x+size,
+        y,
+        size*.45,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+}
+
+
+/* =====================================================
+   TREE
+===================================================== */
+
+function drawTree(x,y,s){
+
+    ctx.save();
+
+    ctx.translate(x,y);
+
+    ctx.scale(s,s);
+
+    ctx.fillStyle =
+        "#70411e";
+
+    ctx.fillRect(
+        -12,
+        -95,
+        24,
+        95
+    );
+
+
+    ctx.fillStyle =
+        "#247a39";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        -115,
+        52,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.fillStyle =
+        "#39a84c";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -35,
+        -100,
+        32,
+        0,
+        Math.PI*2
+    );
+
+    ctx.arc(
+        35,
+        -100,
+        32,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+}
+
+
+/* =====================================================
+   PLAYER
+===================================================== */
+
+function drawPlayer(){
+
+    ctx.save();
+
+    const cx =
+        player.x +
+        player.width/2;
+
+    const cy =
+        player.y +
+        player.height/2;
+
+
+    ctx.translate(
+        cx,
+        cy
+    );
+
+    ctx.rotate(
+        player.rotation
+    );
+
+    ctx.scale(
+        player.squash,
+        2-player.squash
+    );
+
+
+    /* SHADOW */
+
+    ctx.restore();
+
+    ctx.fillStyle =
+        "#0005";
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        player.x+29,
+        groundY+2,
+        28,
+        7,
+        0,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.save();
+
+    ctx.translate(
+        cx,
+        cy
+    );
+
+    ctx.rotate(
+        player.rotation
+    );
+
+
+    /* LEGS */
+
+    ctx.strokeStyle =
+        "#18212d";
+
+    ctx.lineWidth = 11;
+
+    ctx.lineCap =
+        "round";
+
+    ctx.beginPath();
+
+    ctx.moveTo(-8,20);
+
+    ctx.lineTo(-17,39);
+
+    ctx.moveTo(8,20);
+
+    ctx.lineTo(18,39);
+
+    ctx.stroke();
+
+
+    /* SHOES */
+
+    ctx.strokeStyle =
+        "#f4f4f4";
+
+    ctx
